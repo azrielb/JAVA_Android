@@ -68,8 +68,8 @@ public class OrderList extends Activity {
 							R.layout.order_list_view, null);
 				}
 
-				TextView orderIdTextView = (TextView) convertView
-						.findViewById(R.id.idTextView);
+				TextView orderFilter = (TextView) convertView
+						.findViewById(R.id.filter);
 
 				TextView orderAddressTextView = (TextView) convertView
 						.findViewById(R.id.addressTextView);
@@ -80,7 +80,7 @@ public class OrderList extends Activity {
 				TextView orderDateTextView = (TextView) convertView
 						.findViewById(R.id.dateTextView);
 
-				orderIdTextView.setText(((Integer) orders.get(position)
+				orderFilter.setText(((Integer) orders.get(position)
 						.getOrderNumber()).toString());
 
 				orderAddressTextView.setText(orders.get(position).getAddres());

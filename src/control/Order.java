@@ -1,0 +1,24 @@
+package control;
+
+import com.example.java5774_04_7842_7588.R;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.Menu;
+
+public class Order extends Activity {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_order);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.order, menu);
+		return true;
+	}
+
+}

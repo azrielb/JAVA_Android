@@ -50,6 +50,10 @@ public class Technician implements Serializable {
 		LastName = lastName;
 	}
 
+	public String getName() {
+		return firstName +" "+LastName;
+	}
+
 	public String getPassword() {
 		return password;
 	}
@@ -97,5 +101,4 @@ public class Technician implements Serializable {
 	public void setBusy(boolean busy) {
 		this.busy = busy;
 	}
-
 }

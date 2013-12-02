@@ -27,6 +27,12 @@ public class OrderSummary extends _Activity {
 				+ currentOrder.getStart().toGMTString());
 		super.appendText(R.id.finishOrder, ": "
 				+ currentOrder.getFinish().toGMTString());
+		super.appendText(R.id.assignedToOrder, ": "
+				+ currentOrder.getTechnician().getName());
+		super.appendText(R.id.statusOrder, ": "
+				+ currentOrder.getStatus().toString());
+		super.appendText(R.id.idOrder,
+				": " + ((Integer) currentOrder.getOrderNumber()).toString());
 	}
 
 	@Override

@@ -28,20 +28,24 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(MainActivity.this, OrderList.class);
-				int id = Integer
-						.parseInt(((TextView) findViewById(R.id.filterOrders))
-								.getText().toString());
+				String strID = ((TextView) findViewById(R.id.filterOrders))
+						.getText().toString();
 				String password = ((TextView) findViewById(R.id.passwordUser))
 						.getText().toString();
-				tecnic = BackendFactory.getInstance().getUserByIdAndPassword(
-						id, password);
-				if (tecnic != null) {
-					intent.putExtra("user", tecnic);
-					startActivity(intent);
-				} else {
-
+				if (strID.length() > 0 && password.length() > 0) {
+					int id = Integer.parseInt(strID);
+					tecnic = BackendFactory.getInstance()
+							.getUserByIdAndPassword(id, password);
+					if (tecnic != null) {
+						Intent intent = new Intent(MainActivity.this,
+								OrderList.class);
+						intent.putExtra("user", tecnic);
+						startActivity(intent);
+						return;
+					}
 				}
+				Alert.show(MainActivity.this, "Login error",
+						"Invalid ID or password!");
 			}
 		});
 		newAccount.setOnClickListener(new OnClickListener() {

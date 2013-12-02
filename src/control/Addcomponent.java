@@ -1,12 +1,11 @@
 package control;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 
 import com.example.java5774_04_7842_7588.R;
 
-public class Addcomponent extends Activity {
+public class Addcomponent extends _Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

@@ -1,12 +1,11 @@
 package control;
 
-import com.example.java5774_04_7842_7588.R;
-
 import android.os.Bundle;
-import android.app.Activity;
 import android.view.Menu;
 
-public class Order extends Activity {
+import com.example.java5774_04_7842_7588.R;
+
+public class Order extends _Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

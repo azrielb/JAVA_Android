@@ -2,7 +2,6 @@ package control;
 
 import model.backend.BackendFactory;
 import BE.Technician;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,7 +12,7 @@ import android.widget.EditText;
 
 import com.example.java5774_04_7842_7588.R;
 
-public class NewAccount extends Activity {
+public class NewAccount extends _Activity {
 	Technician user;
 
 	@Override

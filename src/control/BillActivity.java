@@ -2,13 +2,12 @@ package control;
 
 import model.backend.BackendFactory;
 import BE.Order;
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 
 import com.example.java5774_04_7842_7588.R;
 
-public class BillActivity extends Activity {
+public class BillActivity extends _Activity {
 
 	int orderNumber;
 	Order currentNumber;

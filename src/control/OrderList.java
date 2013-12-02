@@ -6,7 +6,6 @@ import java.util.List;
 import model.backend.BackendFactory;
 import BE.Order;
 import BE.Technician;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -20,11 +19,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.java5774_04_7842_7588.R;
 
-public class OrderList extends Activity {
+public class OrderList extends _Activity {
 	protected class ordersAdapter extends ArrayAdapter<BE.Order> {
 		public ordersAdapter(OrderList orderList, int orderListView,
 				List<Order> orders) {
@@ -49,28 +47,15 @@ public class OrderList extends Activity {
 						R.layout.order_list_view, null);
 			}
 
-			TextView orderIdTextView = (TextView) convertView
-					.findViewById(R.id.filterTextView);
-
-			TextView orderAddressTextView = (TextView) convertView
-					.findViewById(R.id.addressTextView);
-
-			TextView orderNameTextView = (TextView) convertView
-					.findViewById(R.id.nameTextView);
-
-			TextView orderDateTextView = (TextView) convertView
-					.findViewById(R.id.dateTextView);
-
-			orderIdTextView.setText(((Integer) orders.get(position)
-					.getOrderNumber()).toString());
-
-			orderAddressTextView.setText(orders.get(position).getCity());
-
-			orderNameTextView.setText(orders.get(position).getCustomer());
-
-			orderDateTextView.setText(orders.get(position).getCreateDate()
-					.toGMTString());
-
+			OrderList.super.setText(R.id.filterTextView,
+					((Integer) orders.get(position).getOrderNumber())
+							.toString());
+			OrderList.super.setText(R.id.addressTextView, orders.get(position)
+					.getCity());
+			OrderList.super.setText(R.id.nameTextView, orders.get(position)
+					.getCustomer());
+			OrderList.super.setText(R.id.dateTextView, orders.get(position)
+					.getCreateDate().toGMTString());
 			return convertView;
 		}
 

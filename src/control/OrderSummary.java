@@ -2,33 +2,31 @@ package control;
 
 import model.backend.BackendFactory;
 import BE.Order;
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
-import android.widget.TextView;
 
 import com.example.java5774_04_7842_7588.R;
 
-public class OrderSummary extends Activity {
+public class OrderSummary extends _Activity {
 
 	Order currentOrder;
 	int orderNumber;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_order_summary);
 		orderNumber = getIntent().getExtras().getInt("currentOrder");
-		currentOrder = BackendFactory.getInstance().getOrderByNumber(orderNumber);
-		TextView address = (TextView) findViewById(R.id.addressOrder);
-		address.setText(address.getText()+": "+ currentOrder.getAddres());
-		TextView contact = (TextView) findViewById(R.id.contactOrder);
-		contact.setText(contact.getText()+": " + currentOrder.getCustomer());
-		TextView phoneNumber = (TextView) findViewById(R.id.phoneNumOrder);
-		phoneNumber.setText(phoneNumber.getText()+": " +Long.toString(currentOrder.getCustomerPhone()));
-		TextView startDate = (TextView) findViewById(R.id.createOrder);
-		startDate.setText(startDate.getText()+": "+ currentOrder.getStart().toGMTString());
-		//TextView finishDate = (TextView) findViewById(R.id.finishOrder);
-		//finishDate.setText(finishDate.getText()+": "+ currentOrder.getFinish().toGMTString());
+		currentOrder = BackendFactory.getInstance().getOrderByNumber(
+				orderNumber);
+		super.appendText(R.id.addressOrder, ": " + currentOrder.getAddres());
+		super.appendText(R.id.contactOrder, ": " + currentOrder.getCustomer());
+		super.appendText(R.id.phoneNumOrder,
+				": " + Long.toString(currentOrder.getCustomerPhone()));
+		super.appendText(R.id.createOrder, ": "
+				+ currentOrder.getStart().toGMTString());
+		super.appendText(R.id.finishOrder, ": "
+				+ currentOrder.getFinish().toGMTString());
 	}
 
 	@Override
@@ -39,4 +37,3 @@ public class OrderSummary extends Activity {
 	}
 
 }
- 

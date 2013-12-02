@@ -1,5 +1,6 @@
 package control;
 
+import model.backend.BackendFactory;
 import BE.Technician;
 import android.app.Activity;
 import android.content.Intent;
@@ -24,8 +25,8 @@ public class NewAccount extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(NewAccount.this, OrderList.class);
-				String fname = ((EditText) findViewById(R.id.firstName))
+				Intent intent = new Intent(NewAccount.this, MainActivity.class);
+				String fname = ((EditText) findViewById(R.id.filterOrders))
 						.getText().toString().trim();
 				String lname = ((EditText) findViewById(R.id.lastName))
 						.getText().toString().trim();
@@ -36,7 +37,7 @@ public class NewAccount extends Activity {
 				String email = ((EditText) findViewById(R.id.email)).getText()
 						.toString().trim();
 				user = new Technician(fname, lname, pass, email, id);
-				intent.putExtra("currentUser", user);
+				BackendFactory.getInstance().addTechnician(user);
 				startActivity(intent);
 			}
 		});

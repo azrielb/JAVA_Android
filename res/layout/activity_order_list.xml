@@ -22,19 +22,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/linearLayout1"
-            android:layout_alignLeft="@+id/filter" >
+            android:layout_alignLeft="@+id/filterTextView" >
 
-            <TextView
-                android:id="@+id/filter"
+            <Button
+                android:id="@+id/billButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="filter" />
+                android:text="Filter" />
 
             <EditText
-                android:id="@+id/firstName"
+                android:id="@+id/filterOrders"
                 android:layout_width="256dp"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/filter"
+                android:layout_alignTop="@+id/filterTextView"
                 android:layout_centerHorizontal="true"
                 android:ems="10" />
         </LinearLayout>

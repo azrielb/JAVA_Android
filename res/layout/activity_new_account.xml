@@ -23,13 +23,13 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <EditText
-            android:id="@+id/firstName"
+            android:id="@+id/filterOrders"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/createOrder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Last name"
@@ -46,7 +46,7 @@
         </EditText>
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/finishOrder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="ID"
@@ -72,7 +72,7 @@
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/phoneNumOrder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Email"

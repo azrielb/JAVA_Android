@@ -27,16 +27,40 @@
             android:label="order list" >
         </activity>
         <activity
-            android:name="control.Order"
-            android:label="@string/title_activity_order" >
+            android:name="control.OrderNavigation"
+            android:label="Navigation" >
         </activity>
         <activity
             android:name="control.OrderSummary"
-            android:label="@string/title_activity_order_summary" >
+            android:label="summary" >
         </activity>
         <activity
             android:name="control.NewAccount"
-            android:label="@string/title_activity_new_account" >
+            android:label="new account" >
+        </activity>
+        <activity
+            android:name="control.ComponentAddUpdate"
+            android:label="@string/title_activity_component_add_update" >
+        </activity>
+        <activity
+            android:name="control.Test"
+            android:label="@string/title_activity_test" >
+        </activity>
+        <activity
+            android:name="control.Addcomponent"
+            android:label="@string/title_activity_addcomponent" >
+        </activity>
+        <activity
+            android:name="control.ComponentList"
+            android:label="@string/title_activity_component_list" >
+        </activity>
+        <activity
+            android:name="control.Test"
+            android:label="@string/title_activity_test" >
+        </activity>
+        <activity
+            android:name="control.BillActivity"
+            android:label="@string/title_activity_bill" >
         </activity>
     </application>
 

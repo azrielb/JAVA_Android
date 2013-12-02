@@ -8,5 +8,12 @@
     <string name="title_activity_order">Order</string>
     <string name="title_activity_order_summary">OrderSummary</string>
     <string name="title_activity_new_account">NewAccount</string>
+    <string name="add_update_component">Add/Update component</string>
+    <string name="title_activity_component_add_update">ComponentAddUpdate</string>
+    <string name="title_activity_add_component">AddComponent</string>
+    <string name="title_activity_test">Test</string>
+    <string name="title_activity_addcomponent">Addcomponent</string>
+    <string name="title_activity_component_list">ComponentList</string>
+    <string name="title_activity_bill">BillActivity</string>
 
 </resources>

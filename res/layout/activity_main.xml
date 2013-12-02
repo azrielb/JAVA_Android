@@ -19,18 +19,18 @@
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/filter"
+            android:id="@+id/filterTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/linearLayout1"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="17dp"
             android:layout_marginTop="30dp"
-            android:text="User Name"
+            android:text="User ID"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <EditText
-            android:id="@+id/firstName"
+            android:id="@+id/filterOrders"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="34dp"
@@ -49,7 +49,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <EditText
-            android:id="@+id/pass"
+            android:id="@+id/passwordUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="0dp"

@@ -25,11 +25,60 @@ import android.widget.TextView;
 import com.example.java5774_04_7842_7588.R;
 
 public class OrderList extends Activity {
+	protected class ordersAdapter extends ArrayAdapter<BE.Order> {
+		public ordersAdapter(OrderList orderList, int orderListView,
+				List<Order> orders) {
+			super(orderList, orderListView, orders);
+		}
 
-	Order choosenOrder;
-	Technician technic;
-	List<BE.Order> orders = new ArrayList<BE.Order>();
-	ListView list;
+		@Override
+		public View getDropDownView(int position, View convertView,
+				ViewGroup parent) {
+			return getCustomView(position, convertView, parent);
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			return getCustomView(position, convertView, parent);
+		}
+
+		View getCustomView(int position, View convertView, ViewGroup parent) {
+
+			if (convertView == null) {
+				convertView = View.inflate(OrderList.this,
+						R.layout.order_list_view, null);
+			}
+
+			TextView orderIdTextView = (TextView) convertView
+					.findViewById(R.id.filterTextView);
+
+			TextView orderAddressTextView = (TextView) convertView
+					.findViewById(R.id.addressTextView);
+
+			TextView orderNameTextView = (TextView) convertView
+					.findViewById(R.id.nameTextView);
+
+			TextView orderDateTextView = (TextView) convertView
+					.findViewById(R.id.dateTextView);
+
+			orderIdTextView.setText(((Integer) orders.get(position)
+					.getOrderNumber()).toString());
+
+			orderAddressTextView.setText(orders.get(position).getCity());
+
+			orderNameTextView.setText(orders.get(position).getCustomer());
+
+			orderDateTextView.setText(orders.get(position).getCreateDate()
+					.toGMTString());
+
+			return convertView;
+		}
+
+	};
+
+	private Technician technic;
+	private List<BE.Order> orders = new ArrayList<BE.Order>();
+	private ListView list;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,55 +86,8 @@ public class OrderList extends Activity {
 		setContentView(R.layout.activity_order_list);
 		technic = (Technician) getIntent().getSerializableExtra("user");
 		list = (ListView) findViewById(R.id.orderListView);
-		orders = BackendFactory.getInstance().getOrdersByTechnicianId(technic.getId());
-
-		ListAdapter adapter = new ArrayAdapter<BE.Order>(this,
-				R.layout.order_list_view, orders) {
-			@Override
-			public View getDropDownView(int position, View convertView,
-					ViewGroup parent) {
-				return getCustomView(position, convertView, parent);
-			}
-
-			@Override
-			public View getView(int position, View convertView, ViewGroup parent) {
-				return getCustomView(position, convertView, parent);
-			}
-
-			View getCustomView(int position, View convertView, ViewGroup parent) {
-
-				if (convertView == null) {
-					convertView = View.inflate(OrderList.this,
-							R.layout.order_list_view, null);
-				}
-
-				TextView orderIdTextView = (TextView) convertView
-						.findViewById(R.id.filterTextView);
-
-				TextView orderAddressTextView = (TextView) convertView
-						.findViewById(R.id.addressTextView);
-
-				TextView orderNameTextView = (TextView) convertView
-						.findViewById(R.id.nameTextView);
-
-				TextView orderDateTextView = (TextView) convertView
-						.findViewById(R.id.dateTextView);
-
-				orderIdTextView.setText(((Integer) orders.get(position)
-						.getOrderNumber()).toString());
-
-				orderAddressTextView.setText(orders.get(position).getCity());
-
-				orderNameTextView.setText(orders.get(position).getCustomer());
-
-				orderDateTextView.setText(orders.get(position).getCreateDate()
-						.toGMTString());
-
-				return convertView;
-			}
-
-		};
-		list.setAdapter(adapter);
+		setOrders(BackendFactory.getInstance().getOrdersByTechnicianId(
+				technic.getId()));
 
 		list.setClickable(true);
 		list.setOnItemClickListener(new OnItemClickListener() {
@@ -94,29 +96,26 @@ public class OrderList extends Activity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				try {
-					choosenOrder = orders.get(position);
-					int orderNumber= choosenOrder.getOrderNumber();
+					int orderNumber = orders.get(position).getOrderNumber();
 					Intent intent = new Intent(OrderList.this,
 							OrderNavigation.class);
 					intent.putExtra("selectedOrder", orderNumber);
 					startActivity(intent);
 				} catch (Exception ex) {
-					//int x = 5;
-					return;
 				}
-
 			}
 		});
-		
+
 		Button filterButton = (Button) findViewById(R.id.billButton);
-		 filterButton.setOnClickListener(new OnClickListener() {
+		filterButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				EditText filter= (EditText) findViewById(R.id.filterOrders);
-				String city= filter.getText().toString().trim();
-				orders= BackendFactory.getInstance().getOrdersByCity(city, technic.getId());
-				
+				EditText filter = (EditText) findViewById(R.id.filterOrders);
+				String city = filter.getText().toString().trim();
+				setOrders(BackendFactory.getInstance().getOrdersByCity(city,
+						technic.getId()));
+
 			}
 		});
 
@@ -127,5 +126,13 @@ public class OrderList extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.order_list, menu);
 		return true;
+	}
+
+	protected void setOrders(ArrayList<Order> Orders) {
+		list.setAdapter(null);
+		orders = Orders;
+		ListAdapter adapter = new ordersAdapter(this, R.layout.order_list_view,
+				orders);
+		list.setAdapter(adapter);
 	}
 }

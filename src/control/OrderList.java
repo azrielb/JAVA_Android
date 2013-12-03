@@ -46,15 +46,14 @@ public class OrderList extends _Activity {
 				convertView = View.inflate(OrderList.this,
 						R.layout.order_list_view, null);
 			}
-
-			OrderList.super.setText(R.id.filterTextView,
-					((Integer) orders.get(position).getOrderNumber())
-							.toString());
-			OrderList.super.setText(R.id.addressTextView, orders.get(position)
-					.getCity());
-			OrderList.super.setText(R.id.nameTextView, orders.get(position)
-					.getCustomer());
-			OrderList.super.setText(R.id.dateTextView, orders.get(position)
+			Order order = orders.get(position);
+			_Activity.setText(convertView, R.id.filterTextView,
+					((Integer) order.getOrderNumber()).toString());
+			_Activity.setText(convertView, R.id.addressTextView,
+					order.getCity());
+			_Activity.setText(convertView, R.id.nameTextView,
+					order.getCustomer());
+			_Activity.setText(convertView, R.id.dateTextView, order
 					.getCreateDate().toGMTString());
 			return convertView;
 		}

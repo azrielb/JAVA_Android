@@ -27,7 +27,8 @@ public class DataSource implements Backend, Serializable {
 		orders = new ArrayList<Order>();
 		components = new ArrayList<Component>();
 		bills = new ArrayList<Bill>();
-		Technician t1 = new Technician("a", "a", "1", "a@a", 1);
+		Technician t1 = new Technician("Reuven", "Cohen", "1",
+				"Reuven.Cohen@gmail.com", 1);
 		technicians.add(t1);
 		Order o1 = new BE.Order(1, "Tel Aviv", "baruch", new Date());
 		o1.setTechnician(t1);
@@ -88,24 +89,23 @@ public class DataSource implements Backend, Serializable {
 	}
 
 	@Override
-	public void deleteTechnician(Technician book) {
-		// TODO Auto-generated method stub
-
+	public void deleteTechnician(Technician tech) {
+		technicians.remove(tech);
 	}
 
 	@Override
 	public Technician getUserByIdAndPassword(int id, String password) {
 		for (Technician user : technicians)
-			if (user.getId() == (id) && user.getPassword().equals(password))
-				return user;
-
-		// throw new Exception("Wrong Email address or password.");
+			if (user.getId() == id)
+				return user.getPassword().equals(password) ? user : null;
 		return null;
 	}
 
 	@Override
 	public Technician getTechnicianByName(String technicianName) {
-		// TODO Auto-generated method stub
+		for (Technician user : technicians)
+			if (user.getName().equalsIgnoreCase(technicianName))
+				return user;
 		return null;
 	}
 
@@ -144,7 +144,7 @@ public class DataSource implements Backend, Serializable {
 		ArrayList<Order> temp = getOrdersByTechnicianId(id);
 		ArrayList<Order> result = new ArrayList<Order>();
 		for (Order item : temp)
-			if (compareWords(city, item.getCity()))
+			if (item.getCity().contains(city.subSequence(0, city.length())))
 				result.add(item);
 		if (result.size() > 0)
 			return result;

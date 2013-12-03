@@ -19,7 +19,7 @@ public class OrderSummary extends _Activity {
 		orderNumber = getIntent().getExtras().getInt("currentOrder");
 		currentOrder = BackendFactory.getInstance().getOrderByNumber(
 				orderNumber);
-		super.appendText(R.id.addressOrder, ": " + currentOrder.getAddres());
+		super.appendText(R.id.addressOrder, ": " + currentOrder.getFullAdress());
 		super.appendText(R.id.contactOrder, ": " + currentOrder.getCustomer());
 		super.appendText(R.id.phoneNumOrder,
 				": " + Long.toString(currentOrder.getCustomerPhone()));

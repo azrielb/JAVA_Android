@@ -33,19 +33,18 @@ public class Order implements Serializable {
 	ArrayList<Component> requiredComponents;
 	Bill bill;
 
-	public Order(int orderNumber, String city, String customer,
-			Date createDate) {
+	public Order(int orderNumber, String city, String customer, Date createDate) {
 		super();
 		this.orderNumber = orderNumber;
 		this.city = city;
 		this.customer = customer;
 		this.createDate = createDate;
-		createDate=new Date();
-		start=new Date();
-		finish=new Date() ;
-	    technician= new Technician();
-		status= statuses.NEW;
-		requiredComponents= new ArrayList<Component>();
+		createDate = new Date();
+		start = new Date();
+		finish = new Date();
+		technician = new Technician();
+		status = statuses.NEW;
+		requiredComponents = new ArrayList<Component>();
 	}
 
 	public int getOrderNumber() {
@@ -179,10 +178,13 @@ public class Order implements Serializable {
 	public void setCity(String city) {
 		this.city = city;
 	}
-	
+
 	public void addComponent(Component item) {
 		item.setExist(false);
 		requiredComponents.add(item);
-		
+	}
+
+	public String getFullAdress() {
+		return Convertions.Join(new String[] { addres, city }, ", ");
 	}
 }

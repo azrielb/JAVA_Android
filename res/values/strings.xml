@@ -15,5 +15,14 @@
     <string name="title_activity_addcomponent">Addcomponent</string>
     <string name="title_activity_component_list">ComponentList</string>
     <string name="title_activity_bill">BillActivity</string>
+    <string name="amount">Amount</string>
+    <string name="price_per_unit">Price per unit</string>
+    <string name="add">Add</string>
+    <string name="price">Price</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="finish_and_go_to_customer_apos_s_confirmation">Finish and go to customer&amp;apos;s confirmation</string>
+    <string name="total_price_">Total price:</string>
+    <string name="total">total</string>
 
 </resources>

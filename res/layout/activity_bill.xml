@@ -80,7 +80,7 @@
         android:layout_alignBaseline="@+id/Delete"
         android:layout_alignBottom="@+id/Delete"
         android:layout_alignRight="@+id/Price_decimal"
-        android:text="@string/add" />
+        android:text="@string/add_new" />
 
     <Button
         android:id="@+id/Save"

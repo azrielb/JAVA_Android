@@ -1,6 +1,7 @@
 package control;
 
 import model.backend.BackendFactory;
+import BE.Convertions;
 import BE.Order;
 import android.os.Bundle;
 import android.view.Menu;
@@ -24,9 +25,9 @@ public class OrderSummary extends _Activity {
 		super.appendText(R.id.phoneNumOrder,
 				": " + Long.toString(currentOrder.getCustomerPhone()));
 		super.appendText(R.id.createOrder, ": "
-				+ currentOrder.getStart().toGMTString());
+				+ Convertions.formatDateToString(currentOrder.getStart()));
 		super.appendText(R.id.finishOrder, ": "
-				+ currentOrder.getFinish().toGMTString());
+				+ Convertions.formatDateToString(currentOrder.getFinish()));
 		super.appendText(R.id.assignedToOrder, ": "
 				+ currentOrder.getTechnician().getName());
 		super.appendText(R.id.statusOrder, ": "

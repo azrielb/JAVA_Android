@@ -46,24 +46,16 @@ public class ComponentList extends _Activity {
 			}
 
 			View getCustomView(int position, View convertView, ViewGroup parent) {
-
 				if (convertView == null) {
 					convertView = View.inflate(ComponentList.this,
 							R.layout.component_list_view, null);
 				}
-
-				ComponentList.super.setText(R.id.componentName,
-						components.get(position).getName());
-				ComponentList.super.setText(R.id.serialNumber,
-						components.get(position).getSerialNumber());
-//				TextView name = (TextView) findViewById(R.id.componentName);
-//				name.setText(components.get(position).getName());
-//				TextView number = (TextView) findViewById(R.id.serialNumber);
-//				number.setText(components.get(position).getSerialNumber());
-
+				_Activity.setText(convertView, R.id.componentName, components
+						.get(position).getName());
+				_Activity.setText(convertView, R.id.serialNumber, components
+						.get(position).getSerialNumber());
 				return convertView;
 			}
-
 		};
 		componentList.setAdapter(adapter);
 

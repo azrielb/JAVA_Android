@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.backend.BackendFactory;
+import BE.Convertions;
 import BE.Order;
 import BE.Technician;
 import android.content.Intent;
@@ -53,8 +54,8 @@ public class OrderList extends _Activity {
 					order.getCity());
 			_Activity.setText(convertView, R.id.nameTextView,
 					order.getCustomer());
-			_Activity.setText(convertView, R.id.dateTextView, order
-					.getCreateDate().toGMTString());
+			_Activity.setText(convertView, R.id.dateTextView,
+					Convertions.formatDateToString(order.getCreateDate()));
 			return convertView;
 		}
 

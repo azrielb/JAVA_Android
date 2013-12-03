@@ -152,14 +152,6 @@ public class DataSource implements Backend, Serializable {
 			return temp;
 	}
 
-	private boolean compareWords(String source, String word) {
-		if (source.length() == word.length())
-			return source.equals(word);
-		if (source.length() > word.length())
-			return false;
-		return (source.equals(word.subSequence(0, source.length())));
-	}
-
 	public ArrayList<Component> getAvailableComponent() {
 		ArrayList<Component> result = new ArrayList<Component>();
 		for (Component item : components)

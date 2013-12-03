@@ -26,7 +26,7 @@ public class OrderNavigation extends _Activity {
 		Button summaryButton = (Button) findViewById(R.id.summaryButton);
 		Button componetAddButton = (Button) findViewById(R.id.addComponentButton);
 		Button componetsList = (Button) findViewById(R.id.componentListButton);
-		Button billButton = (Button) findViewById(R.id.billButton);
+		Button billButton = (Button) findViewById(R.id.saveButton);
 
 		summaryButton.setOnClickListener(new OnClickListener() {
 
@@ -45,6 +45,7 @@ public class OrderNavigation extends _Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent(OrderNavigation.this,
 						Addcomponent.class);
+				intent.putExtra("number", orderNumber);
 				startActivity(intent);
 			}
 		});

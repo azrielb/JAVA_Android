@@ -90,7 +90,7 @@ public class OrderList extends _Activity {
 			}
 		});
 
-		Button filterButton = (Button) findViewById(R.id.billButton);
+		Button filterButton = (Button) findViewById(R.id.saveButton);
 		filterButton.setOnClickListener(new OnClickListener() {
 
 			@Override

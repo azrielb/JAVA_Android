@@ -15,60 +15,30 @@
         android:gravity="top"
         android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/componentName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="component name"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
-        <EditText
-            android:id="@+id/editText1"
+        <Spinner
+            android:id="@+id/spinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content" />
 
-            <requestFocus />
-        </EditText>
-
-        <TextView
-            android:id="@+id/serialNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="amount"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
-        <EditText
-            android:id="@+id/editText2"
+        <ListView
+            android:id="@+id/addCompListView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Small Text"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
-        <EditText
-            android:id="@+id/editText3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10" />
+            android:layout_height="314dp" >
+        </ListView>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
 
             <Button
-                android:id="@+id/billButton"
+                android:id="@+id/saveButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:text="save" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/cancelButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"

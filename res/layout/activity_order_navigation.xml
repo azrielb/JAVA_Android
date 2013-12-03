@@ -35,13 +35,13 @@
             android:text="List of component" />
 
         <Button
-            android:id="@+id/billButton"
+            android:id="@+id/saveButton"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="Bill" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/cancelButton"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="Button" />

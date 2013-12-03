@@ -56,6 +56,10 @@ public class ComponentList extends _Activity {
 						components.get(position).getName());
 				ComponentList.super.setText(R.id.serialNumber,
 						components.get(position).getSerialNumber());
+//				TextView name = (TextView) findViewById(R.id.componentName);
+//				name.setText(components.get(position).getName());
+//				TextView number = (TextView) findViewById(R.id.serialNumber);
+//				number.setText(components.get(position).getSerialNumber());
 
 				return convertView;
 			}

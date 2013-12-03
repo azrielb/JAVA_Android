@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE documet-type>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.java5774_04_7842_7588"
     android:versionCode="1"
@@ -6,7 +7,7 @@
 
     <uses-sdk
         android:minSdkVersion="10"
-        android:targetSdkVersion="18" />
+        android:targetSdkVersion="19" />
 
     <application
         android:allowBackup="true"
@@ -53,10 +54,6 @@
         <activity
             android:name="control.ComponentList"
             android:label="@string/title_activity_component_list" >
-        </activity>
-        <activity
-            android:name="control.Test"
-            android:label="@string/title_activity_test" >
         </activity>
         <activity
             android:name="control.BillActivity"

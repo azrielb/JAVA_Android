@@ -15,7 +15,7 @@ public class Convertions {
 		int i = 0;
 		String joined = "";
 		for (; i < length; ++i) {
-			if (!strings[i].isEmpty()) {
+			if (strings[i]!= null && !strings[i].isEmpty()) {
 				joined = strings[i++];
 				break;
 			}

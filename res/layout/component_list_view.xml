@@ -12,7 +12,7 @@
             android:id="@+id/componentName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="name"
+            android:text="@string/name"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
@@ -20,9 +20,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
-            android:text="serial number"
+            android:text="@string/serial_number"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-
     </LinearLayout>
 
 </LinearLayout>

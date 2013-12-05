@@ -20,7 +20,7 @@
             android:id="@+id/summaryButton"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Summary" />
+            android:text="@string/summary" />
 
         <Button
             android:id="@+id/addComponentButton"
@@ -32,26 +32,25 @@
             android:id="@+id/componentListButton"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="List of component" />
+            android:text="@string/list_of_component" />
 
         <Button
             android:id="@+id/saveButton"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Bill" />
+            android:text="@string/bill" />
 
         <Button
             android:id="@+id/cancelButton"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:text="@string/button" />
 
         <Button
             android:id="@+id/button4"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Button" />
-
+            android:text="@string/button" />
     </LinearLayout>
 
 </RelativeLayout>

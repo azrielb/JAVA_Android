@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#00AA00"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -22,12 +23,10 @@
             android:id="@+id/filterTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/linearLayout1"
-            android:layout_alignParentTop="true"
             android:layout_marginLeft="17dp"
             android:layout_marginTop="30dp"
-            android:text="User ID"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:text="@string/user_id"
+            android:textAppearance="@string/_android_attr_textappearancelarge" />
 
         <EditText
             android:id="@+id/filterOrders"
@@ -35,18 +34,18 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="34dp"
             android:layout_marginTop="10dp"
-            android:ems="10" />
+            android:background="#00D000"
+            android:ems="10"
+            android:inputType="number" />
 
         <TextView
             android:id="@+id/nameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/linearLayout1"
-            android:layout_alignParentTop="true"
             android:layout_marginLeft="17dp"
             android:layout_marginTop="50dp"
-            android:text="Password"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:text="@string/password"
+            android:textAppearance="@string/_android_attr_textappearancelarge" />
 
         <EditText
             android:id="@+id/passwordUser"
@@ -54,6 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="0dp"
             android:layout_marginTop="10dp"
+            android:background="#00D000"
             android:ems="10"
             android:inputType="textPassword" />
 
@@ -63,18 +63,16 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="140dp"
             android:layout_marginTop="30dp"
-            android:text="Login" />
+            android:text="@string/login" />
 
         <Button
             android:id="@+id/addNewAccount"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/linearLayout1"
-            android:layout_alignParentBottom="true"
             android:layout_marginBottom="56dp"
             android:layout_marginLeft="0dp"
             android:layout_marginTop="25dp"
-            android:text="Don&apos;t have a user?" />
+            android:text="@string/don_apos_t_have_a_user_" />
     </LinearLayout>
 
 </RelativeLayout>

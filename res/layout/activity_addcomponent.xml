@@ -35,14 +35,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:text="save" />
+                android:text="@string/save" />
 
             <Button
                 android:id="@+id/cancelButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:text="cancel" />
+                android:text="@string/cancel" />
 
         </LinearLayout>
 

@@ -29,7 +29,7 @@
     <string name="login">Login</string>
     <string name="don_apos_t_have_a_user_">Don\'t have a user?</string>
     <string name="user_id">User ID</string>
-    <string name="cancel">cancel</string>
+    <string name="cancel">Cancel</string>
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
     <string name="id">ID</string>
@@ -52,5 +52,7 @@
     <string name="name">Name</string>
     <string name="date">Date</string>
     <string name="title_activity_work_details">WorkDetails</string>
+    <string name="insert_work_details">insert work details</string>
+    <string name="go_back">GO BACK</string>
 
 </resources>

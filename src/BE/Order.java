@@ -39,7 +39,6 @@ public class Order implements Serializable {
 		this.city = city;
 		this.customer = customer;
 		this.createDate = createDate;
-		createDate = new Date();
 		start = new Date();
 		finish = new Date();
 		technician = new Technician();

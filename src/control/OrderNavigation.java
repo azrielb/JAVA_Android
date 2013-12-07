@@ -27,6 +27,8 @@ public class OrderNavigation extends _Activity {
 		Button componetAddButton = (Button) findViewById(R.id.addComponentButton);
 		Button componetsList = (Button) findViewById(R.id.componentListButton);
 		Button billButton = (Button) findViewById(R.id.saveButton);
+		Button workDetails = (Button) findViewById(R.id.workDetailsButton);
+		Button goBack = (Button) findViewById(R.id.returnToOrderList);
 
 		summaryButton.setOnClickListener(new OnClickListener() {
 
@@ -67,6 +69,25 @@ public class OrderNavigation extends _Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent(OrderNavigation.this,
 						BillActivity.class);
+				intent.putExtra("orderNum", orderNumber);
+				startActivity(intent);
+			}
+		});
+		
+		goBack.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
+		
+		workDetails.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(OrderNavigation.this,
+						WorkDetails.class);
 				intent.putExtra("orderNum", orderNumber);
 				startActivity(intent);
 			}

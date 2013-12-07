@@ -2,7 +2,6 @@ package control;
 
 import model.backend.BackendFactory;
 import BE.Technician;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -13,7 +12,6 @@ import android.widget.EditText;
 import com.example.java5774_04_7842_7588.R;
 
 public class NewAccount extends _Activity {
-	Technician user;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +22,6 @@ public class NewAccount extends _Activity {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(NewAccount.this, MainActivity.class);
 				String fname = ((EditText) findViewById(R.id.filterOrders))
 						.getText().toString().trim();
 				String lname = ((EditText) findViewById(R.id.lastName))
@@ -35,9 +32,9 @@ public class NewAccount extends _Activity {
 						.getText().toString().trim();
 				String email = ((EditText) findViewById(R.id.email)).getText()
 						.toString().trim();
-				user = new Technician(fname, lname, pass, email, id);
+				Technician user = new Technician(fname, lname, pass, email, id);
 				BackendFactory.getInstance().addTechnician(user);
-				startActivity(intent);
+				finish();
 			}
 		});
 	}

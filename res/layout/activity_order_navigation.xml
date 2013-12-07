@@ -41,16 +41,16 @@
             android:text="Bill" />
 
         <Button
-            android:id="@+id/cancelButton"
+            android:id="@+id/workDetailsButton"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:text="insert work details" />
 
         <Button
-            android:id="@+id/button4"
-            android:layout_width="fill_parent"
+            android:id="@+id/returnToOrderList"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:text="GO BACK" />
 
     </LinearLayout>
 

@@ -25,5 +25,6 @@
     <string name="total_price_">Total price:</string>
     <string name="total">total</string>
     <string name="add_new">add new</string>
+    <string name="title_activity_work_details">WorkDetails</string>
 
 </resources>

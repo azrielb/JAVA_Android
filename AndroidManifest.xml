@@ -59,6 +59,14 @@
             android:name="control.BillActivity"
             android:label="@string/title_activity_bill" >
         </activity>
+        <activity
+            android:name="control.WorkDetails"
+            android:label="@string/title_activity_work_details" >
+        </activity>
+        <activity
+            android:name="control.WorkDetails"
+            android:label="@string/title_activity_work_details" >
+        </activity>
     </application>
 
 </manifest>

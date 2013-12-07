@@ -45,6 +45,7 @@ public class DataSource implements Backend, Serializable {
 		orders.add(o4);
 		orders.add(o5);
 		orders.add(o6);
+		Component c0 = new Component("choose one --->", 0, "#00000");
 		Component c1 = new Component("key", 10, "#12345");
 		Component c2 = new Component("key", 10, "#12346");
 		Component c3 = new Component("key", 10, "#12347");
@@ -54,6 +55,7 @@ public class DataSource implements Backend, Serializable {
 		Component c7 = new Component("capacitor", 25, "#30007");
 		Component c8 = new Component("capacitor", 25, "#30008");
 		Component c9 = new Component("capacitor", 25, "#30009");
+		components.add(c0);
 		components.add(c1);
 		components.add(c2);
 		components.add(c3);

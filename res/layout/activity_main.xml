@@ -26,7 +26,7 @@
             android:layout_marginLeft="17dp"
             android:layout_marginTop="30dp"
             android:text="@string/user_id"
-            android:textAppearance="@string/_android_attr_textappearancelarge" />
+            android:textAppearance="@android:attr/textAppearanceLarge" />
 
         <EditText
             android:id="@+id/filterOrders"
@@ -45,7 +45,7 @@
             android:layout_marginLeft="17dp"
             android:layout_marginTop="50dp"
             android:text="@string/password"
-            android:textAppearance="@string/_android_attr_textappearancelarge" />
+            android:textAppearance="@android:attr/textAppearanceLarge" />
 
         <EditText
             android:id="@+id/passwordUser"

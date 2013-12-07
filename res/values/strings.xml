@@ -25,7 +25,6 @@
     <string name="total_price_">Total price:</string>
     <string name="total">total</string>
     <string name="add_new">add new</string>
-    <string name="_android_attr_textappearancelarge">\?android:attr/textAppearanceLarge</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="don_apos_t_have_a_user_">Don\'t have a user?</string>
@@ -52,5 +51,6 @@
     <string name="serial_number">serial number</string>
     <string name="name">Name</string>
     <string name="date">Date</string>
+    <string name="title_activity_work_details">WorkDetails</string>
 
 </resources>

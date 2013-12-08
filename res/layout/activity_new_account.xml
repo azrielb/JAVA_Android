@@ -19,7 +19,7 @@
             android:id="@+id/addressOrder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/first_name"
+            android:text="First name"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <EditText
@@ -32,7 +32,7 @@
             android:id="@+id/createOrder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/last_name"
+            android:text="Last name"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <EditText
@@ -49,7 +49,7 @@
             android:id="@+id/finishOrder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/id"
+            android:text="ID"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <EditText
@@ -63,20 +63,19 @@
             android:id="@+id/contactOrder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/password"
+            android:text="Password"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <EditText
             android:id="@+id/password"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/phoneNumOrder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/email"
+            android:text="Email"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <EditText
@@ -89,7 +88,8 @@
             android:id="@+id/addNewAccount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/add_new_account" />
+            android:text="Add new account" />
+
     </LinearLayout>
 
 </RelativeLayout>

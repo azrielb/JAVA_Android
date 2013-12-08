@@ -9,124 +9,77 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".BillActivity" >
 
-    <Spinner
-        android:id="@+id/items_list"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/Amount_Label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/items_list"
-        android:layout_below="@+id/items_list"
-        android:layout_marginTop="22dp"
-        android:text="@string/amount" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.09" >
 
-    <EditText
-        android:id="@+id/Amount_decimal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/Amount_Label"
-        android:layout_alignBottom="@+id/Amount_Label"
-        android:layout_alignRight="@+id/items_list"
-        android:ems="10"
-        android:inputType="numberDecimal" >
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="name"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
-        <requestFocus />
-    </EditText>
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="amount"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <EditText
-        android:id="@+id/Price_per_unit_decimal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/Amount_decimal"
-        android:layout_alignTop="@+id/Price_per_unit_label"
-        android:ems="10"
-        android:inputType="numberDecimal" />
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="price"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <TextView
-        android:id="@+id/Price_per_unit_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/Amount_Label"
-        android:layout_below="@+id/Amount_decimal"
-        android:layout_marginTop="24dp"
-        android:text="@string/price_per_unit" />
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/Price_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/Price_per_unit_label"
-        android:layout_centerVertical="true"
-        android:text="@string/price"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        <ListView
+            android:id="@+id/billList"
+            android:layout_width="match_parent"
+            android:layout_height="269dp"
+            android:layout_weight="0.79" >
+        </ListView>
 
-    <EditText
-        android:id="@+id/Price_decimal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/Price_label"
-        android:layout_alignBottom="@+id/Price_label"
-        android:layout_alignRight="@+id/Price_per_unit_decimal"
-        android:ems="10"
-        android:inputType="numberDecimal" />
+        <TextView
+            android:id="@+id/totalP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.09"
+            android:text="Total price:"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <Button
-        android:id="@+id/add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/Delete"
-        android:layout_alignBottom="@+id/Delete"
-        android:layout_alignRight="@+id/Price_decimal"
-        android:text="@string/add_new" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="89dp" >
 
-    <Button
-        android:id="@+id/Save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/Price_label"
-        android:layout_below="@+id/Price_decimal"
-        android:layout_marginTop="23dp"
-        android:text="@string/save" />
+            <Button
+                android:id="@+id/saveBillButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="save" />
 
-    <Button
-        android:id="@+id/Delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/Save"
-        android:layout_alignBottom="@+id/Save"
-        android:layout_centerHorizontal="true"
-        android:text="@string/delete" />
+            <Button
+                android:id="@+id/cancelBillButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="cancel" />
 
-    <Button
-        android:id="@+id/Finish_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="30dp"
-        android:text="@string/finish_and_go_to_customer_apos_s_confirmation" />
-
-    <TextView
-        android:id="@+id/Total_price_decimal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/Total_price_label"
-        android:layout_alignBottom="@+id/Total_price_label"
-        android:layout_alignRight="@+id/Finish_button"
-        android:text="@string/total"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/Total_price_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/Finish_button"
-        android:layout_alignLeft="@+id/Finish_button"
-        android:layout_marginBottom="18dp"
-        android:text="@string/total_price_"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        </LinearLayout>
+    </LinearLayout>
 
 </RelativeLayout>

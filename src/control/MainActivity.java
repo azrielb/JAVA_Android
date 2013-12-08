@@ -27,8 +27,8 @@ public class MainActivity extends _Activity {
 
 			@Override
 			public void onClick(View v) {
-				String strID = ((TextView) findViewById(R.id.filterOrders))
-						.getText().toString();
+				String strID = ((TextView) findViewById(R.id.userID)).getText()
+						.toString();
 				String password = ((TextView) findViewById(R.id.passwordUser))
 						.getText().toString();
 				if (strID.length() > 0 && password.length() > 0) {

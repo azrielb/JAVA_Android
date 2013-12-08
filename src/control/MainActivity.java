@@ -21,14 +21,14 @@ public class MainActivity extends _Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		Button logButton = (Button) findViewById(R.id.logButton);
+		Button loginButton = (Button) findViewById(R.id.logButton);
 		Button newAccount = (Button) findViewById(R.id.addNewAccount);
-		logButton.setOnClickListener(new OnClickListener() {
+		loginButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				String strID = ((TextView) findViewById(R.id.filterOrders))
-						.getText().toString();
+				String strID = ((TextView) findViewById(R.id.userID)).getText()
+						.toString();
 				String password = ((TextView) findViewById(R.id.passwordUser))
 						.getText().toString();
 				if (strID.length() > 0 && password.length() > 0) {

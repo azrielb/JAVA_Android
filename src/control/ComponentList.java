@@ -6,13 +6,18 @@ import java.util.List;
 import model.backend.BackendFactory;
 import BE.Component;
 import BE.Order;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.java5774_04_7842_7588.R;
 
@@ -27,7 +32,7 @@ public class ComponentList extends _Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_component_list);
-		orderNumber = getIntent().getExtras().getInt("number");
+		orderNumber = getIntent().getExtras().getInt("orderNumber");
 		currentOrder = BackendFactory.getInstance().getOrderByNumber(
 				orderNumber);
 		componentList = (ListView) findViewById(R.id.componentListView);
@@ -58,6 +63,41 @@ public class ComponentList extends _Activity {
 			}
 		};
 		componentList.setAdapter(adapter);
+		componentList.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view,
+					final int position, long id) {
+				DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						switch (which) {
+						case DialogInterface.BUTTON_POSITIVE:
+							Toast.makeText(ComponentList.this, "yes clicked",
+									Toast.LENGTH_LONG).show();
+							components.get(position).setExist(true);
+							components.remove(position);
+
+							break;
+
+						case DialogInterface.BUTTON_NEGATIVE:
+							Toast.makeText(ComponentList.this, "no clicked",
+									Toast.LENGTH_LONG).show();
+							break;
+						}
+					}
+				};
+
+				AlertDialog.Builder builder = new AlertDialog.Builder(
+						ComponentList.this);
+				builder.setMessage("Are you sure yoy want to deldete?")
+						.setPositiveButton("Yes", dialogClickListener)
+						.setNegativeButton("No", dialogClickListener).show();
+
+				return true;
+			}
+
+		});
 
 	}
 

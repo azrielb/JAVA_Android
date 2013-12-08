@@ -55,7 +55,7 @@ public class OrderList extends _Activity {
 			_Activity.setText(convertView, R.id.nameTextView,
 					order.getCustomer());
 			_Activity.setText(convertView, R.id.dateTextView,
-					Convertions.formatDateToString(order.getCreateDate()));
+					Convertions.dateInstance.format(order.getCreateDate()));
 			return convertView;
 		}
 
@@ -69,6 +69,7 @@ public class OrderList extends _Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_order_list);
+
 		technic = (Technician) getIntent().getSerializableExtra("user");
 		list = (ListView) findViewById(R.id.orderListView);
 		setOrders(BackendFactory.getInstance().getOrdersByTechnicianId(
@@ -116,8 +117,13 @@ public class OrderList extends _Activity {
 	protected void setOrders(ArrayList<Order> Orders) {
 		list.setAdapter(null);
 		orders = Orders;
-		ListAdapter adapter = new ordersAdapter(this, R.layout.order_list_view,
-				orders);
-		list.setAdapter(adapter);
+		if (orders != null && !orders.isEmpty()) {
+			ListAdapter adapter = new ordersAdapter(this,
+					R.layout.order_list_view, orders);
+			list.setAdapter(adapter);
+		} else {
+			Alert.show(this, "No items",
+					"You don't have any orders. You can go sleep... :)");
+		}
 	}
 }

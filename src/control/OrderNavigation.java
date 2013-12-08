@@ -36,7 +36,7 @@ public class OrderNavigation extends _Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent(OrderNavigation.this,
 						OrderSummary.class);
-				intent.putExtra("currentOrder", orderNumber);
+				intent.putExtra("orderNumber", orderNumber);
 				startActivity(intent);
 			}
 		});
@@ -47,7 +47,7 @@ public class OrderNavigation extends _Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent(OrderNavigation.this,
 						Addcomponent.class);
-				intent.putExtra("number", orderNumber);
+				intent.putExtra("orderNumber", orderNumber);
 				startActivity(intent);
 			}
 		});
@@ -58,7 +58,7 @@ public class OrderNavigation extends _Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent(OrderNavigation.this,
 						ComponentList.class);
-				intent.putExtra("number", orderNumber);
+				intent.putExtra("orderNumber", orderNumber);
 				startActivity(intent);
 			}
 		});
@@ -69,7 +69,7 @@ public class OrderNavigation extends _Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent(OrderNavigation.this,
 						BillActivity.class);
-				intent.putExtra("orderNum", orderNumber);
+				intent.putExtra("orderNumber", orderNumber);
 				startActivity(intent);
 			}
 		});
@@ -87,8 +87,8 @@ public class OrderNavigation extends _Activity {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(OrderNavigation.this,
-						WorkDetails.class);
-				intent.putExtra("orderNum", orderNumber);
+						WorkingTime.class);
+				intent.putExtra("orderNumber", orderNumber);
 				startActivity(intent);
 			}
 		});

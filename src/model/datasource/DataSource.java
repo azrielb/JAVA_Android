@@ -72,6 +72,10 @@ public class DataSource implements Backend, Serializable {
 
 	@Override
 	public void addTechnician(Technician technician) {
+		for (Technician _technician: technicians){
+			if (technician.getId() == _technician.getId())
+				return;
+		}
 		technicians.add(technician);
 	}
 

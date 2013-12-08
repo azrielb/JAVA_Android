@@ -17,57 +17,58 @@
             android:id="@+id/addressOrder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/address"
+            android:text="Address"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
             android:id="@+id/contactOrder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/contact"
+            android:text="Contact"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
             android:id="@+id/phoneNumOrder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/phone_number"
+            android:text="Phone number"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
             android:id="@+id/createOrder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/create_date"
+            android:text="Create Date"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
             android:id="@+id/finishOrder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/finish_date"
+            android:text="Finish Date"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
             android:id="@+id/assignedToOrder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/assigned_to"
+            android:text="Assigned To"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
             android:id="@+id/statusOrder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/status"
+            android:text="Status"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
             android:id="@+id/idOrder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/order_id"
+            android:text="Order ID"
             android:textAppearance="?android:attr/textAppearanceMedium" />
+
     </LinearLayout>
 
 </RelativeLayout>

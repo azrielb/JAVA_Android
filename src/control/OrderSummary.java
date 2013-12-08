@@ -17,7 +17,7 @@ public class OrderSummary extends _Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_order_summary);
-		orderNumber = getIntent().getExtras().getInt("currentOrder");
+		orderNumber = getIntent().getExtras().getInt("orderNumber");
 		currentOrder = BackendFactory.getInstance().getOrderByNumber(
 				orderNumber);
 		super.appendText(R.id.addressOrder, ": " + currentOrder.getFullAdress());
@@ -25,9 +25,9 @@ public class OrderSummary extends _Activity {
 		super.appendText(R.id.phoneNumOrder,
 				": " + Long.toString(currentOrder.getCustomerPhone()));
 		super.appendText(R.id.createOrder, ": "
-				+ Convertions.formatDateToString(currentOrder.getStart()));
+				+ Convertions.dateInstance.format(currentOrder.getStart()));
 		super.appendText(R.id.finishOrder, ": "
-				+ Convertions.formatDateToString(currentOrder.getFinish()));
+				+ Convertions.dateInstance.format(currentOrder.getFinish()));
 		super.appendText(R.id.assignedToOrder, ": "
 				+ currentOrder.getTechnician().getName());
 		super.appendText(R.id.statusOrder, ": "

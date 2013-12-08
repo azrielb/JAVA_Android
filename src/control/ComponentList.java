@@ -8,7 +8,6 @@ import BE.Component;
 import BE.Order;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -22,8 +21,6 @@ import android.widget.Toast;
 
 import com.example.java5774_04_7842_7588.R;
 
-import control.OrderList.ordersAdapter;
-
 public class ComponentList extends _Activity {
 
 	Order currentOrder;
@@ -35,7 +32,7 @@ public class ComponentList extends _Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_component_list);
-		orderNumber = getIntent().getExtras().getInt("number");
+		orderNumber = getIntent().getExtras().getInt("orderNumber");
 		currentOrder = BackendFactory.getInstance().getOrderByNumber(
 				orderNumber);
 		componentList = (ListView) findViewById(R.id.componentListView);

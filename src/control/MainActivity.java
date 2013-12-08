@@ -21,9 +21,9 @@ public class MainActivity extends _Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		Button logButton = (Button) findViewById(R.id.logButton);
+		Button loginButton = (Button) findViewById(R.id.logButton);
 		Button newAccount = (Button) findViewById(R.id.addNewAccount);
-		logButton.setOnClickListener(new OnClickListener() {
+		loginButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {

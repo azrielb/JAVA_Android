@@ -20,7 +20,6 @@ import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.java5774_04_7842_7588.R;
 
@@ -37,9 +36,8 @@ public class BillActivity extends _Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_bill);
-		orderNumber = getIntent().getExtras().getInt("orderNum");
-		currentOrder = BackendFactory.getInstance().getOrderByNumber(
-				orderNumber);
+		orderNumber =  getIntent().getExtras().getInt("orderNumber");
+		currentOrder=BackendFactory.getInstance().getOrderByNumber(orderNumber);
 		componentList = (ListView) findViewById(R.id.billList);
 		components = currentOrder.getRequiredComponents();
 		TextView total = (TextView) findViewById(R.id.totalP);
@@ -99,7 +97,6 @@ public class BillActivity extends _Activity {
 				
 			}
 		});
-
 	}
 
 	@Override

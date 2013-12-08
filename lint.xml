@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="UselessParent">
+        <ignore path="res/layout/activity_addcomponent.xml" />
+        <ignore path="res/layout/activity_bill.xml" />
+        <ignore path="res/layout/activity_component_list.xml" />
+        <ignore path="res/layout/activity_main.xml" />
+        <ignore path="res/layout/activity_new_account.xml" />
+        <ignore path="res/layout/activity_order.xml" />
+        <ignore path="res/layout/activity_order_list.xml" />
+        <ignore path="res/layout/activity_order_navigation.xml" />
+        <ignore path="res/layout/activity_order_summary.xml" />
+        <ignore path="res/layout/activity_working_time.xml" />
+        <ignore path="res/layout/component_list_view.xml" />
+        <ignore path="res/layout/order_list_view.xml" />
+    </issue>
+</lint>

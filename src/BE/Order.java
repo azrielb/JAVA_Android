@@ -2,6 +2,7 @@ package BE;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class Order implements Serializable {
@@ -22,8 +23,8 @@ public class Order implements Serializable {
 	String customer;
 	long customerPhone;
 	Date createDate;
-	Date start;
-	Date finish;
+	Calendar start;
+	Calendar finish;
 	Technician technician;
 	statuses status;
 	String title;
@@ -39,8 +40,8 @@ public class Order implements Serializable {
 		this.city = city;
 		this.customer = customer;
 		this.createDate = createDate;
-		start = new Date();
-		finish = new Date();
+		start = null;
+		finish = null;
 		technician = new Technician();
 		status = statuses.NEW;
 		requiredComponents = new ArrayList<Component>();
@@ -94,19 +95,19 @@ public class Order implements Serializable {
 		this.customerPhone = customerPhone;
 	}
 
-	public Date getStart() {
+	public Calendar getStart() {
 		return start;
 	}
 
-	public void setStart(Date start) {
+	public void setStart(Calendar start) {
 		this.start = start;
 	}
 
-	public Date getFinish() {
+	public Calendar getFinish() {
 		return finish;
 	}
 
-	public void setFinish(Date finish) {
+	public void setFinish(Calendar finish) {
 		this.finish = finish;
 	}
 

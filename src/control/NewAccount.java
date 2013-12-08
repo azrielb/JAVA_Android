@@ -32,8 +32,22 @@ public class NewAccount extends _Activity {
 						.getText().toString().trim();
 				String email = ((EditText) findViewById(R.id.email)).getText()
 						.toString().trim();
+				if (BackendFactory.getInstance().getUserByIdAndPassword(id,
+						pass) != null) {
+					Alert.show(NewAccount.this, "User exists",
+							"You are alredy in the system!");
+					return;
+				}
+				
 				Technician user = new Technician(fname, lname, pass, email, id);
 				BackendFactory.getInstance().addTechnician(user);
+				
+				if (BackendFactory.getInstance().getUserByIdAndPassword(id,
+						pass) == null) {
+					Alert.show(NewAccount.this, "User not created",
+							"May you are alredy in the system? Please check your password.");
+					return;
+				}
 				finish();
 			}
 		});

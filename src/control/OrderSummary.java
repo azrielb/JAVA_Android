@@ -24,10 +24,11 @@ public class OrderSummary extends _Activity {
 		super.appendText(R.id.contactOrder, ": " + currentOrder.getCustomer());
 		super.appendText(R.id.phoneNumOrder,
 				": " + Long.toString(currentOrder.getCustomerPhone()));
-		super.appendText(R.id.createOrder, ": "
-				+ Convertions.dateInstance.format(currentOrder.getStart()));
-		super.appendText(R.id.finishOrder, ": "
-				+ Convertions.dateInstance.format(currentOrder.getFinish()));
+		super.appendText(R.id.createOrder, (": " + Convertions.dateInstance
+				.format(currentOrder.getCreateDate())));
+		if (currentOrder.getFinish() != null)
+			super.appendText(R.id.finishOrder, (": " + Convertions.dateInstance
+					.format(currentOrder.getFinish().getTime())));
 		super.appendText(R.id.assignedToOrder, ": "
 				+ currentOrder.getTechnician().getName());
 		super.appendText(R.id.statusOrder, ": "

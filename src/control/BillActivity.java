@@ -16,7 +16,7 @@ public class BillActivity extends _Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_bill);
-		orderNumber =  getIntent().getExtras().getInt("orderNum");
+		orderNumber =  getIntent().getExtras().getInt("orderNumber");
 		currentNumber=BackendFactory.getInstance().getOrderByNumber(orderNumber);
 	}
 

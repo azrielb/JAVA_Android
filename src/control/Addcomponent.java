@@ -36,7 +36,7 @@ public class Addcomponent extends _Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_addcomponent);
 		spinner = (Spinner) findViewById(R.id.spinner);
-		int orderNumber = getIntent().getExtras().getInt("number");
+		int orderNumber = getIntent().getExtras().getInt("orderNumber");
 		currentOrder = BackendFactory.getInstance().getOrderByNumber(
 				orderNumber);
 		components = BackendFactory.getInstance().getAvailableComponent();

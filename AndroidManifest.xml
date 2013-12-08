@@ -60,12 +60,8 @@
             android:label="@string/title_activity_bill" >
         </activity>
         <activity
-            android:name="control.WorkDetails"
-            android:label="@string/title_activity_work_details" >
-        </activity>
-        <activity
-            android:name="control.WorkDetails"
-            android:label="@string/title_activity_work_details" >
+            android:name="control.WorkingTime"
+            android:label="@string/title_activity_working_time" >
         </activity>
     </application>
 

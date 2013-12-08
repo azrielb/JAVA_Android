@@ -55,7 +55,7 @@ public class OrderList extends _Activity {
 			_Activity.setText(convertView, R.id.nameTextView,
 					order.getCustomer());
 			_Activity.setText(convertView, R.id.dateTextView,
-					Convertions.formatDateToString(order.getCreateDate()));
+					Convertions.dateInstance.format(order.getCreateDate()));
 			return convertView;
 		}
 

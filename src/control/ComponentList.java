@@ -27,7 +27,7 @@ public class ComponentList extends _Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_component_list);
-		orderNumber = getIntent().getExtras().getInt("number");
+		orderNumber = getIntent().getExtras().getInt("orderNumber");
 		currentOrder = BackendFactory.getInstance().getOrderByNumber(
 				orderNumber);
 		componentList = (ListView) findViewById(R.id.componentListView);

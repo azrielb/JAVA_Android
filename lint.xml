@@ -8,7 +8,6 @@
         <ignore path="res/layout/activity_order_list.xml" />
         <ignore path="res/layout/activity_order_navigation.xml" />
         <ignore path="res/layout/activity_order_summary.xml" />
-        <ignore path="res/layout/activity_work_details.xml" />
         <ignore path="res/layout/component_list_view.xml" />
     </issue>
 </lint>

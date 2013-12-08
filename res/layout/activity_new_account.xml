@@ -26,7 +26,10 @@
             android:id="@+id/filterOrders"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName" >
+
+            <requestFocus />
+        </EditText>
 
         <TextView
             android:id="@+id/createOrder"
@@ -40,10 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName" >
-
-            <requestFocus />
-        </EditText>
+            android:inputType="textPersonName" />
 
         <TextView
             android:id="@+id/finishOrder"

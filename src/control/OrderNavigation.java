@@ -2,6 +2,7 @@ package control;
 
 import model.backend.BackendFactory;
 import BE.Order;
+import BE.Order.statuses;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -45,10 +46,15 @@ public class OrderNavigation extends _Activity {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(OrderNavigation.this,
-						Addcomponent.class);
-				intent.putExtra("orderNumber", orderNumber);
-				startActivity(intent);
+				if (currentOrder.getStatus() == statuses.FINISHED) {
+					Alert.show(OrderNavigation.this, "Permission denied!",
+							"Order alredy finished");
+				} else {
+					Intent intent = new Intent(OrderNavigation.this,
+							Addcomponent.class);
+					intent.putExtra("orderNumber", orderNumber);
+					startActivity(intent);
+				}
 			}
 		});
 
@@ -62,7 +68,7 @@ public class OrderNavigation extends _Activity {
 				startActivity(intent);
 			}
 		});
-		
+
 		billButton.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -73,7 +79,7 @@ public class OrderNavigation extends _Activity {
 				startActivity(intent);
 			}
 		});
-		
+
 		goBack.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -81,15 +87,20 @@ public class OrderNavigation extends _Activity {
 				finish();
 			}
 		});
-		
+
 		workDetails.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(OrderNavigation.this,
-						WorkingTime.class);
-				intent.putExtra("orderNumber", orderNumber);
-				startActivity(intent);
+				if (currentOrder.getStatus() == statuses.FINISHED) {
+					Alert.show(OrderNavigation.this, "Permission denied!",
+							"Order alredy finished");
+				} else {
+					Intent intent = new Intent(OrderNavigation.this,
+							WorkingTime.class);
+					intent.putExtra("orderNumber", orderNumber);
+					startActivity(intent);
+				}
 			}
 		});
 

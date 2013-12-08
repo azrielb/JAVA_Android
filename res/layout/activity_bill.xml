@@ -25,7 +25,7 @@
                 android:id="@+id/textView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="name"
+                android:text="@string/name"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <TextView
@@ -33,7 +33,7 @@
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:gravity="right"
-                android:text="amount"
+                android:text="@string/amount"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <TextView
@@ -41,9 +41,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
-                android:text="price"
+                android:text="@string/price"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
-
         </LinearLayout>
 
         <ListView
@@ -54,11 +53,19 @@
         </ListView>
 
         <TextView
+            android:id="@+id/WorkingHours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.09"
+            android:text="@string/working_hours_"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
             android:id="@+id/totalP"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.09"
-            android:text="Total price:"
+            android:text="@string/total_price_"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <LinearLayout
@@ -70,15 +77,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:text="save" />
+                android:text="@string/save_and_finish" />
 
             <Button
                 android:id="@+id/cancelBillButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:text="cancel" />
-
+                android:text="@string/close" />
         </LinearLayout>
     </LinearLayout>
 

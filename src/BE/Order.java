@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class Order implements Serializable {
 
@@ -186,5 +187,12 @@ public class Order implements Serializable {
 
 	public String getFullAdress() {
 		return Convertions.Join(new String[] { addres, city }, ", ");
+	}
+
+	public float getHours() {
+		if (finish == null || start == null)
+			return 0;
+		Long miliSecDiff = finish.getTimeInMillis() - start.getTimeInMillis();
+		return (float) (TimeUnit.MILLISECONDS.toMinutes(miliSecDiff)) / 60;
 	}
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import model.backend.BackendFactory;
 import BE.Component;
 import BE.Order;
+import BE.Order.statuses;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -63,42 +64,54 @@ public class ComponentList extends _Activity {
 			}
 		};
 		componentList.setAdapter(adapter);
-		componentList.setOnItemLongClickListener(new OnItemLongClickListener() {
+		if (currentOrder.getStatus() != statuses.FINISHED)
+			componentList
+					.setOnItemLongClickListener(new OnItemLongClickListener() {
 
-			@Override
-			public boolean onItemLongClick(AdapterView<?> parent, View view,
-					final int position, long id) {
-				DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						switch (which) {
-						case DialogInterface.BUTTON_POSITIVE:
-							Toast.makeText(ComponentList.this, "yes clicked",
-									Toast.LENGTH_LONG).show();
-							components.get(position).setExist(true);
-							components.remove(position);
+						@Override
+						public boolean onItemLongClick(AdapterView<?> parent,
+								View view, final int position, long id) {
+							DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									switch (which) {
+									case DialogInterface.BUTTON_POSITIVE:
+										components.get(position).setExist(true);
+										components.remove(position);
+										Toast.makeText(ComponentList.this,
+												"the item was removed",
+												Toast.LENGTH_LONG).show();
+										break;
 
-							break;
+									case DialogInterface.BUTTON_NEGATIVE:
+										Toast.makeText(ComponentList.this,
+												"the item was not removed",
+												Toast.LENGTH_LONG).show();
+										break;
+									}
+								}
+							};
 
-						case DialogInterface.BUTTON_NEGATIVE:
-							Toast.makeText(ComponentList.this, "no clicked",
-									Toast.LENGTH_LONG).show();
-							break;
+							AlertDialog.Builder builder = new AlertDialog.Builder(
+									ComponentList.this);
+							builder.setMessage(
+									"Are you sure yoy want to delete?")
+									.setPositiveButton("Yes",
+											dialogClickListener)
+									.setNegativeButton("No",
+											dialogClickListener).show();
+
+							return true;
 						}
-					}
-				};
 
-				AlertDialog.Builder builder = new AlertDialog.Builder(
-						ComponentList.this);
-				builder.setMessage("Are you sure yoy want to deldete?")
-						.setPositiveButton("Yes", dialogClickListener)
-						.setNegativeButton("No", dialogClickListener).show();
-
-				return true;
-			}
-
-		});
-
+					});
+		if (currentOrder.getStatus() == statuses.FINISHED)
+			Alert.show(this, "Read only",
+					"The order was finished. You can't change the information.");
+		else
+			Alert.show(this, "You can delete items!",
+					"Touch long-click for deleting.");
 	}
 
 	@Override

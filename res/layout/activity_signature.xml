@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.gesture.GestureOverlayView
+        android:id="@+id/signaturePad"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:background="@android:color/white"
+        android:eventsInterceptionEnabled="true"
+        android:fadeEnabled="false"
+        android:gestureColor="@android:color/black"
+        android:gestureStrokeLengthThreshold="0.1"
+        android:gestureStrokeType="multiple"
+        android:orientation="vertical" >
+
+    </android.gesture.GestureOverlayView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/DoneButton"
+            android:layout_width="70dp"
+            android:layout_height="50dp"
+            android:background="@drawable/button2"
+            android:text="Done" />
+
+        <Button
+            android:id="@+id/clearButton"
+            android:layout_width="70dp"
+            android:layout_height="50dp"
+            android:background="@drawable/button2"
+            android:text="clear" />
+
+    </LinearLayout>
+
+</LinearLayout>

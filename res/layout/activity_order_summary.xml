@@ -9,65 +9,114 @@
     tools:context=".OrderSummary" >
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
         android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/addressOrder"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="202dp"
             android:layout_height="wrap_content"
-            android:text="Address"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:layout_marginLeft="40dp"
+            android:background="@drawable/frame"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/contactOrder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Contact"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/phoneNumOrder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Phone number"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/firstNameLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Address"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/frame"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/createOrder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Create Date"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/finishOrder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Finish Date"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/assignedToOrder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Assigned To"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/statusOrder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Status"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/idOrder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Order ID"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/contactOrder"
+            android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Contact"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:text="Technician port:" />
 
-        <TextView
-            android:id="@+id/phoneNumOrder"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/orderDescription"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Phone number"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:layout_weight="0.16"
+            android:ems="10"
+            android:inputType="textMultiLine"
+            android:text=" insert details" />
 
-        <TextView
-            android:id="@+id/createOrder"
+        <Button
+            android:id="@+id/summarySaveButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Create Date"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <TextView
-            android:id="@+id/finishOrder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Finish Date"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <TextView
-            android:id="@+id/assignedToOrder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Assigned To"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <TextView
-            android:id="@+id/statusOrder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Status"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <TextView
-            android:id="@+id/idOrder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Order ID"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:text="save" />
 
     </LinearLayout>
 

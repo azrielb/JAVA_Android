@@ -10,7 +10,7 @@ import model.backend.BackendFactory;
 import BE.Bill;
 import BE.Component;
 import BE.Order;
-import BE.Order.statuses;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -29,7 +29,7 @@ public class BillActivity extends _Activity {
 	float hours = 0;
 	int orderNumber;
 	Order currentOrder;
-	Bill bill;
+	Bill bill = null;
 	ListView componentList;
 	List<Component> components = new ArrayList<Component>();
 	List<Integer> counter = new ArrayList<Integer>();
@@ -38,17 +38,17 @@ public class BillActivity extends _Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_bill);
+
 		orderNumber = getIntent().getExtras().getInt("orderNumber");
 		currentOrder = BackendFactory.getInstance().getOrderByNumber(
 				orderNumber);
+		bill = currentOrder.getBill();
 		componentList = (ListView) findViewById(R.id.billList);
 		components = currentOrder.getRequiredComponents();
 		TextView total = (TextView) findViewById(R.id.totalP);
 		List<Component> uniqList = uniqComponent();
-
 		hours = currentOrder.getHours();
-		super.appendText(R.id.WorkingHours, Float.toString(hours));
-
+		super.appendText(R.id.workHours, Float.toString(hours));
 		total.setText(total.getText() + "\t" + Float.toString(totalPrice()));
 
 		ListAdapter adapter = new ArrayAdapter<Component>(this,
@@ -69,9 +69,9 @@ public class BillActivity extends _Activity {
 					convertView = View.inflate(BillActivity.this,
 							R.layout.component_list_view, null);
 				}
-				String name = components.get(position).getName();
 				String amount = (counter.get(position)).toString();
-				_Activity.setText(convertView, R.id.componentName, name);
+				_Activity.setText(convertView, R.id.componentName, components
+						.get(position).getName());
 				_Activity.setText(
 						convertView,
 						R.id.serialNumber,
@@ -83,37 +83,39 @@ public class BillActivity extends _Activity {
 
 			}
 		};
-
 		componentList.setAdapter(adapter);
-		OnClickListener finish = new OnClickListener() {
+
+		Button saveButton = (Button) findViewById(R.id.saveBillButton);
+		saveButton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+					bill.setCost(totalPrice());
+					BackendFactory.getInstance().addBill(bill);
+					finish();
+			}
+		});
+
+		Button cancelButton = (Button) findViewById(R.id.cancelBillButton);
+		cancelButton.setOnClickListener(new OnClickListener() {
+
 			@Override
 			public void onClick(View v) {
 				finish();
 			}
-		};
-		Button cancelButton = (Button) findViewById(R.id.cancelBillButton);
-		cancelButton.setOnClickListener(finish);
-		Button saveButton = (Button) findViewById(R.id.saveBillButton);
-		if (currentOrder.getFinish() == null) {
-			Alert.show(this, "Read only",
-					"The order was not completed, you can't finish it.");
-			saveButton.setOnClickListener(finish);
-		} else if (currentOrder.getStatus() == statuses.FINISHED) {
-			Alert.show(this, "Read only",
-					"The order was finished!");
-			saveButton.setOnClickListener(finish);
-		} else {
-			saveButton.setOnClickListener(new OnClickListener() {
+		});
 
-				@Override
-				public void onClick(View v) {
-					bill = new Bill(orderNumber, totalPrice());
-					BackendFactory.getInstance().addBill(bill);
-					currentOrder.setStatus(statuses.FINISHED);
-					finish();
-				}
-			});
-		}
+		Button signature = (Button) findViewById(R.id.signatureButton);
+		signature.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(BillActivity.this,
+						SignatureActivity.class);
+				intent.putExtra("orderNumber", orderNumber);
+				startActivity(intent);
+			}
+		});
 	}
 
 	@Override

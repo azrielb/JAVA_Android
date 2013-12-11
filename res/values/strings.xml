@@ -15,11 +15,11 @@
     <string name="title_activity_addcomponent">Addcomponent</string>
     <string name="title_activity_component_list">ComponentList</string>
     <string name="title_activity_bill">BillActivity</string>
-    <string name="amount">amount</string>
+    <string name="amount">Amount</string>
     <string name="price_per_unit">Price per unit</string>
     <string name="add">Add</string>
-    <string name="price">price</string>
-    <string name="save">save</string>
+    <string name="price">Price</string>
+    <string name="save">Save</string>
     <string name="delete">Delete</string>
     <string name="finish_and_go_to_customer_apos_s_confirmation">Finish and go to customer\'s confirmation</string>
     <string name="total_price_">Total price:</string>
@@ -49,7 +49,7 @@
     <string name="finish_date">Finish Date</string>
     <string name="status">Status</string>
     <string name="serial_number">serial number</string>
-    <string name="name">name</string>
+    <string name="name">Name</string>
     <string name="date">date</string>
     <string name="insert_work_details">insert work details</string>
     <string name="go_back">GO BACK</string>
@@ -57,10 +57,6 @@
     <string name="hours">hours</string>
     <string name="Cancel">Cancel</string>
     <string name="title_activity_working_time">Working Times</string>
-    <string name="_android_attr_textappearancelarge">\?android:attr/textAppearanceLarge</string>
-    <string name="don_t_have_a_user_">Don\'t have a user?</string>
-    <string name="working_hours_">working hours: </string>
-    <string name="save_and_finish">Save and finish</string>
-    <string name="close">Close</string>
+    <string name="title_activity_signature">SignatureActivity</string>
 
 </resources>

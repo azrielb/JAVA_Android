@@ -10,68 +10,88 @@
 
     <LinearLayout
         android:id="@+id/linearLayout1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="0dp"
         android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/filterTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="17dp"
-            android:layout_marginTop="30dp"
-            android:text="@string/user_id"
-            android:textAppearance="@string/_android_attr_textappearancelarge" />
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="146dp"
+            android:layout_height="167dp"
+            android:layout_gravity="center"
+            android:layout_weight="2.92"
+            android:src="@drawable/tecnic" />
 
-        <EditText
-            android:id="@+id/userID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:ems="10"
-            android:inputType="numberDecimal" >
-
-            <requestFocus />
-        </EditText>
-
-        <TextView
-            android:id="@+id/nameTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="17dp"
-            android:layout_marginTop="20dp"
-            android:text="@string/password"
-            android:textAppearance="@string/_android_attr_textappearancelarge" />
-
-        <EditText
-            android:id="@+id/passwordUser"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="286dp"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:ems="10"
-            android:inputType="textPassword" />
+            android:background="@drawable/frame"
+            android:orientation="vertical" >
 
-        <Button
-            android:id="@+id/logButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="140dp"
-            android:layout_marginTop="30dp"
-            android:text="@string/login" />
+            <TextView
+                android:id="@+id/filterTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="40dp"
+                android:text="User ID"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="15dp" />
 
-        <Button
-            android:id="@+id/addNewAccount"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="56dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="25dp"
-            android:text="@string/don_t_have_a_user_" />
+            <EditText
+                android:id="@+id/userID"
+                android:layout_width="254dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="0dp"
+                android:ems="10"
+                android:inputType="numberDecimal" >
+
+                <requestFocus />
+            </EditText>
+
+            <TextView
+                android:id="@+id/nameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:text="Password"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/passwordUser"
+                android:layout_width="254dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="0dp"
+                android:ems="10"
+                android:inputType="textPassword" />
+
+            <Button
+                android:id="@+id/logButton"
+                style="@style/button_text"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="140dp"
+                android:background="@drawable/button_shape"
+                android:text="Login"
+                android:textSize="19sp" />
+
+            <Button
+                android:id="@+id/addNewAccount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="10dp"
+                android:text="Don&apos;t have a user?" />
+        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>

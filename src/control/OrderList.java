@@ -97,7 +97,7 @@ public class OrderList extends _Activity {
 
 			@Override
 			public void onClick(View v) {
-				EditText filter = (EditText) findViewById(R.id.filterOrders);
+				EditText filter = (EditText) findViewById(R.id.firstName);
 				String city = filter.getText().toString().trim();
 				setOrders(BackendFactory.getInstance().getOrdersByCity(city,
 						technic.getId()));

@@ -1,12 +1,10 @@
 package control;
 
 import java.util.Calendar;
-
 import java.util.concurrent.TimeUnit;
 
 import model.backend.BackendFactory;
 import BE.Order;
-import BE.Order.statuses;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -42,9 +40,13 @@ public class WorkingTime extends _Activity {
 					startDate.get(Calendar.DAY_OF_MONTH), null);
 			startTimePicker.setCurrentHour(startDate.get(Calendar.HOUR_OF_DAY));
 			startTimePicker.setCurrentMinute(startDate.get(Calendar.MINUTE));
-			if (currentOrder.getFinish() != null) {
-				super.setText(R.id.working_hours,
-						Float.toString(currentOrder.getHours()));
+			finishDate = currentOrder.getFinish();
+			if (finishDate != null) {
+				Long miliSecDiff = finishDate.getTimeInMillis()
+						- startDate.getTimeInMillis();
+				Float hours = (float) (TimeUnit.MILLISECONDS
+						.toMinutes(miliSecDiff)) / 60;
+				super.setText(R.id.working_hours, hours.toString());
 			}
 		}
 
@@ -56,23 +58,22 @@ public class WorkingTime extends _Activity {
 			public void onClick(View v) {
 				String s_hours = ((TextView) findViewById(R.id.working_hours))
 						.getText().toString();
-				startDate = Calendar.getInstance();
+				startDate=Calendar.getInstance();
 				startDate.set(startDatePicker.getYear(),
 						startDatePicker.getMonth(),
 						startDatePicker.getDayOfMonth(),
 						startTimePicker.getCurrentHour(),
 						startTimePicker.getCurrentMinute());
+				currentOrder.setStart(startDate);
 				if (s_hours.length() > 0) {
-					finishDate = Calendar.getInstance();
+					finishDate=Calendar.getInstance();
 					finishDate.setTimeInMillis(startDate.getTimeInMillis()
 							+ TimeUnit.MINUTES.toMillis((long) (Float
 									.parseFloat(s_hours) * 60)));
+					currentOrder.setFinish(finishDate);
 				} else {
-					finishDate = null;
+					currentOrder.setFinish(finishDate = null);
 				}
-				currentOrder.setStart(startDate);
-				currentOrder.setStatus(statuses.IN_PROGRESS);
-				currentOrder.setFinish(finishDate);
 				finish();
 			}
 		});

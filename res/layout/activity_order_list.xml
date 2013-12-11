@@ -20,26 +20,31 @@
         <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/linearLayout1"
+            android:layout_alignLeft="@+id/filterTextView" >
 
             <Button
                 android:id="@+id/saveButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/filter" />
+                android:text="Filter" />
 
             <EditText
-                android:id="@+id/filterOrders"
+                android:id="@+id/firstName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="text" />
+                android:layout_alignTop="@+id/filterTextView"
+                android:layout_centerHorizontal="true"
+                android:ems="10" />
         </LinearLayout>
 
         <ListView
             android:id="@+id/orderListView"
             android:layout_width="match_parent"
             android:layout_height="322dp"
+            android:layout_below="@+id/linearLayout1"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp" >
         </ListView>
     </LinearLayout>

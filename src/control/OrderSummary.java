@@ -3,8 +3,15 @@ package control;
 import model.backend.BackendFactory;
 import BE.Convertions;
 import BE.Order;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.java5774_04_7842_7588.R;
 
@@ -12,6 +19,8 @@ public class OrderSummary extends _Activity {
 
 	Order currentOrder;
 	int orderNumber;
+	TextView orderDescruption;
+	TextView phoneNumber;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -20,10 +29,15 @@ public class OrderSummary extends _Activity {
 		orderNumber = getIntent().getExtras().getInt("orderNumber");
 		currentOrder = BackendFactory.getInstance().getOrderByNumber(
 				orderNumber);
-		super.appendText(R.id.addressOrder, ": " + currentOrder.getFullAdress());
+		orderDescruption = (EditText) findViewById(R.id.orderDescription);
+		Button save = (Button) findViewById(R.id.summarySaveButton);
+		super.setText(R.id.orderDescription,
+				currentOrder.getTechnicianComments());
+		super.appendText(R.id.firstNameLabel,
+				": " + currentOrder.getFullAdress());
 		super.appendText(R.id.contactOrder, ": " + currentOrder.getCustomer());
-		super.appendText(R.id.phoneNumOrder,
-				": " + Long.toString(currentOrder.getCustomerPhone()));
+		phoneNumber = (TextView) findViewById(R.id.phoneNumOrder);
+		super.setText(R.id.phoneNumOrder, (currentOrder.getCustomerPhone()));
 		super.appendText(R.id.createOrder, (": " + Convertions.dateInstance
 				.format(currentOrder.getCreateDate())));
 		if (currentOrder.getFinish() != null)
@@ -35,6 +49,26 @@ public class OrderSummary extends _Activity {
 				+ currentOrder.getStatus().toString());
 		super.appendText(R.id.idOrder,
 				": " + ((Integer) currentOrder.getOrderNumber()).toString());
+
+		save.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				currentOrder.setTechnicianComments(orderDescruption.getText()
+						.toString());
+				finish();
+			}
+		});
+		phoneNumber.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				String number = currentOrder.getCustomerPhone();
+			    Intent intent = new Intent(Intent.ACTION_CALL);
+			    intent.setData(Uri.parse("tel:" +number));
+			    startActivity(intent);
+			}
+		});
 	}
 
 	@Override

@@ -14,15 +14,11 @@ public class Order implements Serializable {
 		NEW, FINISHED, WAITING_FOR_COMPONENT, IN_PROGRESS
 	};
 
-	public enum Urgency {
-		low, medium, high
-	}
-
 	int orderNumber;
 	String city;
 	String addres;
 	String customer;
-	long customerPhone;
+	String customerPhone;
 	Date createDate;
 	Calendar start;
 	Calendar finish;
@@ -30,22 +26,24 @@ public class Order implements Serializable {
 	statuses status;
 	String title;
 	String detailes;
-	Urgency urgency;
 	String technicianComments;
 	ArrayList<Component> requiredComponents;
 	Bill bill;
 
-	public Order(int orderNumber, String city, String customer, Date createDate) {
+	public Order(int orderNumber, String city, String customer,
+			Date createDate, String phone) {
 		super();
 		this.orderNumber = orderNumber;
 		this.city = city;
 		this.customer = customer;
 		this.createDate = createDate;
+		this.customerPhone = phone;
 		start = null;
 		finish = null;
 		technician = new Technician();
 		status = statuses.NEW;
 		requiredComponents = new ArrayList<Component>();
+		bill = new Bill(orderNumber, 0);
 	}
 
 	public int getOrderNumber() {
@@ -88,11 +86,11 @@ public class Order implements Serializable {
 		this.technician = technician;
 	}
 
-	public long getCustomerPhone() {
+	public String getCustomerPhone() {
 		return customerPhone;
 	}
 
-	public void setCustomerPhone(long customerPhone) {
+	public void setCustomerPhone(String customerPhone) {
 		this.customerPhone = customerPhone;
 	}
 
@@ -134,14 +132,6 @@ public class Order implements Serializable {
 
 	public void setDetailes(String detailes) {
 		this.detailes = detailes;
-	}
-
-	public Urgency getUrgency() {
-		return urgency;
-	}
-
-	public void setUrgency(Urgency urgency) {
-		this.urgency = urgency;
 	}
 
 	public String getTechnicianComments() {

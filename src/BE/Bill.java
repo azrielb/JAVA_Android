@@ -2,7 +2,6 @@ package BE;
 
 import java.io.Serializable;
 
-import android.gesture.Gesture;
 import android.graphics.Bitmap;
 
 public class Bill implements Serializable {

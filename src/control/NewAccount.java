@@ -2,14 +2,12 @@ package control;
 
 import model.backend.BackendFactory;
 import BE.Technician;
-import android.R.integer;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.example.java5774_04_7842_7588.R;
 

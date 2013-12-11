@@ -84,7 +84,6 @@ public class SignatureActivity extends _Activity {
 					+ File.separator + sigName);
 			f.createNewFile();
 			FileOutputStream os = new FileOutputStream(f);
-			os = new FileOutputStream(f);
 			// compress to specified format (PNG), quality - which is ignored
 			// for PNG, and out stream
 			bm.compress(Bitmap.CompressFormat.PNG, 100, os);

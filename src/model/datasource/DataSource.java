@@ -36,7 +36,6 @@ public class DataSource implements Backend, Serializable {
 			in.close();
 			isFileExist = true;
 		} catch (Exception ex) {
-			isFileExist = false;
 			Log.e("model", (ex != null ? ex.getMessage() : "null"));
 		}
 
@@ -94,7 +93,6 @@ public class DataSource implements Backend, Serializable {
 			o1.addComponent(c4);
 			o1.addComponent(c7);
 			this.save();
-
 		}
 		// *****************************************
 	}

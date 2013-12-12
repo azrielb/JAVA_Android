@@ -1,6 +1,5 @@
 package control;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import model.backend.BackendFactory;
@@ -17,16 +16,45 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.java5774_04_7842_7588.R;
 
 public class ComponentList extends _Activity {
+	protected class componentAdapter extends ArrayAdapter<Component> {
 
-	Order currentOrder;
-	ListView componentList;
-	List<Component> components = new ArrayList<Component>();
-	int orderNumber;
+		public componentAdapter(ComponentList componentList,
+				int componentListView, List<Component> components) {
+			super(componentList, componentListView, components);
+		}
+
+		@Override
+		public View getDropDownView(int position, View convertView,
+				ViewGroup parent) {
+			return getCustomView(position, convertView, parent);
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			return getCustomView(position, convertView, parent);
+		}
+
+		View getCustomView(int position, View convertView, ViewGroup parent) {
+			if (convertView == null) {
+				convertView = View.inflate(ComponentList.this,
+						R.layout.component_list_view, null);
+			}
+			_Activity.setText(convertView, R.id.componentName,
+					components.get(position).getName());
+			_Activity.setText(convertView, R.id.serialNumber,
+					components.get(position).getSerialNumber());
+			return convertView;
+		}
+	};
+
+	private Order currentOrder = null;
+	private ListView componentList = null;
+	private List<Component> components = null;
+	private int orderNumber = -1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,33 +64,8 @@ public class ComponentList extends _Activity {
 		currentOrder = BackendFactory.getInstance().getOrderByNumber(
 				orderNumber);
 		componentList = (ListView) findViewById(R.id.componentListView);
-		components = currentOrder.getRequiredComponents();
-		ListAdapter adapter = new ArrayAdapter<Component>(this,
-				R.layout.component_list_view, components) {
-			@Override
-			public View getDropDownView(int position, View convertView,
-					ViewGroup parent) {
-				return getCustomView(position, convertView, parent);
-			}
 
-			@Override
-			public View getView(int position, View convertView, ViewGroup parent) {
-				return getCustomView(position, convertView, parent);
-			}
-
-			View getCustomView(int position, View convertView, ViewGroup parent) {
-				if (convertView == null) {
-					convertView = View.inflate(ComponentList.this,
-							R.layout.component_list_view, null);
-				}
-				_Activity.setText(convertView, R.id.componentName, components
-						.get(position).getName());
-				_Activity.setText(convertView, R.id.serialNumber, components
-						.get(position).getSerialNumber());
-				return convertView;
-			}
-		};
-		componentList.setAdapter(adapter);
+		setComponents(currentOrder.getRequiredComponents());
 		componentList.setOnItemLongClickListener(new OnItemLongClickListener() {
 
 			@Override
@@ -73,32 +76,28 @@ public class ComponentList extends _Activity {
 					public void onClick(DialogInterface dialog, int which) {
 						switch (which) {
 						case DialogInterface.BUTTON_POSITIVE:
-							Toast.makeText(ComponentList.this, "yes clicked",
-									Toast.LENGTH_LONG).show();
 							components.get(position).setExist(true);
 							components.remove(position);
-
+							setComponents(components);
+							Alert.showToast(ComponentList.this,
+									"The item has been removed successfuly");
 							break;
-
 						case DialogInterface.BUTTON_NEGATIVE:
-							Toast.makeText(ComponentList.this, "no clicked",
-									Toast.LENGTH_LONG).show();
+							Alert.showToast(ComponentList.this,
+									"The removing has been canceled.");
 							break;
 						}
 					}
 				};
-
 				AlertDialog.Builder builder = new AlertDialog.Builder(
 						ComponentList.this);
-				builder.setMessage("Are you sure yoy want to deldete?")
-						.setPositiveButton("Yes", dialogClickListener)
-						.setNegativeButton("No", dialogClickListener).show();
-
+				builder.setMessage("Are you sure you want to remove this item?")
+						.setPositiveButton("Ok", dialogClickListener)
+						.setNegativeButton("Cancel", dialogClickListener)
+						.show();
 				return true;
 			}
-
 		});
-
 	}
 
 	@Override
@@ -108,4 +107,11 @@ public class ComponentList extends _Activity {
 		return true;
 	}
 
+	private void setComponents(List<Component> _components) {
+		componentList.setAdapter(null);
+		components = _components;
+		ListAdapter adapter = new componentAdapter(this,
+				R.layout.component_list_view, components);
+		componentList.setAdapter(adapter);
+	}
 }

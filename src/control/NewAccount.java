@@ -36,15 +36,15 @@ public class NewAccount extends _Activity {
 
 				if (fname.length() == 0 || lname.length() == 0
 						|| pass.length() == 0 || email.length() == 0) {
-					Alert.show(NewAccount.this, "Empty detail",
-							"You have to fill all details!");
+					Alert.showToast(NewAccount.this,
+							"Empty detail! Please fill all details!");
 					return;
 				}
 				int id = Integer.parseInt(idStr);
 				if (BackendFactory.getInstance().getUserByIdAndPassword(id,
 						pass) != null) {
-					Alert.show(NewAccount.this, "User exists",
-							"You are alredy in the system!");
+					Alert.showToast(NewAccount.this,
+							"User exists in the system!");
 					return;
 				}
 
@@ -53,8 +53,9 @@ public class NewAccount extends _Activity {
 
 				if (BackendFactory.getInstance().getUserByIdAndPassword(id,
 						pass) == null) {
-					Alert.show(NewAccount.this, "User not created",
-							"May you are alredy in the system? Please check your password.");
+					Alert.showToast(
+							NewAccount.this,
+							"User not created\n\nAre you alredy in the system? Please check your password.");
 					return;
 				}
 				finish();

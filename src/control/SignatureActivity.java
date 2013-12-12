@@ -21,7 +21,7 @@ public class SignatureActivity extends _Activity {
 
 	int orderNumber = 0;
 	Order currentOrder = null;
-	GestureOverlayView gestureView;	
+	GestureOverlayView gestureView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +41,11 @@ public class SignatureActivity extends _Activity {
 		save.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-
 				try {
 					saveSig(gestureView);
 					finish();
 				} catch (Exception e) {
-					Alert.show(SignatureActivity.this, "signature missed!",
-							"????????");
+					Alert.showToast(SignatureActivity.this, e.getMessage());
 				}
 			}
 		});

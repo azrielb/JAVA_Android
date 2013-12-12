@@ -43,8 +43,7 @@ public class MainActivity extends _Activity {
 						return;
 					}
 				}
-				Alert.show(MainActivity.this, "Login error",
-						"Invalid ID or password!");
+				Alert.showToast(MainActivity.this, "Invalid ID or password!");
 			}
 		});
 		newAccount.setOnClickListener(new OnClickListener() {

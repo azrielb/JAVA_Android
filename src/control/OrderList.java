@@ -122,8 +122,8 @@ public class OrderList extends _Activity {
 					R.layout.order_list_view, orders);
 			list.setAdapter(adapter);
 		} else {
-			Alert.show(this, "No items",
-					"You don't have any orders. You can go sleep... :)");
+			Alert.showToast(this,
+					"You don't have any orders. You can go to sleep... :)");
 		}
 	}
 }

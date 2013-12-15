@@ -36,9 +36,11 @@ public class OrderNavigation extends _Activity {
 					if (currentOrder.getStatus()
 							.compareTo(statuses.ACTION_DONE) < 1)
 						destinationActivity = Addcomponent.class;
-					else
+					else {
 						Alert.showToast(OrderNavigation.this,
 								R.string.order_is_closed);
+						return;
+					}
 					break;
 				case R.id.componentListButton:
 					destinationActivity = ComponentList.class;
@@ -50,9 +52,11 @@ public class OrderNavigation extends _Activity {
 					if (currentOrder.getStatus()
 							.compareTo(statuses.ACTION_DONE) < 1)
 						destinationActivity = WorkingTime.class;
-					else
+					else {
 						Alert.showToast(OrderNavigation.this,
 								R.string.order_is_closed);
+						return;
+					}
 					break;
 				case R.id.returnToOrderList:
 					destinationActivity = null;

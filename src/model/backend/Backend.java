@@ -37,7 +37,7 @@ public interface Backend {
 	
 	public ArrayList<Component> getAvailableComponent()/*throws Exception*/;
 
-	public ArrayList<Order> getOrdersByCity(String city, int id);
+	public ArrayList<Order> getFilteredOrders(String city, int id);
 
 	public Order getOrderByNumber(int orderNumber);
 

@@ -9,6 +9,11 @@ public final class Alert {
 		Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 	}
 
+	public static final void showToast(Context context, int messageID) {
+		Toast.makeText(context, context.getString(messageID), Toast.LENGTH_LONG)
+				.show();
+	}
+
 	public static final void showAlertDialog(Context context, String title,
 			String message) {
 		AlertDialog ad = new AlertDialog.Builder(context).create();
@@ -16,4 +21,5 @@ public final class Alert {
 		ad.setMessage(message);
 		ad.show();
 	}
+
 }

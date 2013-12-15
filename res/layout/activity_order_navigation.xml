@@ -18,11 +18,11 @@
 
         <Button
             android:id="@+id/summarySaveButton"
+            style="@style/button_text"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/summary"
             android:background="@drawable/button_shape"
-            style="@style/button_text" />
+            android:text="@string/summary" />
 
         <Button
             android:id="@+id/addComponentButton"
@@ -30,39 +30,39 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/button_shape"
-            android:text="Add component" />
+            android:text="@string/add_component" />
 
         <Button
             android:id="@+id/componentListButton"
+            style="@style/button_text"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/list_of_component"
-             android:background="@drawable/button_shape"
-            style="@style/button_text" />
-
-        <Button
-            android:id="@+id/saveButton"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/bill"
-             android:background="@drawable/button_shape"
-            style="@style/button_text" />
+            android:background="@drawable/button_shape"
+            android:text="@string/list_of_component" />
 
         <Button
             android:id="@+id/workDetailsButton"
+            style="@style/button_text"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/insert_work_details"
-             android:background="@drawable/button_shape"
-            style="@style/button_text" />
+            android:background="@drawable/button_shape"
+            android:text="@string/insert_work_details" />
+
+        <Button
+            android:id="@+id/billButton"
+            style="@style/button_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_shape"
+            android:text="@string/bill" />
 
         <Button
             android:id="@+id/returnToOrderList"
+            style="@style/button_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/go_back"
-             android:background="@drawable/button_shape"
-            style="@style/button_text" />
+            android:background="@drawable/button_shape"
+            android:text="@string/go_back" />
     </LinearLayout>
 
 </RelativeLayout>

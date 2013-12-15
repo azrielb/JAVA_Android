@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 
 import model.backend.BackendFactory;
 import BE.Order;
+import BE.Order.statuses;
 import android.gesture.GestureOverlayView;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -43,6 +44,7 @@ public class SignatureActivity extends _Activity {
 			public void onClick(View v) {
 				try {
 					saveSig(gestureView);
+					currentOrder.setStatus(statuses.SIGNATURED);
 					finish();
 				} catch (Exception e) {
 					Alert.showToast(SignatureActivity.this, e.getMessage());
@@ -54,7 +56,6 @@ public class SignatureActivity extends _Activity {
 
 			@Override
 			public void onClick(View v) {
-
 				try {
 					gestureView.clear(false);
 				} catch (Exception e) {
@@ -73,7 +74,7 @@ public class SignatureActivity extends _Activity {
 
 	public void saveSig(View view) {
 		try {
-			String sigName = currentOrder.getCustomer() + ".png";
+			String sigName = Integer.toString(orderNumber) + ".png";
 			GestureOverlayView gestureView1 = (GestureOverlayView) findViewById(R.id.signaturePad);
 			gestureView1.setDrawingCacheEnabled(true);
 

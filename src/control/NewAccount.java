@@ -23,7 +23,7 @@ public class NewAccount extends _Activity {
 			@Override
 			public void onClick(View v) {
 
-				String fname = ((EditText) findViewById(R.id.firstName))
+				String fname = ((EditText) findViewById(R.id.filterText))
 						.getText().toString().trim();
 				String lname = ((EditText) findViewById(R.id.lastName))
 						.getText().toString().trim();

@@ -48,14 +48,13 @@ public class OrderList extends _Activity {
 						R.layout.order_list_view, null);
 			}
 			Order order = orders.get(position);
-			_Activity.setText(convertView, R.id.filterTextView,
+			_Activity.setText(convertView, R.id.orderNumber,
 					((Integer) order.getOrderNumber()).toString());
-			_Activity.setText(convertView, R.id.addressTextView,
-					order.getCity());
+			_Activity.setText(convertView, R.id.cityTextView, order.getCity());
 			_Activity.setText(convertView, R.id.nameTextView,
 					order.getCustomer());
 			_Activity.setText(convertView, R.id.dateTextView,
-					Convertions.dateInstance.format(order.getCreateDate()));
+					Convertions.toDateString(order.getCreateDate()));
 			return convertView;
 		}
 
@@ -92,15 +91,15 @@ public class OrderList extends _Activity {
 			}
 		});
 
-		Button filterButton = (Button) findViewById(R.id.saveButton);
+		Button filterButton = (Button) findViewById(R.id.filterButton);
 		filterButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				EditText filter = (EditText) findViewById(R.id.firstName);
-				String city = filter.getText().toString().trim();
-				setOrders(BackendFactory.getInstance().getOrdersByCity(city,
-						technic.getId()));
+				EditText filter = (EditText) findViewById(R.id.filterText);
+				String filterStr = filter.getText().toString().trim();
+				setOrders(BackendFactory.getInstance().getFilteredOrders(
+						filterStr, technic.getId()));
 
 			}
 		});
@@ -117,13 +116,13 @@ public class OrderList extends _Activity {
 	protected void setOrders(ArrayList<Order> Orders) {
 		list.setAdapter(null);
 		orders = Orders;
-		if (orders != null && !orders.isEmpty()) {
+		if (orders == null || orders.isEmpty()) {
+			Alert.showToast(this,
+					"You don't have any orders. You can go to sleep... :)");
+		} else {
 			ListAdapter adapter = new ordersAdapter(this,
 					R.layout.order_list_view, orders);
 			list.setAdapter(adapter);
-		} else {
-			Alert.showToast(this,
-					"You don't have any orders. You can go to sleep... :)");
 		}
 	}
 }

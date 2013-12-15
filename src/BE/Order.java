@@ -11,7 +11,7 @@ public class Order implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	public enum statuses {
-		NEW, FINISHED, WAITING_FOR_COMPONENT, IN_PROGRESS
+		NEW, IN_PROGRESS, ACTION_DONE, SIGNATURED, FINISHED,
 	};
 
 	int orderNumber;
@@ -175,7 +175,7 @@ public class Order implements Serializable {
 		requiredComponents.add(item);
 	}
 
-	public String getFullAdress() {
+	public String getFullAddress() {
 		return Convertions.Join(new String[] { addres, city }, ", ");
 	}
 

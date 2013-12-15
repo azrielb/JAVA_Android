@@ -28,7 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Contact"
+                android:text="@string/contact"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
@@ -36,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Phone number"
+                android:text="@string/phone_number"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
@@ -44,7 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Address"
+                android:text="@string/address"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
         </LinearLayout>
 
@@ -60,7 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Create Date"
+                android:text="@string/create_date"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
@@ -68,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Finish Date"
+                android:text="@string/finish_date"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
@@ -76,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Assigned To"
+                android:text="@string/assigned_to"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
@@ -84,7 +84,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Status"
+                android:text="@string/status"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
@@ -92,32 +92,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Order ID"
+                android:text="@string/order_id"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
-
         </LinearLayout>
 
         <TextView
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Technician port:" />
+            android:text="@string/technician_port_" />
 
         <EditText
             android:id="@+id/orderDescription"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="0.16"
             android:ems="10"
             android:inputType="textMultiLine"
-            android:text=" insert details" />
+            android:text="@string/insert_details" />
 
         <Button
             android:id="@+id/summarySaveButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="save" />
-
+            android:text="@string/save" />
     </LinearLayout>
 
 </RelativeLayout>

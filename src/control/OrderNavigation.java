@@ -2,6 +2,7 @@ package control;
 
 import model.backend.BackendFactory;
 import BE.Order;
+import BE.Order.statuses;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -23,76 +24,56 @@ public class OrderNavigation extends _Activity {
 		orderNumber = getIntent().getExtras().getInt("selectedOrder");
 		currentOrder = BackendFactory.getInstance().getOrderByNumber(
 				orderNumber);
-		Button summaryButton = (Button) findViewById(R.id.summarySaveButton);
-		Button componetAddButton = (Button) findViewById(R.id.addComponentButton);
-		Button componetsList = (Button) findViewById(R.id.componentListButton);
-		Button billButton = (Button) findViewById(R.id.saveButton);
-		Button workDetails = (Button) findViewById(R.id.workDetailsButton);
-		Button goBack = (Button) findViewById(R.id.returnToOrderList);
-
-		summaryButton.setOnClickListener(new OnClickListener() {
-
+		OnClickListener buttonsClick = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(OrderNavigation.this,
-						OrderSummary.class);
-				intent.putExtra("orderNumber", orderNumber);
-				startActivity(intent);
+				Class<?> destinationActivity = null;
+				switch (v.getId()) {
+				case R.id.summarySaveButton:
+					destinationActivity = OrderSummary.class;
+					break;
+				case R.id.addComponentButton:
+					if (currentOrder.getStatus()
+							.compareTo(statuses.ACTION_DONE) < 1)
+						destinationActivity = Addcomponent.class;
+					else
+						Alert.showToast(OrderNavigation.this,
+								R.string.order_is_closed);
+					break;
+				case R.id.componentListButton:
+					destinationActivity = ComponentList.class;
+					break;
+				case R.id.billButton:
+					destinationActivity = BillActivity.class;
+					break;
+				case R.id.workDetailsButton:
+					if (currentOrder.getStatus()
+							.compareTo(statuses.ACTION_DONE) < 1)
+						destinationActivity = WorkingTime.class;
+					else
+						Alert.showToast(OrderNavigation.this,
+								R.string.order_is_closed);
+					break;
+				case R.id.returnToOrderList:
+					destinationActivity = null;
+					break;
+				}
+				if (destinationActivity == null)
+					finish();
+				else {
+					Intent intent = new Intent(OrderNavigation.this,
+							destinationActivity);
+					intent.putExtra("orderNumber", orderNumber);
+					startActivity(intent);
+				}
 			}
-		});
-
-		componetAddButton.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(OrderNavigation.this,
-						Addcomponent.class);
-				intent.putExtra("orderNumber", orderNumber);
-				startActivity(intent);
-			}
-		});
-
-		componetsList.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(OrderNavigation.this,
-						ComponentList.class);
-				intent.putExtra("orderNumber", orderNumber);
-				startActivity(intent);
-			}
-		});
-		
-		billButton.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(OrderNavigation.this,
-						BillActivity.class);
-				intent.putExtra("orderNumber", orderNumber);
-				startActivity(intent);
-			}
-		});
-		
-		goBack.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				finish();
-			}
-		});
-		
-		workDetails.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(OrderNavigation.this,
-						WorkingTime.class);
-				intent.putExtra("orderNumber", orderNumber);
-				startActivity(intent);
-			}
-		});
-
+		};
+		for (int i : new int[] { R.id.summarySaveButton,
+				R.id.addComponentButton, R.id.componentListButton,
+				R.id.billButton, R.id.workDetailsButton, R.id.returnToOrderList }) {
+			Button button = (Button) findViewById(i);
+			button.setOnClickListener(buttonsClick);
+		}
 	}
 
 	@Override

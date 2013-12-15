@@ -38,7 +38,7 @@
                 android:layout_height="50dp"
                 android:layout_gravity="bottom"
                 android:background="@drawable/button2"
-                android:text="save" />
+                android:text="@string/save" />
 
             <Button
                 android:id="@+id/cancelButton"
@@ -46,7 +46,7 @@
                 android:layout_height="50dp"
                 android:layout_gravity="bottom"
                 android:background="@drawable/button2"
-                android:text="cancel" />
+                android:text="@string/cancel" />
         </LinearLayout>
 
     </LinearLayout>

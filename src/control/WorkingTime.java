@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 
 import model.backend.BackendFactory;
 import BE.Order;
+import BE.Order.statuses;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -58,7 +59,7 @@ public class WorkingTime extends _Activity {
 			public void onClick(View v) {
 				String s_hours = ((TextView) findViewById(R.id.working_hours))
 						.getText().toString();
-				startDate=Calendar.getInstance();
+				startDate = Calendar.getInstance();
 				startDate.set(startDatePicker.getYear(),
 						startDatePicker.getMonth(),
 						startDatePicker.getDayOfMonth(),
@@ -66,13 +67,15 @@ public class WorkingTime extends _Activity {
 						startTimePicker.getCurrentMinute());
 				currentOrder.setStart(startDate);
 				if (s_hours.length() > 0) {
-					finishDate=Calendar.getInstance();
+					finishDate = Calendar.getInstance();
 					finishDate.setTimeInMillis(startDate.getTimeInMillis()
 							+ TimeUnit.MINUTES.toMillis((long) (Float
 									.parseFloat(s_hours) * 60)));
 					currentOrder.setFinish(finishDate);
+					currentOrder.setStatus(statuses.ACTION_DONE);
 				} else {
 					currentOrder.setFinish(finishDate = null);
+					currentOrder.setStatus(statuses.IN_PROGRESS);
 				}
 				finish();
 			}

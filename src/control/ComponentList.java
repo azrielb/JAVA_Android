@@ -5,6 +5,7 @@ import java.util.List;
 import model.backend.BackendFactory;
 import BE.Component;
 import BE.Order;
+import BE.Order.statuses;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -66,6 +67,10 @@ public class ComponentList extends _Activity {
 		componentList = (ListView) findViewById(R.id.componentListView);
 
 		setComponents(currentOrder.getRequiredComponents());
+		if (currentOrder.getStatus().compareTo(statuses.ACTION_DONE) >= 0) {
+			Alert.showToast(ComponentList.this, R.string.order_is_closed);
+			return;
+		}
 		componentList.setOnItemLongClickListener(new OnItemLongClickListener() {
 
 			@Override

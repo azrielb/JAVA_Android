@@ -11,6 +11,7 @@ import java.util.Date;
 import model.backend.Backend;
 import BE.Bill;
 import BE.Component;
+import BE.Convertions;
 import BE.Order;
 import BE.Technician;
 import android.os.Environment;
@@ -222,11 +223,14 @@ public class DataSource implements Backend, Serializable {
 	}
 
 	@Override
-	public ArrayList<Order> getOrdersByCity(String city, int id) {
-		ArrayList<Order> temp = getOrdersByTechnicianId(id);
+	public ArrayList<Order> getFilteredOrders(String filter, int technicianId) {
+		ArrayList<Order> temp = getOrdersByTechnicianId(technicianId);
 		ArrayList<Order> result = new ArrayList<Order>();
+		CharSequence _filter = filter.subSequence(0, filter.length());
 		for (Order item : temp)
-			if (item.getCity().contains(city.subSequence(0, city.length())))
+			if (Convertions.Join(
+					new String[] { item.getFullAddress(), item.getCustomer(),
+							item.getCustomerPhone() }, " ").contains(_filter))
 				result.add(item);
 		if (result.size() > 0)
 			return result;

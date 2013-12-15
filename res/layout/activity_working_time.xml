@@ -59,14 +59,6 @@
         android:inputType="numberDecimal" />
 
     <Button
-        android:id="@+id/Cancel_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/Save_button"
-        android:layout_centerHorizontal="true"
-        android:text="@string/Cancel" />
-
-    <Button
         android:id="@+id/Save_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -74,5 +66,14 @@
         android:layout_marginTop="22dp"
         android:layout_toLeftOf="@+id/working_hours"
         android:text="@string/save" />
+
+    <Button
+        android:id="@+id/Cancel_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/Save_button"
+        android:layout_alignBottom="@+id/Save_button"
+        android:layout_alignRight="@+id/working_hours"
+        android:text="@string/cancel" />
 
 </RelativeLayout>

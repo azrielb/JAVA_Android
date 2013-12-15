@@ -10,6 +10,7 @@ import model.backend.BackendFactory;
 import BE.Bill;
 import BE.Component;
 import BE.Order;
+import BE.Order.statuses;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -85,35 +86,42 @@ public class BillActivity extends _Activity {
 		};
 		componentList.setAdapter(adapter);
 
-		Button saveButton = (Button) findViewById(R.id.saveBillButton);
-		saveButton.setOnClickListener(new OnClickListener() {
+		Button nextStepButton = (Button) findViewById(R.id.nextStepButton);
+		nextStepButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
+				switch (currentOrder.getStatus()) {
+				case NEW:
+				case IN_PROGRESS:
+					Alert.showToast(BillActivity.this,
+							"This order is still open!");
+					break;
+				case ACTION_DONE:
+					Intent intent = new Intent(BillActivity.this,
+							SignatureActivity.class);
+					intent.putExtra("orderNumber", orderNumber);
+					startActivity(intent);
+					return; // "return" instead of "break" - for ignoring the "finish" line. 
+				case SIGNATURED:
 					bill.setCost(totalPrice());
 					BackendFactory.getInstance().addBill(bill);
-					finish();
+					currentOrder.setStatus(statuses.FINISHED);
+					break;
+				case FINISHED:
+					Alert.showToast(BillActivity.this,
+							"This order is closed!\nThank you for the excellent work!");
+					break;
+				}
+				finish();
 			}
 		});
-
-		Button cancelButton = (Button) findViewById(R.id.cancelBillButton);
-		cancelButton.setOnClickListener(new OnClickListener() {
+		Button backButton = (Button) findViewById(R.id.backBillButton);
+		backButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				finish();
-			}
-		});
-
-		Button signature = (Button) findViewById(R.id.signatureButton);
-		signature.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(BillActivity.this,
-						SignatureActivity.class);
-				intent.putExtra("orderNumber", orderNumber);
-				startActivity(intent);
 			}
 		});
 	}

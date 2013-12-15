@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import model.backend.BackendFactory;
 import BE.Component;
 import BE.Order;
+import BE.Order.statuses;
 import android.R.layout;
 import android.os.Bundle;
 import android.view.Menu;
@@ -35,7 +36,6 @@ public class Addcomponent extends _Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_addcomponent);
-		spinner = (Spinner) findViewById(R.id.spinner);
 		int orderNumber = getIntent().getExtras().getInt("orderNumber");
 		currentOrder = BackendFactory.getInstance().getOrderByNumber(
 				orderNumber);
@@ -53,6 +53,7 @@ public class Addcomponent extends _Activity {
 		// -------------------------------------------------------------------
 
 		// set the spinner
+		spinner = (Spinner) findViewById(R.id.spinner);
 		adapter = new ArrayAdapter<String>(this,
 				layout.simple_list_item_checked, componentNames);
 		spinner.setAdapter(adapter);
@@ -93,6 +94,8 @@ public class Addcomponent extends _Activity {
 			public void onClick(View v) {
 				for (Component item : componentsToAdd)
 					currentOrder.addComponent(item);
+				if (currentOrder.getStatus() == statuses.NEW)
+					currentOrder.setStatus(statuses.IN_PROGRESS);
 				finish();
 			}
 		});

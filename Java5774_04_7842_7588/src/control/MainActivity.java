@@ -35,7 +35,7 @@ public class MainActivity extends _Activity {
 				try {
 					if (strID.length() == 0 || password.length() == 0)
 						throw new Exception("Empty field!!");
-					
+
 					new AsyncTask<String, Void, Technician>() {
 						@Override
 						protected void onPreExecute() {
@@ -43,6 +43,8 @@ public class MainActivity extends _Activity {
 									MainActivity.this, "Please wait",
 									"Synchronizing with the server...", true);
 						}
+
+						String error = null;
 
 						@Override
 						protected Technician doInBackground(String... params) {
@@ -53,6 +55,7 @@ public class MainActivity extends _Activity {
 												Long.parseLong(params[0]),
 												params[1]);
 							} catch (Exception e) {
+								error = e.getMessage();
 							}
 							return result;
 						}
@@ -68,6 +71,8 @@ public class MainActivity extends _Activity {
 								intent.putExtra("user", user);
 								startActivity(intent);
 							} else {
+								if (error != null)
+									Alert.showAlertDialog(MainActivity.this, "Exception",error);
 								Alert.showToast(MainActivity.this,
 										"Invalid ID or password!");
 							}

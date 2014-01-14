@@ -40,51 +40,15 @@ public class Addcomponent extends _Activity {
 		setContentView(R.layout.activity_addcomponent);
 		currentOrder = (Order) (getIntent()
 				.getSerializableExtra("currentOrder"));
-		new AsyncTask<Void, Void, ArrayList<Component>>() {
-			@Override
-			protected void onPreExecute() {
-				progressDialog = ProgressDialog
-						.show(Addcomponent.this, "Please wait",
-								"Synchronizing with the server...", true);
-			}
-
-			@Override
-			protected ArrayList<Component> doInBackground(Void... params) {
-				try {
-					ArrayList<Component> items = BackendFactory.getInstance()
-							.getAvailableComponent();
-					return items;
-				} catch (Exception e) {
-					return null;
-				}
-			}
-
-			@Override
-			protected void onPostExecute(ArrayList<Component> res) {
-				if (progressDialog.isShowing()) {
-					progressDialog.dismiss();
-				}
-				components = res;
-			}
-		}.execute();
-
-		componentNames = getComponentsNames(components);
+		
 		saveButton = (Button) findViewById(R.id.saveButton);
 		cancelButton = (Button) findViewById(R.id.cancelButton);
-		// -------------------------------------------------------------------
 		list = (ListView) findViewById(R.id.addCompListView);
-
 		ArrayAdapter<String> adapterl = new ArrayAdapter<String>(this,
 				layout.simple_list_item_1, getComponentsNames(componentsToAdd));
 		list.setAdapter(adapterl);
-
-		// -------------------------------------------------------------------
-
 		// set the spinner
 		spinner = (Spinner) findViewById(R.id.spinner);
-		adapter = new ArrayAdapter<String>(this,
-				layout.simple_list_item_checked, componentNames);
-		spinner.setAdapter(adapter);
 		// set when choosing item
 		spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
 			@Override
@@ -135,6 +99,38 @@ public class Addcomponent extends _Activity {
 				finish();
 			}
 		});
+
+		new AsyncTask<Void, Void, ArrayList<Component>>() {
+			@Override
+			protected void onPreExecute() {
+				progressDialog = ProgressDialog
+						.show(Addcomponent.this, "Please wait",
+								"Synchronizing with the server...", true);
+			}
+
+			@Override
+			protected ArrayList<Component> doInBackground(Void... params) {
+				try {
+					ArrayList<Component> items = BackendFactory.getInstance()
+							.getAvailableComponent();
+					return items;
+				} catch (Exception e) {
+					return null;
+				}
+			}
+
+			@Override
+			protected void onPostExecute(ArrayList<Component> res) {
+				if (progressDialog.isShowing()) {
+					progressDialog.dismiss();
+				}
+				components = res;
+				componentNames = getComponentsNames(components);
+				adapter = new ArrayAdapter<String>(Addcomponent.this,
+						layout.simple_list_item_checked, componentNames);
+				spinner.setAdapter(adapter);
+			}
+		}.execute();
 	}
 
 	@Override

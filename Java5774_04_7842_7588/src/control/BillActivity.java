@@ -132,7 +132,7 @@ public class BillActivity extends _Activity {
 			}
 		}.execute(currentOrder.getBillId(), currentOrder.getOrderNumber());
 
-		from here we have to check
+		//from here we have to check
 		
 		Button nextStepButton = (Button) findViewById(R.id.nextStepButton);
 		nextStepButton.setOnClickListener(new OnClickListener() {

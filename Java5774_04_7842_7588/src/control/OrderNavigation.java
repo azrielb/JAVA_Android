@@ -21,7 +21,7 @@ public class OrderNavigation extends _Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_order_navigation);
 		currentOrder = (Order) (getIntent()
-				.getSerializableExtra("currentOrder"));
+				.getSerializableExtra("selectedOrder"));
 
 		OnClickListener buttonsClick = new OnClickListener() {
 			@Override

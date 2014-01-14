@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 import conversions.Convertions;
 import conversions.toGoogleConvertions;
 
-public class Order implements Serializable ,toGoogleConvertions{
+public class Order implements Serializable, toGoogleConvertions {
 
 	private static final long serialVersionUID = 1L;
 
@@ -170,7 +170,7 @@ public class Order implements Serializable ,toGoogleConvertions{
 	}
 
 	public float getHours() {
-		if (finish < 0 || start < 0)
+		if (finish < 0 || start < 0 || finish == null || start == null)
 			return 0;
 		return (float) (TimeUnit.MILLISECONDS.toMinutes(finish - start)) / 60;
 	}

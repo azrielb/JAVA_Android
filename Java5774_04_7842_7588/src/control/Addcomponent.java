@@ -51,7 +51,9 @@ public class Addcomponent extends _Activity {
 			@Override
 			protected ArrayList<Component> doInBackground(Void... params) {
 				try {
-					return BackendFactory.getInstance().getAvailableComponent();
+					ArrayList<Component> items = BackendFactory.getInstance()
+							.getAvailableComponent();
+					return items;
 				} catch (Exception e) {
 					return null;
 				}

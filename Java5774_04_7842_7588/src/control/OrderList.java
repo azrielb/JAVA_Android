@@ -111,10 +111,11 @@ public class OrderList extends _Activity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				try {
-					long orderNumber = orders.get(position).getOrderNumber();
+					//long orderNumber = orders.get(position).getOrderNumber();
 					Intent intent = new Intent(OrderList.this,
 							OrderNavigation.class);
-					intent.putExtra("selectedOrder", orderNumber);
+					//intent.putExtra("selectedOrder", orderNumber);
+					intent.putExtra("selectedOrder", orders.get(position));
 					startActivity(intent);
 				} catch (Exception ex) {
 				}

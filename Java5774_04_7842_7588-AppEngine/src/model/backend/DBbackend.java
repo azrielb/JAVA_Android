@@ -73,8 +73,9 @@ public class DBbackend implements Backend {
 	@Override
 	public void addComponent(Component component) throws Exception {
 		for (Component c : getAllComponents())
-			if (c.getSerialNumber().equalsIgnoreCase(
-					component.getSerialNumber()))
+			if (c != null
+					&& c.getSerialNumber().equalsIgnoreCase(
+							component.getSerialNumber()))
 				throw new Exception("Component " + c.getSerialNumber()
 						+ " exists!");
 		insert(component);
@@ -137,7 +138,8 @@ public class DBbackend implements Backend {
 			throws Exception {
 		try {
 			for (Technician user : getAllTechnicians())
-				if (user.getName().equalsIgnoreCase(technicianName))
+				if (user != null
+						&& user.getName().equalsIgnoreCase(technicianName))
 					return user;
 		} catch (Exception e) {
 		}
@@ -149,7 +151,7 @@ public class DBbackend implements Backend {
 			throws Exception {
 		List<Order> arr = new ArrayList<Order>();
 		for (Order item : getAllOrders())
-			if (item.getTechnicianId() == tecnicainID)
+			if (item != null && item.getTechnicianId() == tecnicainID)
 				arr.add(item);
 		if (arr.size() > 0)
 			return arr;
@@ -176,7 +178,7 @@ public class DBbackend implements Backend {
 	public List<Component> getAvailableComponents() throws Exception {
 		List<Component> result = new ArrayList<Component>();
 		for (Component item : getAllComponents())
-			if (item.getOrderId() < 0)
+			if (item != null && item.getOrderId() < 0)
 				result.add(item);
 		if (result.size() > 0)
 			return result;
@@ -193,9 +195,11 @@ public class DBbackend implements Backend {
 		if (temp == null)
 			return result;
 		for (Order item : temp)
-			if (Convertions.Join(
-					new String[] { item.getFullAddress(), item.getCustomer(),
-							item.getCustomerPhone() }, " ").contains(_filter))
+			if (item != null
+					&& Convertions
+							.Join(new String[] { item.getFullAddress(),
+									item.getCustomer(), item.getCustomerPhone() },
+									" ").contains(_filter))
 				result.add(item);
 		if (result.size() > 0)
 			return result;
@@ -236,7 +240,7 @@ public class DBbackend implements Backend {
 			throws Exception {
 		List<Component> result = new ArrayList<Component>();
 		for (Component component : getAllComponents())
-			if (component.getOrderId() == orderNumber)
+			if (component != null && component.getOrderId() == orderNumber)
 				result.add(component);
 		return result;
 	}

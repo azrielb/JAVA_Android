@@ -11,7 +11,9 @@ import BE.Bill;
 import BE.Component;
 import BE.Order;
 import BE.Order.statuses;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -27,8 +29,8 @@ import com.example.java5774_04_7842_7588.R;
 
 public class BillActivity extends _Activity {
 
-	float hours = 0;
-	int orderNumber;
+	float hours;
+	Long orderNumber;
 	Order currentOrder;
 	Bill bill = null;
 	ListView componentList;
@@ -40,52 +42,98 @@ public class BillActivity extends _Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_bill);
 
-		orderNumber = getIntent().getExtras().getInt("orderNumber");
-		currentOrder = BackendFactory.getInstance().getOrderByNumber(
-				orderNumber);
-		bill = currentOrder.getBill();
+		currentOrder = (Order) (getIntent()
+				.getSerializableExtra("currentOrder"));
 		componentList = (ListView) findViewById(R.id.billList);
-		components = currentOrder.getRequiredComponents();
-		TextView total = (TextView) findViewById(R.id.totalP);
-		List<Component> uniqList = uniqComponent();
 		hours = currentOrder.getHours();
 		super.appendText(R.id.workHours, Float.toString(hours));
-		total.setText(total.getText() + "\t" + Float.toString(totalPrice()));
+		Button backButton = (Button) findViewById(R.id.backBillButton);
+		backButton.setOnClickListener(new OnClickListener() {
 
-		ListAdapter adapter = new ArrayAdapter<Component>(this,
-				R.layout.component_list_view, uniqList) {
 			@Override
-			public View getDropDownView(int position, View convertView,
-					ViewGroup parent) {
-				return getCustomView(position, convertView, parent);
+			public void onClick(View v) {
+				finish();
+			}
+		});
+
+		new AsyncTask<Long, Void, Void>() {
+			Bill tempBill = null;
+			List<Component> tempComponents = null;
+
+			@Override
+			protected void onPreExecute() {
+				progressDialog = ProgressDialog
+						.show(BillActivity.this, "Please wait",
+								"Synchronizing with the server...", true);
 			}
 
 			@Override
-			public View getView(int position, View convertView, ViewGroup parent) {
-				return getCustomView(position, convertView, parent);
-			}
-
-			View getCustomView(int position, View convertView, ViewGroup parent) {
-				if (convertView == null) {
-					convertView = View.inflate(BillActivity.this,
-							R.layout.component_list_view, null);
+			protected Void doInBackground(Long... params) {
+				try {
+					tempBill = BackendFactory.getInstance().getBillById(
+							params[0]);
+					tempComponents = BackendFactory.getInstance()
+							.getComponentsByOrderNumber(params[1]);
+				} catch (Exception e) {
 				}
-				String amount = (counter.get(position)).toString();
-				_Activity.setText(convertView, R.id.componentName, components
-						.get(position).getName());
-				_Activity.setText(
-						convertView,
-						R.id.serialNumber,
-						amount
-								+ "                      "
-								+ Float.toString(components.get(position)
-										.getCost()));
-				return convertView;
-
+				return null;
 			}
-		};
-		componentList.setAdapter(adapter);
 
+			@Override
+			protected void onPostExecute(Void res) {
+				if (progressDialog.isShowing()) {
+					progressDialog.dismiss();
+				}
+				if (tempBill == null)
+					BillActivity.this.bill = new Bill(orderNumber, 0);
+				else
+					BillActivity.this.bill = tempBill;
+				BillActivity.this.components = tempComponents;
+				List<Component> uniqList = uniqComponent();
+				TextView total = (TextView) findViewById(R.id.totalP);
+				total.setText(total.getText() + "\t"
+						+ Float.toString(totalPrice()));
+
+				ListAdapter adapter = new ArrayAdapter<Component>(BillActivity.this,
+						R.layout.component_list_view, uniqList) {
+					@Override
+					public View getDropDownView(int position, View convertView,
+							ViewGroup parent) {
+						return getCustomView(position, convertView, parent);
+					}
+
+					@Override
+					public View getView(int position, View convertView,
+							ViewGroup parent) {
+						return getCustomView(position, convertView, parent);
+					}
+
+					View getCustomView(int position, View convertView,
+							ViewGroup parent) {
+						if (convertView == null) {
+							convertView = View.inflate(BillActivity.this,
+									R.layout.component_list_view, null);
+						}
+						String amount = (counter.get(position)).toString();
+						_Activity.setText(convertView, R.id.componentName,
+								components.get(position).getName());
+						_Activity.setText(
+								convertView,
+								R.id.serialNumber,
+								amount
+										+ "                      "
+										+ Float.toString(components.get(
+												position).getCost()));
+						return convertView;
+
+					}
+				};
+				componentList.setAdapter(adapter);
+			}
+		}.execute(currentOrder.getBillId(), currentOrder.getOrderNumber());
+
+		from here we have to check
+		
 		Button nextStepButton = (Button) findViewById(R.id.nextStepButton);
 		nextStepButton.setOnClickListener(new OnClickListener() {
 
@@ -100,12 +148,17 @@ public class BillActivity extends _Activity {
 				case ACTION_DONE:
 					Intent intent = new Intent(BillActivity.this,
 							SignatureActivity.class);
-					intent.putExtra("orderNumber", orderNumber);
+					intent.putExtra("currentOrder", currentOrder);
 					startActivity(intent);
-					return; // "return" instead of "break" - for ignoring the "finish" line. 
+					return; 
+					// "return" instead of "break" - for ignoring the "finish" line.
 				case SIGNATURED:
 					bill.setCost(totalPrice());
-					BackendFactory.getInstance().addBill(bill);
+					try {
+						BackendFactory.getInstance().addBill(bill);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+					}
 					currentOrder.setStatus(statuses.FINISHED);
 					break;
 				case FINISHED:
@@ -113,14 +166,6 @@ public class BillActivity extends _Activity {
 							"This order is closed!\nThank you for the excellent work!");
 					break;
 				}
-				finish();
-			}
-		});
-		Button backButton = (Button) findViewById(R.id.backBillButton);
-		backButton.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
 				finish();
 			}
 		});
@@ -141,7 +186,7 @@ public class BillActivity extends _Activity {
 	}
 
 	private List<Component> uniqComponent() {
-		List<String> result = getComponentsNames((ArrayList<Component>) components);
+		List<String> result = getComponentsNames(components);
 		Set<String> uniqueComponents = new HashSet<String>(result);
 		List<Component> items = new ArrayList<Component>();
 		for (String str : uniqueComponents)
@@ -160,7 +205,7 @@ public class BillActivity extends _Activity {
 		return items;
 	}
 
-	private ArrayList<String> getComponentsNames(ArrayList<Component> list) {
+	private ArrayList<String> getComponentsNames(List<Component> list) {
 		ArrayList<String> result = new ArrayList<String>();
 		for (Component item : list)
 			result.add(item.getName());

@@ -1,10 +1,22 @@
 package control;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 public class _Activity extends Activity {
+	protected ProgressDialog progressDialog;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		progressDialog = new ProgressDialog(this);
+		this.progressDialog.dismiss();
+		setProgressBarIndeterminateVisibility(false);		
+	}
+
 	protected void setText(int TextViewID, String text) {
 		setText(this, TextViewID, text);
 	}

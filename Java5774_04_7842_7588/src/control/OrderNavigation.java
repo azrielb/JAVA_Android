@@ -1,6 +1,5 @@
 package control;
 
-import model.backend.BackendFactory;
 import BE.Order;
 import BE.Order.statuses;
 import android.content.Intent;
@@ -15,15 +14,15 @@ import com.example.java5774_04_7842_7588.R;
 public class OrderNavigation extends _Activity {
 
 	Order currentOrder;
-	int orderNumber;
+	Long orderNumber;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_order_navigation);
-		orderNumber = getIntent().getExtras().getInt("selectedOrder");
-		currentOrder = BackendFactory.getInstance().getOrderByNumber(
-				orderNumber);
+		currentOrder = (Order) (getIntent()
+				.getSerializableExtra("currentOrder"));
+
 		OnClickListener buttonsClick = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -36,11 +35,9 @@ public class OrderNavigation extends _Activity {
 					if (currentOrder.getStatus()
 							.compareTo(statuses.ACTION_DONE) < 1)
 						destinationActivity = Addcomponent.class;
-					else {
+					else
 						Alert.showToast(OrderNavigation.this,
 								R.string.order_is_closed);
-						return;
-					}
 					break;
 				case R.id.componentListButton:
 					destinationActivity = ComponentList.class;
@@ -52,11 +49,9 @@ public class OrderNavigation extends _Activity {
 					if (currentOrder.getStatus()
 							.compareTo(statuses.ACTION_DONE) < 1)
 						destinationActivity = WorkingTime.class;
-					else {
+					else
 						Alert.showToast(OrderNavigation.this,
 								R.string.order_is_closed);
-						return;
-					}
 					break;
 				case R.id.returnToOrderList:
 					destinationActivity = null;
@@ -67,7 +62,7 @@ public class OrderNavigation extends _Activity {
 				else {
 					Intent intent = new Intent(OrderNavigation.this,
 							destinationActivity);
-					intent.putExtra("orderNumber", orderNumber);
+					intent.putExtra("currentOrder", currentOrder);
 					startActivity(intent);
 				}
 			}

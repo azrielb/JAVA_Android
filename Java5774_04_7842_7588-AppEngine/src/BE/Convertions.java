@@ -1,15 +1,6 @@
 package BE;
 
-import java.util.Date;
-import android.text.format.DateFormat;
-
 public class Convertions {
-	public static String toDateString(Date date) {
-		return DateFormat.format("[dd/MM/yyyy]", date).toString();
-	}
-	public static String toTimeString(Date date) {
-		return DateFormat.format("[HH:mm]", date).toString();
-	}
 	public static String Join(String[] strings, String seperator) {
 		int length = strings.length;
 		int i = 0;

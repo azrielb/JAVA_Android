@@ -1,4 +1,4 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,79 +8,72 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".WorkingTime" >
 
-    <RelativeLayout
-        android:id="@+id/working_time_activity_relative_layout"
-        android:layout_width="fill_parent"
+    <TextView
+        android:id="@+id/date_label"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:text="@string/date" />
 
-        <TextView
-            android:id="@+id/date_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/date" />
+    <DatePicker
+        android:id="@+id/date_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/date_label"
+        android:layout_below="@+id/date_label" />
 
-        <DatePicker
-            android:id="@+id/date_picker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/date_label"
-            android:layout_below="@+id/date_label" />
+    <TextView
+        android:id="@+id/start_time_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/date_picker"
+        android:layout_below="@+id/date_picker"
+        android:text="@string/start_time"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <TextView
-            android:id="@+id/start_time_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/date_picker"
-            android:layout_below="@+id/date_picker"
-            android:text="@string/start_time"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+    <TimePicker
+        android:id="@+id/time_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/start_time_label"
+        android:layout_below="@+id/start_time_label"
+        android:layout_marginTop="24dp" />
 
-        <TimePicker
-            android:id="@+id/time_picker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/start_time_label"
-            android:layout_below="@+id/start_time_label"
-            android:layout_marginTop="24dp" />
+    <TextView
+        android:id="@+id/working_hours_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/time_picker"
+        android:layout_below="@+id/time_picker"
+        android:layout_marginTop="17dp"
+        android:text="@string/hours"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <TextView
-            android:id="@+id/working_hours_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/time_picker"
-            android:layout_below="@+id/time_picker"
-            android:layout_marginTop="17dp"
-            android:text="@string/hours"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+    <EditText
+        android:id="@+id/working_hours"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/working_hours_label"
+        android:layout_alignBottom="@+id/working_hours_label"
+        android:layout_toRightOf="@+id/start_time_label"
+        android:ems="10"
+        android:inputType="numberDecimal" />
 
-        <EditText
-            android:id="@+id/working_hours"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/working_hours_label"
-            android:layout_alignBottom="@+id/working_hours_label"
-            android:layout_toRightOf="@+id/start_time_label"
-            android:ems="10"
-            android:inputType="numberDecimal" />
+    <Button
+        android:id="@+id/Save_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/working_hours"
+        android:layout_marginTop="22dp"
+        android:layout_toLeftOf="@+id/working_hours"
+        android:text="@string/save" />
 
-        <Button
-            android:id="@+id/Save_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/working_hours"
-            android:layout_marginTop="22dp"
-            android:layout_toLeftOf="@+id/working_hours"
-            android:text="@string/save" />
+    <Button
+        android:id="@+id/Cancel_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/Save_button"
+        android:layout_alignBottom="@+id/Save_button"
+        android:layout_alignRight="@+id/working_hours"
+        android:text="@string/cancel" />
 
-        <Button
-            android:id="@+id/Cancel_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/Save_button"
-            android:layout_alignBottom="@+id/Save_button"
-            android:layout_alignRight="@+id/working_hours"
-            android:text="@string/cancel" />
-    </RelativeLayout>
-
-</ScrollView>
+</RelativeLayout>

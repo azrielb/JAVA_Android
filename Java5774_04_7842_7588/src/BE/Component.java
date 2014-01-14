@@ -2,21 +2,23 @@ package BE;
 
 import java.io.Serializable;
 
-public class Component implements Serializable {
+import conversions.toGoogleConvertions;
+
+public class Component implements Serializable ,toGoogleConvertions{
 
 	private static final long serialVersionUID = 1L;
 	String name;
 	String description;
 	float cost;
 	String serialNumber;
-	boolean exist;
+	Long orderId;
 
 	public Component() {
 		name = "a";
 		description = "a";
 		cost = 5;
 		serialNumber = "#0000";
-		exist = true;
+		orderId = -1L;
 	}
 
 	public Component(String name, float cost, String serialNumber) {
@@ -25,7 +27,7 @@ public class Component implements Serializable {
 		this.description = "";
 		this.cost = cost;
 		this.serialNumber = serialNumber;
-		this.exist = true;
+		orderId = -1L;
 	}
 
 	public String getName() {
@@ -60,12 +62,12 @@ public class Component implements Serializable {
 		this.serialNumber = serialNumber;
 	}
 
-	public boolean isExist() {
-		return exist;
+	public long getOrderId() {
+		return orderId;
 	}
 
-	public void setExist(boolean exist) {
-		this.exist = exist;
+	public void setOrderId(long orderId) {
+		this.orderId= orderId;
 	}
 
 }

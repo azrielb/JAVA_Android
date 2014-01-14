@@ -5,7 +5,7 @@ public class BackendFactory {
 
 	public final static Backend getInstance() {
 		if (instance == null)
-			instance = new model.datasource.DataSource();
+			instance = new model.datasource.DataSourceApi();
 		return instance;
 	}
 

@@ -2,7 +2,9 @@ package control;
 
 import model.backend.BackendFactory;
 import BE.Technician;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -20,7 +22,6 @@ public class MainActivity extends _Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
 		Button loginButton = (Button) findViewById(R.id.logButton);
 		Button newAccount = (Button) findViewById(R.id.addNewAccount);
 		loginButton.setOnClickListener(new OnClickListener() {
@@ -31,19 +32,50 @@ public class MainActivity extends _Activity {
 						.toString();
 				String password = ((TextView) findViewById(R.id.passwordUser))
 						.getText().toString();
-				if (strID.length() > 0 && password.length() > 0) {
-					int id = Integer.parseInt(strID);
-					tecnic = BackendFactory.getInstance()
-							.getUserByIdAndPassword(id, password);
-					if (tecnic != null) {
-						Intent intent = new Intent(MainActivity.this,
-								OrderList.class);
-						intent.putExtra("user", tecnic);
-						startActivity(intent);
-						return;
-					}
+				try {
+					if (strID.length() == 0 || password.length() == 0)
+						throw new Exception("Empty field!!");
+					
+					new AsyncTask<String, Void, Technician>() {
+						@Override
+						protected void onPreExecute() {
+							progressDialog = ProgressDialog.show(
+									MainActivity.this, "Please wait",
+									"Synchronizing with the server...", true);
+						}
+
+						@Override
+						protected Technician doInBackground(String... params) {
+							Technician result = null;
+							try {
+								result = BackendFactory.getInstance()
+										.getUserByIdAndPassword(
+												Long.parseLong(params[0]),
+												params[1]);
+							} catch (Exception e) {
+							}
+							return result;
+						}
+
+						@Override
+						protected void onPostExecute(Technician user) {
+							if (progressDialog.isShowing()) {
+								progressDialog.dismiss();
+							}
+							if (user != null) {
+								Intent intent = new Intent(MainActivity.this,
+										OrderList.class);
+								intent.putExtra("user", user);
+								startActivity(intent);
+							} else {
+								Alert.showToast(MainActivity.this,
+										"Invalid ID or password!");
+							}
+						}
+					}.execute(strID, password);
+				} catch (Exception e) {
+					Alert.showToast(MainActivity.this, e.getMessage());
 				}
-				Alert.showToast(MainActivity.this, "Invalid ID or password!");
 			}
 		});
 		newAccount.setOnClickListener(new OnClickListener() {

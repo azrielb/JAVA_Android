@@ -1,12 +1,13 @@
 package BE;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-public class Order implements Serializable {
+import conversions.Convertions;
+import conversions.toGoogleConvertions;
+
+public class Order implements Serializable ,toGoogleConvertions{
 
 	private static final long serialVersionUID = 1L;
 
@@ -14,23 +15,22 @@ public class Order implements Serializable {
 		NEW, IN_PROGRESS, ACTION_DONE, SIGNATURED, FINISHED,
 	};
 
-	int orderNumber;
+	Long orderNumber;
 	String city;
 	String addres;
 	String customer;
 	String customerPhone;
 	Date createDate;
-	Calendar start;
-	Calendar finish;
-	Technician technician;
+	Long start;
+	Long finish;
+	Long technicianId;
 	statuses status;
 	String title;
 	String detailes;
 	String technicianComments;
-	ArrayList<Component> requiredComponents;
-	Bill bill;
+	Long billId;
 
-	public Order(int orderNumber, String city, String customer,
+	public Order(Long orderNumber, String city, String customer,
 			Date createDate, String phone) {
 		super();
 		this.orderNumber = orderNumber;
@@ -38,19 +38,18 @@ public class Order implements Serializable {
 		this.customer = customer;
 		this.createDate = createDate;
 		this.customerPhone = phone;
-		start = null;
-		finish = null;
-		technician = new Technician();
+		start = -1L;
+		finish = -1L;
+		technicianId = -1L;
 		status = statuses.NEW;
-		requiredComponents = new ArrayList<Component>();
-		bill = new Bill(orderNumber, 0);
+		billId = -1L;
 	}
 
-	public int getOrderNumber() {
+	public Long getOrderNumber() {
 		return orderNumber;
 	}
 
-	public void setOrderNumber(int orderNumber) {
+	public void setOrderNumber(Long orderNumber) {
 		this.orderNumber = orderNumber;
 	}
 
@@ -78,12 +77,12 @@ public class Order implements Serializable {
 		this.createDate = createDate;
 	}
 
-	public Technician getTechnician() {
-		return technician;
+	public Long getTechnicianId() {
+		return technicianId;
 	}
 
-	public void setTechnician(Technician technician) {
-		this.technician = technician;
+	public void setTechnicianId(Long technicianId) {
+		this.technicianId = technicianId;
 	}
 
 	public String getCustomerPhone() {
@@ -94,19 +93,19 @@ public class Order implements Serializable {
 		this.customerPhone = customerPhone;
 	}
 
-	public Calendar getStart() {
+	public Long getStart() {
 		return start;
 	}
 
-	public void setStart(Calendar start) {
+	public void setStart(Long start) {
 		this.start = start;
 	}
 
-	public Calendar getFinish() {
+	public Long getFinish() {
 		return finish;
 	}
 
-	public void setFinish(Calendar finish) {
+	public void setFinish(Long finish) {
 		this.finish = finish;
 	}
 
@@ -142,20 +141,12 @@ public class Order implements Serializable {
 		this.technicianComments = technicianComments;
 	}
 
-	public ArrayList<Component> getRequiredComponents() {
-		return requiredComponents;
+	public Long getBillId() {
+		return billId;
 	}
 
-	public void setRequiredComponents(ArrayList<Component> requiredComponents) {
-		this.requiredComponents = requiredComponents;
-	}
-
-	public Bill getBill() {
-		return bill;
-	}
-
-	public void setBill(Bill bill) {
-		this.bill = bill;
+	public void setBillId(Long billId) {
+		this.billId = billId;
 	}
 
 	public static long getSerialversionuid() {
@@ -171,8 +162,7 @@ public class Order implements Serializable {
 	}
 
 	public void addComponent(Component item) {
-		item.setExist(false);
-		requiredComponents.add(item);
+		item.setOrderId(orderNumber);
 	}
 
 	public String getFullAddress() {
@@ -180,9 +170,8 @@ public class Order implements Serializable {
 	}
 
 	public float getHours() {
-		if (finish == null || start == null)
+		if (finish < 0 || start < 0)
 			return 0;
-		Long miliSecDiff = finish.getTimeInMillis() - start.getTimeInMillis();
-		return (float) (TimeUnit.MILLISECONDS.toMinutes(miliSecDiff)) / 60;
+		return (float) (TimeUnit.MILLISECONDS.toMinutes(finish - start)) / 60;
 	}
 }

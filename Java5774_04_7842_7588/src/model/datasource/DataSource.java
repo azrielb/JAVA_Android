@@ -7,15 +7,16 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import model.backend.Backend;
 import BE.Bill;
 import BE.Component;
-import BE.Convertions;
 import BE.Order;
 import BE.Technician;
 import android.os.Environment;
 import android.util.Log;
+import conversions.Convertions;
 
 public class DataSource implements Backend, Serializable {
 
@@ -48,21 +49,22 @@ public class DataSource implements Backend, Serializable {
 			components = new ArrayList<Component>();
 			bills = new ArrayList<Bill>();
 			Technician t1 = new Technician("Reuven", "Cohen", "1",
-					"Reuven.Cohen@gmail.com", 1);
+					"Reuven.Cohen@gmail.com", 1L);
 			technicians.add(t1);
-			Order o1 = new BE.Order(1, "Tel Aviv", "baruch", new Date(),
+			Order o1 = new BE.Order(1L, "Tel Aviv", "baruch", new Date(),
 					"0549912308");
-			o1.setTechnician(t1);
-			Order o2 = new BE.Order(2, "Jerusalem", "shmuel", new Date(),
+			o1.setTechnicianId(t1.getId());
+			Order o2 = new BE.Order(2L, "Jerusalem", "shmuel", new Date(),
 					"0503758696");
-			o2.setTechnician(t1);
-			Order o3 = new BE.Order(3, "Haifa", "ohad", new Date(), "052345696");
-			o3.setTechnician(t1);
-			Order o4 = new BE.Order(4, "Nechalim", "noam", new Date(),
+			o2.setTechnicianId(t1.getId());
+			Order o3 = new BE.Order(3L, "Haifa", "ohad", new Date(),
+					"052345696");
+			o3.setTechnicianId(t1.getId());
+			Order o4 = new BE.Order(4L, "Nechalim", "noam", new Date(),
 					"0523744496");
-			Order o5 = new BE.Order(5, "Haifa", "kuku", new Date(),
+			Order o5 = new BE.Order(5L, "Haifa", "kuku", new Date(),
 					"0503772998");
-			Order o6 = new BE.Order(6, "Herzelia", "bobo", new Date(),
+			Order o6 = new BE.Order(6L, "Herzelia", "bobo", new Date(),
 					"0543258621");
 			orders.add(o1);
 			orders.add(o2);
@@ -177,7 +179,7 @@ public class DataSource implements Backend, Serializable {
 	}
 
 	@Override
-	public Technician getUserByIdAndPassword(int id, String password) {
+	public Technician getUserByIdAndPassword(Long id, String password) {
 		for (Technician user : technicians)
 			if (user.getId() == id)
 				return user.getPassword().equals(password) ? user : null;
@@ -193,7 +195,7 @@ public class DataSource implements Backend, Serializable {
 	}
 
 	@Override
-	public Order getOrderByNumber(int orderNumber) {
+	public Order getOrderByNumber(Long orderNumber) {
 		for (Order item : orders)
 			if (item.getOrderNumber() == orderNumber)
 				return item;
@@ -201,10 +203,10 @@ public class DataSource implements Backend, Serializable {
 	}
 
 	@Override
-	public ArrayList<Order> getOrdersByTechnicianId(int tecnicainID) {
+	public ArrayList<Order> getOrdersByTechnicianId(Long tecnicainID) {
 		ArrayList<Order> arr = new ArrayList<Order>();
 		for (Order item : orders)
-			if (item.getTechnician().getId() == (tecnicainID))
+			if (item.getTechnicianId() == tecnicainID)
 				arr.add(item);
 		if (arr.size() > 0)
 			return arr;
@@ -213,7 +215,7 @@ public class DataSource implements Backend, Serializable {
 	}
 
 	@Override
-	public ArrayList<Component> getAllComponent() {
+	public ArrayList<Component> getAllComponents() {
 		return components;
 	}
 
@@ -223,7 +225,7 @@ public class DataSource implements Backend, Serializable {
 	}
 
 	@Override
-	public ArrayList<Order> getFilteredOrders(String filter, int technicianId) {
+	public ArrayList<Order> getFilteredOrders(String filter, Long technicianId) {
 		ArrayList<Order> temp = getOrdersByTechnicianId(technicianId);
 		ArrayList<Order> result = new ArrayList<Order>();
 		CharSequence _filter = filter.subSequence(0, filter.length());
@@ -241,12 +243,38 @@ public class DataSource implements Backend, Serializable {
 	public ArrayList<Component> getAvailableComponent() {
 		ArrayList<Component> result = new ArrayList<Component>();
 		for (Component item : components)
-			if (item.isExist())
+			if (item.getOrderId() < 0)
 				result.add(item);
 		if (result.size() > 0)
 			return result;
 		else
 			return null;
+	}
+
+	@Override
+	public Bill getBillById(Long billId) {
+		for (Bill bill : bills)
+			if (bill.getOrderID() == billId)
+				return bill;
+		return null;
+	}
+
+	@Override
+	public Technician getUserById(Long technicianId) {
+		for (Technician user : technicians)
+			if (user.getId() == technicianId)
+				return user;
+		return null;
+	}
+
+	@Override
+	public List<Component> getComponentsByOrderNumber(long orderNumber)
+			throws Exception {
+		List<Component> result = new ArrayList<Component>();
+		for (Component component : getAllComponents())
+			if (component.getOrderId() == orderNumber)
+				result.add(component);
+		return result;
 	}
 
 }

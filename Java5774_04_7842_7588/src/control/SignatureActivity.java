@@ -3,7 +3,6 @@ package control;
 import java.io.File;
 import java.io.FileOutputStream;
 
-import model.backend.BackendFactory;
 import BE.Order;
 import BE.Order.statuses;
 import android.gesture.GestureOverlayView;
@@ -20,7 +19,7 @@ import com.example.java5774_04_7842_7588.R;
 
 public class SignatureActivity extends _Activity {
 
-	int orderNumber = 0;
+	Long orderNumber = 0L;
 	Order currentOrder = null;
 	GestureOverlayView gestureView;
 
@@ -29,10 +28,7 @@ public class SignatureActivity extends _Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_signature);
 
-		orderNumber = getIntent().getExtras().getInt("orderNumber");
-		currentOrder = BackendFactory.getInstance().getOrderByNumber(
-				orderNumber);
-
+		currentOrder = (Order) (getIntent().getSerializableExtra("currentOrder"));
 		Button save = (Button) findViewById(R.id.DoneButton);
 		Button clear = (Button) findViewById(R.id.clearButton);
 
@@ -74,7 +70,7 @@ public class SignatureActivity extends _Activity {
 
 	public void saveSig(View view) {
 		try {
-			String sigName = Integer.toString(orderNumber) + ".png";
+			String sigName = orderNumber.toString() + ".png";
 			GestureOverlayView gestureView1 = (GestureOverlayView) findViewById(R.id.signaturePad);
 			gestureView1.setDrawingCacheEnabled(true);
 

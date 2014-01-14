@@ -7,6 +7,8 @@ import BE.Component;
 import BE.Order;
 import BE.Order.statuses;
 import android.R.layout;
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -36,10 +38,34 @@ public class Addcomponent extends _Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_addcomponent);
-		int orderNumber = getIntent().getExtras().getInt("orderNumber");
-		currentOrder = BackendFactory.getInstance().getOrderByNumber(
-				orderNumber);
-		components = BackendFactory.getInstance().getAvailableComponent();
+		currentOrder = (Order) (getIntent()
+				.getSerializableExtra("currentOrder"));
+		new AsyncTask<Void, Void, ArrayList<Component>>() {
+			@Override
+			protected void onPreExecute() {
+				progressDialog = ProgressDialog
+						.show(Addcomponent.this, "Please wait",
+								"Synchronizing with the server...", true);
+			}
+
+			@Override
+			protected ArrayList<Component> doInBackground(Void... params) {
+				try {
+					return BackendFactory.getInstance().getAvailableComponent();
+				} catch (Exception e) {
+					return null;
+				}
+			}
+
+			@Override
+			protected void onPostExecute(ArrayList<Component> res) {
+				if (progressDialog.isShowing()) {
+					progressDialog.dismiss();
+				}
+				components = res;
+			}
+		}.execute();
+
 		componentNames = getComponentsNames(components);
 		saveButton = (Button) findViewById(R.id.saveButton);
 		cancelButton = (Button) findViewById(R.id.cancelButton);
@@ -65,8 +91,7 @@ public class Addcomponent extends _Activity {
 				choosenComponent = components.get(position);
 				if (position != 0) {
 					componentsToAdd.add(choosenComponent);
-					choosenComponent.setExist(false);
-					// reset the listview
+					// reset the list view
 					list.setAdapter(null);
 					ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(
 							Addcomponent.this, layout.simple_list_item_1,
@@ -104,7 +129,7 @@ public class Addcomponent extends _Activity {
 			@Override
 			public void onClick(View v) {
 				for (Component item : componentsToAdd)
-					item.setExist(true);
+					item.setOrderId(-item.getOrderId());
 				finish();
 			}
 		});

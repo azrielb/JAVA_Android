@@ -1,76 +1,63 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.java5774_04_7842_7588"
-    android:versionCode="1"
-    android:versionName="1.0" >
+<?xml version="1.0" encoding="utf-8" standalone="no"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.example.java5774_04_7842_7588">
 
-    <uses-sdk
-        android:minSdkVersion="10"
-        android:targetSdkVersion="19" />
+    <uses-sdk android:minSdkVersion="10" android:targetSdkVersion="19"/>
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CALL_PHONE" >
-    </uses-permission>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    
 
-    <application
-        android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
-        <activity
-            android:name="control.MainActivity"
-            android:label="@string/app_name" >
+    <uses-permission android:name="android.permission.INTERNET"/>
+   <permission android:name="com.example.java5774_04_7842_7588.permission.C2D_MESSAGE" android:protectionLevel="signature"/>
+
+   <uses-permission android:name="com.example.java5774_04_7842_7588.permission.C2D_MESSAGE"/>
+   <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
+   <uses-permission android:name="android.permission.WAKE_LOCK"/>
+   <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+   <uses-permission android:name="android.permission.USE_CREDENTIALS"/>
+   <application android:allowBackup="true" android:icon="@drawable/ic_launcher" android:label="@string/app_name" android:theme="@style/AppTheme">
+        <activity android:label="@string/app_name" android:name="control.MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity
-            android:name="control.OrderList"
-            android:label="order list" >
+        <activity android:label="order list" android:name="control.OrderList">
         </activity>
-        <activity
-            android:name="control.OrderNavigation"
-            android:label="Navigation" >
+        <activity android:label="Navigation" android:name="control.OrderNavigation">
         </activity>
-        <activity
-            android:name="control.OrderSummary"
-            android:label="summary" >
+        <activity android:label="summary" android:name="control.OrderSummary">
         </activity>
-        <activity
-            android:name="control.NewAccount"
-            android:label="new account" >
+        <activity android:label="new account" android:name="control.NewAccount">
         </activity>
-        <activity
-            android:name="control.ComponentAddUpdate"
-            android:label="@string/title_activity_component_add_update" >
+        <activity android:label="@string/title_activity_component_add_update" android:name="control.ComponentAddUpdate">
         </activity>
-        <activity
-            android:name="control.Test"
-            android:label="@string/title_activity_test" >
+        <activity android:label="@string/title_activity_test" android:name="control.Test">
         </activity>
-        <activity
-            android:name="control.Addcomponent"
-            android:label="@string/title_activity_addcomponent" >
+        <activity android:label="@string/title_activity_addcomponent" android:name="control.Addcomponent">
         </activity>
-        <activity
-            android:name="control.ComponentList"
-            android:label="@string/title_activity_component_list" >
+        <activity android:label="@string/title_activity_component_list" android:name="control.ComponentList">
         </activity>
-        <activity
-            android:name="control.BillActivity"
-            android:label="@string/title_activity_bill" >
+        <activity android:label="@string/title_activity_bill" android:name="control.BillActivity">
         </activity>
-        <activity
-            android:name="control.WorkingTime"
-            android:label="@string/title_activity_working_time" >
+        <activity android:label="@string/title_activity_working_time" android:name="control.WorkingTime">
         </activity>
-        <activity
-            android:name="control.SignatureActivity"
-            android:label="@string/title_activity_signature" >
+        <activity android:label="@string/title_activity_signature" android:name="control.SignatureActivity">
         </activity>
-    </application>
+        <service android:name=".GCMIntentService"/>
+        <receiver android:name="com.google.android.gcm.GCMBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+                <category android:name="com.example.java5774_04_7842_7588"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION"/>
+                <category android:name="com.example.java5774_04_7842_7588"/>
+            </intent-filter>
+        </receiver>
+    
+        <activity android:launchMode="singleTop" android:name=".RegisterActivity"/>
+</application>
 
 </manifest>

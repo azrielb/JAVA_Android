@@ -2,6 +2,8 @@ package control;
 
 import model.backend.BackendFactory;
 import BE.Technician;
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -40,25 +42,41 @@ public class NewAccount extends _Activity {
 							"Empty detail! Please fill all details!");
 					return;
 				}
-				int id = Integer.parseInt(idStr);
-				if (BackendFactory.getInstance().getUserByIdAndPassword(id,
-						pass) != null) {
-					Alert.showToast(NewAccount.this,
-							"User exists in the system!");
-					return;
-				}
+				new AsyncTask<String, Void, String>() {
+					@Override
+					protected void onPreExecute() {
+						progressDialog = ProgressDialog.show(NewAccount.this,
+								"Please wait",
+								"Synchronizing with the server...", true);
+					}
 
-				Technician user = new Technician(fname, lname, pass, email, id);
-				BackendFactory.getInstance().addTechnician(user);
+					@Override
+					protected String doInBackground(String... params) {
+						try {
+							Technician user = new Technician(params[0], params[1],
+									params[2], params[3], Long.parseLong(params[4]));
+							BackendFactory.getInstance().addTechnician(user);
+							return null;
+						} catch (Exception e) {
+							return "User not created!\nAre you alredy in the system? Please check your password.";
+						}
+					}
 
-				if (BackendFactory.getInstance().getUserByIdAndPassword(id,
-						pass) == null) {
-					Alert.showToast(
-							NewAccount.this,
-							"User not created\n\nAre you alredy in the system? Please check your password.");
-					return;
-				}
-				finish();
+					@Override
+					protected void onPostExecute(String res) {
+						if (progressDialog.isShowing()) {
+							progressDialog.dismiss();
+						}
+
+						if (res != null) {
+							Alert.showToast(NewAccount.this, res);
+						} else {
+							Alert.showToast(NewAccount.this,
+									"The user has been created successfully");
+							finish();
+						}
+					}
+				}.execute(fname, lname, pass, email, idStr);
 			}
 		});
 	}

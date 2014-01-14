@@ -1,0 +1,691 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://android-technician.appspot.com/_ah/api",
+  "name" : "serverApi",
+  "version" : "v1",
+  "defaultVersion" : false,
+  "adapter" : {
+    "bns" : "https://android-technician.appspot.com/_ah/spi",
+    "deadline" : 10.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "methods" : {
+    "serverApi.getAllComponents" : {
+      "path" : "serverApi.getAllComponents",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "model.backend.ServerBackend.getAllComponents",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "serverApi.updateBill" : {
+      "path" : "serverApi.updateBill",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "model.backend.ServerBackend.updateBill",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    },
+    "serverApi.getAvailableComponents" : {
+      "path" : "serverApi.getAvailableComponents",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "model.backend.ServerBackend.getAvailableComponents",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "serverApi.getUserByIdAndPassword" : {
+      "path" : "serverApi.getUserByIdAndPassword",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "model.backend.ServerBackend.getUserByIdAndPassword",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          },
+          "password" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "serverApi.updateComponent" : {
+      "path" : "serverApi.updateComponent",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "model.backend.ServerBackend.updateComponent",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    },
+    "serverApi.updateTechnician" : {
+      "path" : "serverApi.updateTechnician",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "model.backend.ServerBackend.updateTechnician",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    },
+    "serverApi.getComponentsByOrderNumber" : {
+      "path" : "serverApi.getComponentsByOrderNumber",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "model.backend.ServerBackend.getComponentsByOrderNumber",
+      "request" : {
+        "parameters" : {
+          "orderNumber" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "serverApi.addComponent" : {
+      "path" : "serverApi.addComponent",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "model.backend.ServerBackend.addComponent",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    },
+    "serverApi.addOrder" : {
+      "path" : "serverApi.addOrder",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "model.backend.ServerBackend.addOrder",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    },
+    "serverApi.getFilteredOrders" : {
+      "path" : "serverApi.getFilteredOrders",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "model.backend.ServerBackend.getFilteredOrders",
+      "request" : {
+        "parameters" : {
+          "filter" : {
+            "type" : "string",
+            "required" : true
+          },
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "serverApi.getUserById" : {
+      "path" : "serverApi.getUserById",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "model.backend.ServerBackend.getUserById",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "serverApi.getAllOrders" : {
+      "path" : "serverApi.getAllOrders",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "model.backend.ServerBackend.getAllOrders",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "serverApi.addBill" : {
+      "path" : "serverApi.addBill",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "model.backend.ServerBackend.addBill",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    },
+    "serverApi.updateOrder" : {
+      "path" : "serverApi.updateOrder",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "model.backend.ServerBackend.updateOrder",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    },
+    "serverApi.getAllBills" : {
+      "path" : "serverApi.getAllBills",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "model.backend.ServerBackend.getAllBills",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "serverApi.getOrdersByTechnicianId" : {
+      "path" : "serverApi.getOrdersByTechnicianId",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "model.backend.ServerBackend.getOrdersByTechnicianId",
+      "request" : {
+        "parameters" : {
+          "technicianID" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "serverApi.addTechnician" : {
+      "path" : "serverApi.addTechnician",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "model.backend.ServerBackend.addTechnician",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    },
+    "serverApi.getOrderByNumber" : {
+      "path" : "serverApi.getOrderByNumber",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "model.backend.ServerBackend.getOrderByNumber",
+      "request" : {
+        "parameters" : {
+          "orderNumber" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "serverApi.deleteTechnician" : {
+      "path" : "serverApi.deleteTechnician",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "model.backend.ServerBackend.deleteTechnician",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    },
+    "serverApi.getTechnicianByName" : {
+      "path" : "serverApi.getTechnicianByName",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "model.backend.ServerBackend.getTechnicianByName",
+      "request" : {
+        "parameters" : {
+          "technicianName" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "serverApi.getAllTechnicians" : {
+      "path" : "serverApi.getAllTechnicians",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "model.backend.ServerBackend.getAllTechnicians",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "Component" : {
+        "id" : "Component",
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "cost" : {
+            "type" : "number",
+            "format" : "float"
+          },
+          "serialNumber" : {
+            "type" : "string"
+          },
+          "orderId" : {
+            "type" : "string",
+            "format" : "int64"
+          }
+        }
+      },
+      "ComponentCollection" : {
+        "id" : "ComponentCollection",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Component"
+            }
+          }
+        }
+      },
+      "Bill" : {
+        "id" : "Bill",
+        "type" : "object",
+        "properties" : {
+          "orderID" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "cost" : {
+            "type" : "number",
+            "format" : "float"
+          },
+          "signatureFilePath" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Technician" : {
+        "id" : "Technician",
+        "type" : "object",
+        "properties" : {
+          "firstName" : {
+            "type" : "string"
+          },
+          "password" : {
+            "type" : "string"
+          },
+          "eMail" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "cellphone" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "lastName" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Order" : {
+        "id" : "Order",
+        "type" : "object",
+        "properties" : {
+          "orderNumber" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "city" : {
+            "type" : "string"
+          },
+          "addres" : {
+            "type" : "string"
+          },
+          "customer" : {
+            "type" : "string"
+          },
+          "customerPhone" : {
+            "type" : "string"
+          },
+          "createDate" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "start" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "finish" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "technicianId" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "status" : {
+            "$ref" : "statuses"
+          },
+          "title" : {
+            "type" : "string"
+          },
+          "detailes" : {
+            "type" : "string"
+          },
+          "technicianComments" : {
+            "type" : "string"
+          },
+          "billId" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "fullAddress" : {
+            "type" : "string"
+          }
+        }
+      },
+      "statuses" : {
+        "id" : "statuses",
+        "type" : "string",
+        "enum" : [ "NEW", "IN_PROGRESS", "ACTION_DONE", "SIGNATURED", "FINISHED" ]
+      },
+      "OrderCollection" : {
+        "id" : "OrderCollection",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Order"
+            }
+          }
+        }
+      },
+      "BillCollection" : {
+        "id" : "BillCollection",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Bill"
+            }
+          }
+        }
+      },
+      "TechnicianCollection" : {
+        "id" : "TechnicianCollection",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Technician"
+            }
+          }
+        }
+      }
+    },
+    "methods" : {
+      "model.backend.ServerBackend.getAllComponents" : {
+        "response" : {
+          "$ref" : "ComponentCollection"
+        }
+      },
+      "model.backend.ServerBackend.updateBill" : {
+        "request" : {
+          "$ref" : "Bill"
+        }
+      },
+      "model.backend.ServerBackend.getAvailableComponents" : {
+        "response" : {
+          "$ref" : "ComponentCollection"
+        }
+      },
+      "model.backend.ServerBackend.getUserByIdAndPassword" : {
+        "response" : {
+          "$ref" : "Technician"
+        }
+      },
+      "model.backend.ServerBackend.updateComponent" : {
+        "request" : {
+          "$ref" : "Component"
+        }
+      },
+      "model.backend.ServerBackend.updateTechnician" : {
+        "request" : {
+          "$ref" : "Technician"
+        }
+      },
+      "model.backend.ServerBackend.getComponentsByOrderNumber" : {
+        "response" : {
+          "$ref" : "ComponentCollection"
+        }
+      },
+      "model.backend.ServerBackend.addComponent" : {
+        "request" : {
+          "$ref" : "Component"
+        }
+      },
+      "model.backend.ServerBackend.addOrder" : {
+        "request" : {
+          "$ref" : "Order"
+        }
+      },
+      "model.backend.ServerBackend.getFilteredOrders" : {
+        "response" : {
+          "$ref" : "OrderCollection"
+        }
+      },
+      "model.backend.ServerBackend.getUserById" : {
+        "response" : {
+          "$ref" : "Technician"
+        }
+      },
+      "model.backend.ServerBackend.getAllOrders" : {
+        "response" : {
+          "$ref" : "OrderCollection"
+        }
+      },
+      "model.backend.ServerBackend.addBill" : {
+        "request" : {
+          "$ref" : "Bill"
+        }
+      },
+      "model.backend.ServerBackend.updateOrder" : {
+        "request" : {
+          "$ref" : "Order"
+        }
+      },
+      "model.backend.ServerBackend.getAllBills" : {
+        "response" : {
+          "$ref" : "BillCollection"
+        }
+      },
+      "model.backend.ServerBackend.getOrdersByTechnicianId" : {
+        "response" : {
+          "$ref" : "OrderCollection"
+        }
+      },
+      "model.backend.ServerBackend.addTechnician" : {
+        "request" : {
+          "$ref" : "Technician"
+        }
+      },
+      "model.backend.ServerBackend.getOrderByNumber" : {
+        "response" : {
+          "$ref" : "Order"
+        }
+      },
+      "model.backend.ServerBackend.deleteTechnician" : {
+        "request" : {
+          "$ref" : "Technician"
+        }
+      },
+      "model.backend.ServerBackend.getTechnicianByName" : {
+        "response" : {
+          "$ref" : "Technician"
+        }
+      },
+      "model.backend.ServerBackend.getAllTechnicians" : {
+        "response" : {
+          "$ref" : "TechnicianCollection"
+        }
+      }
+    }
+  }
+}

@@ -2,36 +2,32 @@ package BE;
 
 import java.io.Serializable;
 
-public class Technician implements Serializable {
+import conversions.toGoogleConvertions;
+
+public class Technician implements Serializable ,toGoogleConvertions{
 
 	private static final long serialVersionUID = 1L;
 	String firstName;
 	String LastName;
 	String password;
 	String eMail;
-	int id;
-	int cellphone;
-	int workerNumber;
-	boolean busy;
+	Long id;
+	String cellphone;
 
 	public Technician(String firstName, String lastName, String password,
-			String eMail, int id) {
-		super();
+			String eMail, Long id) {
 		this.firstName = firstName;
 		LastName = lastName;
 		this.password = password;
 		this.eMail = eMail;
-		this.id = id;
-		this.busy = false;
+		this.id=id;
 	}
 
 	public Technician() {
 		firstName = "worker";
 		LastName = "worker";
-		id = 0000000;
-		cellphone = 0501234567;
-		workerNumber = 0000;
-		busy = false;
+		id = 0L;
+		cellphone = "";
 	}
 
 	public String getFirstName() {
@@ -70,35 +66,19 @@ public class Technician implements Serializable {
 		this.eMail = eMail;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public int getCellphone() {
+	public String getCellphone() {
 		return cellphone;
 	}
 
-	public void setCellphone(int cellphone) {
+	public void setCellphone(String cellphone) {
 		this.cellphone = cellphone;
-	}
-
-	public int getWorkerNumber() {
-		return workerNumber;
-	}
-
-	public void setWorkerNumber(int workerNumber) {
-		this.workerNumber = workerNumber;
-	}
-
-	public boolean isBusy() {
-		return busy;
-	}
-
-	public void setBusy(boolean busy) {
-		this.busy = busy;
 	}
 }

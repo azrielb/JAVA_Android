@@ -2,35 +2,27 @@ package BE;
 
 import java.io.Serializable;
 
-import android.graphics.Bitmap;
+import conversions.toGoogleConvertions;
 
-public class Bill implements Serializable {
+public class Bill implements Serializable ,toGoogleConvertions{
 
 	private static final long serialVersionUID = 1L;
 
-	public enum Payment {
-		cash, check, creditCard
-	}
-
-	int orderID;
+	Long orderID;
 	float cost;
 	String SignatureFilePath;
-	Payment payment;
-	Bitmap signaturePicture;
 
-	public Bill(int orderID, float cost) {
+	public Bill(Long orderID, float cost) {
 		this.orderID = orderID;
 		this.cost = cost;
 		this.SignatureFilePath = "";
-		this.payment = Payment.creditCard;
-		this.signaturePicture = null;
 	}
 
-	public int getOrderID() {
+	public Long getOrderID() {
 		return orderID;
 	}
 
-	public void setOrderID(int orderID) {
+	public void setOrderID(Long orderID) {
 		this.orderID = orderID;
 	}
 
@@ -49,21 +41,4 @@ public class Bill implements Serializable {
 	public void setSignatureFilePath(String signatureFilePath) {
 		SignatureFilePath = signatureFilePath;
 	}
-
-	public Payment getPayment() {
-		return payment;
-	}
-
-	public void setPayment(Payment payment) {
-		this.payment = payment;
-	}
-
-	public Bitmap getSignaturePicture() {
-		return signaturePicture;
-	}
-
-	public void setSignaturePicture(Bitmap signaturePicture) {
-		this.signaturePicture = signaturePicture;
-	}
-
 }

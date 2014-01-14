@@ -1,5 +1,6 @@
 package control;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import model.backend.BackendFactory;
@@ -55,18 +56,24 @@ public class ComponentList extends _Activity {
 	private Order currentOrder = null;
 	private ListView componentList = null;
 	private List<Component> components = null;
-	private int orderNumber = -1;
+	private Long orderNumber = -1L;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		List<Component> _components = new ArrayList<Component>();
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_component_list);
-		orderNumber = getIntent().getExtras().getInt("orderNumber");
-		currentOrder = BackendFactory.getInstance().getOrderByNumber(
-				orderNumber);
+		currentOrder = (Order) (getIntent().getSerializableExtra("currentOrder"));
+		try {
+			_components  = BackendFactory.getInstance().getComponentsByOrderNumber(
+					orderNumber);	
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 		componentList = (ListView) findViewById(R.id.componentListView);
 
-		setComponents(currentOrder.getRequiredComponents());
+		setComponents(_components);
 		if (currentOrder.getStatus().compareTo(statuses.ACTION_DONE) >= 0) {
 			Alert.showToast(ComponentList.this, R.string.order_is_closed);
 			return;
@@ -81,7 +88,7 @@ public class ComponentList extends _Activity {
 					public void onClick(DialogInterface dialog, int which) {
 						switch (which) {
 						case DialogInterface.BUTTON_POSITIVE:
-							components.get(position).setExist(true);
+							components.get(position).setOrderId(-components.get(position).getOrderId());
 							components.remove(position);
 							setComponents(components);
 							Alert.showToast(ComponentList.this,

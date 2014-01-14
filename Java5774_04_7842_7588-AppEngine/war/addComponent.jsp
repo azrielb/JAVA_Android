@@ -11,7 +11,9 @@
 <title>הוסף רכיב</title>
 </head>
 <body>
-<p><a href="./">חזרה לדף הבית</a></p>
+	<p>
+		<a href="./">חזרה לדף הבית</a>
+	</p>
 	<form>
 		<h1 align="right">הוסף רכיב</h1>
 		<table>
@@ -38,13 +40,26 @@
 		</div>
 		<%
 			String itemName = request.getParameter("itemName");
-			String cost = request.getParameter("cost");
+			String strCost = request.getParameter("cost");
 			String serialNumber = request.getParameter("serialNumber");
 			String description = request.getParameter("description");
 
-			if (itemName != null && serialNumber != null && serialNumber != null) {
-				Component compon = new Component(itemName, Float.parseFloat(cost), serialNumber);
-				Factory.getInstance().addComponent(compon);
+			if (itemName != null && serialNumber != null && strCost != null
+					&& !itemName.isEmpty() && !serialNumber.isEmpty()
+					&& !strCost.isEmpty()) {
+				try {
+					float cost = Float.parseFloat(strCost);
+					if (cost <= 0)
+						throw new Exception("מחיר לא יכול להיות שלילי!");
+					Component compon = new Component(itemName, cost,
+							serialNumber);
+					if (description != null && !description.isEmpty())
+						compon.setDescription(description);
+					Factory.getInstance().addComponent(compon);
+					out.println("<p>רכיב הוסף בהצלחה!</p>");
+				} catch (Exception e) {
+					out.println("<p>Exception: " + e.getMessage() + "</p>");
+				}
 			}
 		%>
 	</form>

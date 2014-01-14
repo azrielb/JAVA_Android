@@ -73,8 +73,9 @@ public class DBbackend implements Backend {
 	@Override
 	public void addComponent(Component component) throws Exception {
 		for (Component c : getAllComponents())
-			if (c.getSerialNumber() == component.getSerialNumber())
-				throw new Exception("Component " + component.getSerialNumber()
+			if (c.getSerialNumber().equalsIgnoreCase(
+					component.getSerialNumber()))
+				throw new Exception("Component " + c.getSerialNumber()
 						+ " exists!");
 		insert(component);
 	}

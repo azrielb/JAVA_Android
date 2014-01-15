@@ -170,7 +170,7 @@ public class Order implements Serializable, toGoogleConvertions {
 	}
 
 	public float getHours() {
-		if (finish < 0 || start < 0 || finish == null || start == null)
+		if (finish == null || start == null || finish < 0 || start < 0)
 			return 0;
 		return (float) (TimeUnit.MILLISECONDS.toMinutes(finish - start)) / 60;
 	}

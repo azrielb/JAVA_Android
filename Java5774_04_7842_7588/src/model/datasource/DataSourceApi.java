@@ -88,10 +88,8 @@ public class DataSourceApi implements Backend {
 	public ArrayList<BE.Order> getOrdersByTechnicianId(Long technicianID)
 			throws Exception {
 		// TODO check
-		ArrayList<BE.Order> orderList = new ArrayList<BE.Order>();
-		List<Order> orders = (myApi.getOrdersByTechnicianId(technicianID)
-				.execute()).getItems();
-		Adapter.fromGoogle(orders, orderList);
+		ArrayList<BE.Order> orderList = Adapter.fromGoogle(myApi
+				.getOrdersByTechnicianId(technicianID).execute().getItems());
 		return orderList;
 	}
 
@@ -108,9 +106,8 @@ public class DataSourceApi implements Backend {
 	@Override
 	public ArrayList<BE.Component> getAvailableComponent() throws Exception {
 		// TODO check
-		ArrayList<BE.Component> components = new ArrayList<BE.Component>();
-		Adapter.fromGoogle(myApi.getAvailableComponents().execute().getItems(),
-				components);
+		ArrayList<BE.Component> components = Adapter.fromGoogle(myApi
+				.getAvailableComponents().execute().getItems());
 		return components;
 	}
 
@@ -118,9 +115,8 @@ public class DataSourceApi implements Backend {
 	public ArrayList<BE.Order> getFilteredOrders(String city, Long id)
 			throws Exception {
 		// TODO check
-		ArrayList<BE.Order> orders = new ArrayList<BE.Order>();
-		Adapter.fromGoogle(myApi.getFilteredOrders(city, id).execute()
-				.getItems(), orders);
+		ArrayList<BE.Order> orders = Adapter.fromGoogle(myApi
+				.getFilteredOrders(city, id).execute().getItems());
 		return orders;
 	}
 
@@ -135,9 +131,10 @@ public class DataSourceApi implements Backend {
 	public BE.Bill getBillById(Long billId) throws Exception {
 		// TODO check
 		List<Bill> bills = myApi.getAllBills().execute().getItems();
-		for (Bill bill : bills)
-			if (bill.getOrderID() == billId)
-				return Adapter.fromGoogle(bill);
+		if (bills != null)
+			for (Bill bill : bills)
+				if (bill.getOrderID() == billId)
+					return Adapter.fromGoogle(bill);
 		return null;
 	}
 
@@ -152,7 +149,7 @@ public class DataSourceApi implements Backend {
 			throws Exception {
 		// TODO check
 		return Adapter.fromGoogle(myApi.getComponentsByOrderNumber(orderNumber)
-				.execute());
+				.execute().getItems());
 	}
 
 }

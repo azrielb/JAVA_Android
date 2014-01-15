@@ -70,10 +70,13 @@ public class BillActivity extends _Activity {
 			@Override
 			protected Void doInBackground(Long... params) {
 				try {
-					tempBill = BackendFactory.getInstance().getBillById(
-							params[0]);
 					tempComponents = BackendFactory.getInstance()
 							.getComponentsByOrderNumber(params[1]);
+				} catch (Exception e) {
+				}
+				try {
+					tempBill = BackendFactory.getInstance().getBillById(
+							params[0]);
 				} catch (Exception e) {
 				}
 				return null;
@@ -94,8 +97,9 @@ public class BillActivity extends _Activity {
 				total.setText(total.getText() + "\t"
 						+ Float.toString(totalPrice()));
 
-				ListAdapter adapter = new ArrayAdapter<Component>(BillActivity.this,
-						R.layout.component_list_view, uniqList) {
+				ListAdapter adapter = new ArrayAdapter<Component>(
+						BillActivity.this, R.layout.component_list_view,
+						uniqList) {
 					@Override
 					public View getDropDownView(int position, View convertView,
 							ViewGroup parent) {
@@ -132,8 +136,8 @@ public class BillActivity extends _Activity {
 			}
 		}.execute(currentOrder.getBillId(), currentOrder.getOrderNumber());
 
-		//from here we have to check
-		
+		// from here we have to check
+
 		Button nextStepButton = (Button) findViewById(R.id.nextStepButton);
 		nextStepButton.setOnClickListener(new OnClickListener() {
 
@@ -150,8 +154,9 @@ public class BillActivity extends _Activity {
 							SignatureActivity.class);
 					intent.putExtra("currentOrder", currentOrder);
 					startActivity(intent);
-					return; 
-					// "return" instead of "break" - for ignoring the "finish" line.
+					return;
+					// "return" instead of "break" - for ignoring the "finish"
+					// line.
 				case SIGNATURED:
 					bill.setCost(totalPrice());
 					try {
@@ -180,8 +185,9 @@ public class BillActivity extends _Activity {
 
 	private float totalPrice() {
 		float price = 20 * hours;
-		for (Component item : components)
-			price += item.getCost();
+		if (components != null)
+			for (Component item : components)
+				price += item.getCost();
 		return price;
 	}
 
@@ -207,8 +213,9 @@ public class BillActivity extends _Activity {
 
 	private ArrayList<String> getComponentsNames(List<Component> list) {
 		ArrayList<String> result = new ArrayList<String>();
-		for (Component item : list)
-			result.add(item.getName());
+		if (list != null)
+			for (Component item : list)
+				result.add(item.getName());
 		return result;
 	}
 }

@@ -8,7 +8,9 @@ import BE.Component;
 import BE.Order;
 import BE.Order.statuses;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -56,24 +58,53 @@ public class ComponentList extends _Activity {
 	private Order currentOrder = null;
 	private ListView componentList = null;
 	private List<Component> components = null;
-	private Long orderNumber = -1L;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		List<Component> _components = new ArrayList<Component>();
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_component_list);
-		currentOrder = (Order) (getIntent().getSerializableExtra("currentOrder"));
-		try {
-			_components  = BackendFactory.getInstance().getComponentsByOrderNumber(
-					orderNumber);	
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		
-		componentList = (ListView) findViewById(R.id.componentListView);
+		currentOrder = (Order) (getIntent()
+				.getSerializableExtra("currentOrder"));
+		new AsyncTask<Long, Void, List<Component>>() {
+			@Override
+			protected void onPreExecute() {
+				progressDialog = ProgressDialog
+						.show(ComponentList.this, "Please wait",
+								"Synchronizing with the server...", true);
+			}
 
-		setComponents(_components);
+			String error = null;
+
+			@Override
+			protected List<Component> doInBackground(Long... params) {
+				List<Component> _components = new ArrayList<Component>();
+				try {
+					_components = BackendFactory.getInstance()
+							.getComponentsByOrderNumber(params[0]);
+				} catch (Exception e) {
+					error = e.getMessage();
+				}
+				return _components;
+			}
+
+			@Override
+			protected void onPostExecute(List<Component> res) {
+				if (progressDialog.isShowing()) {
+					progressDialog.dismiss();
+				}
+				if (res == null || res.isEmpty()) {
+					if (error != null)
+						Alert.showAlertDialog(ComponentList.this, "Exception",
+								error);
+					Alert.showToast(ComponentList.this,
+							"no componenets availble!!!");
+				}
+				setComponents(res);
+			}
+		}.execute(currentOrder.getOrderNumber());
+
+		componentList = (ListView) findViewById(R.id.componentListView);
 		if (currentOrder.getStatus().compareTo(statuses.ACTION_DONE) >= 0) {
 			Alert.showToast(ComponentList.this, R.string.order_is_closed);
 			return;
@@ -88,7 +119,8 @@ public class ComponentList extends _Activity {
 					public void onClick(DialogInterface dialog, int which) {
 						switch (which) {
 						case DialogInterface.BUTTON_POSITIVE:
-							components.get(position).setOrderId(-components.get(position).getOrderId());
+							components.get(position).setOrderId(
+									-components.get(position).getOrderId());
 							components.remove(position);
 							setComponents(components);
 							Alert.showToast(ComponentList.this,
@@ -122,6 +154,8 @@ public class ComponentList extends _Activity {
 	private void setComponents(List<Component> _components) {
 		componentList.setAdapter(null);
 		components = _components;
+		if (components == null)
+			return;
 		ListAdapter adapter = new componentAdapter(this,
 				R.layout.component_list_view, components);
 		componentList.setAdapter(adapter);

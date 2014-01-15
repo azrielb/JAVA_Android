@@ -1,5 +1,6 @@
 package conversions;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,8 +14,7 @@ import com.google.api.client.json.GenericJson;
 
 public class Adapter {
 	@SuppressWarnings("unchecked")
-	public static <S extends toGoogleConvertions, T extends GenericJson> S fromGoogle(
-			T item) {
+	public static <S extends toGoogleConvertions> S fromGoogle(GenericJson item) {
 		if (item instanceof Bill) {
 			return (S) fromGoogle((Bill) item);
 		}
@@ -30,16 +30,16 @@ public class Adapter {
 		return null;
 	}
 
-	public static <S extends toGoogleConvertions, T extends GenericJson> 
-	void fromGoogle(List<T> src, List<S> dst) throws NullPointerException {
-		if (src == null || dst == null) {
-			throw new NullPointerException();
-		}
-		dst.clear();
-		for (T item : src) {
+	public static <S extends toGoogleConvertions> ArrayList<S> fromGoogle(
+			List<? extends GenericJson> src) throws NullPointerException {
+		if (src == null)
+			return null;
+		ArrayList<S> dst = new ArrayList<S>();
+		for (GenericJson item : src) {
 			S obj = fromGoogle(item);
 			dst.add(obj);
 		}
+		return dst;
 	}
 
 	public static BE.Bill fromGoogle(Bill GoogleBill) {
@@ -85,8 +85,7 @@ public class Adapter {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static <T extends GenericJson, S extends toGoogleConvertions> T toGoogle(
-			S item) {
+	public static <T extends GenericJson> T toGoogle(toGoogleConvertions item) {
 		if (item instanceof BE.Bill) {
 			return (T) toGoogle((BE.Bill) item);
 		}
@@ -102,15 +101,16 @@ public class Adapter {
 		return null;
 	}
 
-	public static <T extends GenericJson, S extends toGoogleConvertions> void toGoogle(
-			List<S> src, List<T> objects) throws NullPointerException {
-		if (src == null || objects == null) {
-			throw new NullPointerException();
-		}
-		for (S item : src) {
+	public static <T extends GenericJson> List<T> toGoogle(
+			List<? extends toGoogleConvertions> src) throws NullPointerException {
+		if (src == null)
+			return null;
+		List<T> dst = new ArrayList<T>();
+		for (toGoogleConvertions item : src) {
 			T obj = toGoogle(item);
-			objects.add(obj);
+			dst.add(obj);
 		}
+		return dst;
 	}
 
 	public static Bill toGoogle(BE.Bill AndroidBill) {

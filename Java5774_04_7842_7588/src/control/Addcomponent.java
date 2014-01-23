@@ -3,9 +3,6 @@ package control;
 import java.util.ArrayList;
 
 import model.backend.BackendFactory;
-import BE.Component;
-import BE.Order;
-import BE.Order.statuses;
 import android.R.layout;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
@@ -19,11 +16,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
+import androidBE.Component;
+import androidBE.Order.statuses;
 
 import com.example.java5774_04_7842_7588.R;
 
+import conversions.toGoogleConvertions;
+
 public class Addcomponent extends _Activity {
-	private Order currentOrder;
 	private ArrayList<Component> components = new ArrayList<Component>();
 	private Component choosenComponent;
 	ArrayList<String> componentNames;
@@ -34,13 +34,17 @@ public class Addcomponent extends _Activity {
 	ArrayList<Component> componentsToAdd = new ArrayList<Component>();
 	ListView list;
 
+	public Addcomponent() {
+		components.add(new Component("Choose One item -->", 0, "null"));
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_addcomponent);
-		currentOrder = (Order) (getIntent()
-				.getSerializableExtra("currentOrder"));
-		
+		// currentOrder = (Order) (getIntent()
+		// .getSerializableExtra("currentOrder"));
+
 		saveButton = (Button) findViewById(R.id.saveButton);
 		cancelButton = (Button) findViewById(R.id.cancelButton);
 		list = (ListView) findViewById(R.id.addCompListView);
@@ -83,19 +87,27 @@ public class Addcomponent extends _Activity {
 
 			@Override
 			public void onClick(View v) {
-				for (Component item : componentsToAdd)
-					currentOrder.addComponent(item);
-				if (currentOrder.getStatus() == statuses.NEW)
+				toGoogleConvertions[] Entities = new toGoogleConvertions[componentsToAdd
+						.size() + 1];
+				if (currentOrder.getStatus() == statuses.NEW) {
 					currentOrder.setStatus(statuses.IN_PROGRESS);
-				finish();
+					Entities[0] = currentOrder;
+				} else
+					Entities[0] = null;
+				int i = 0;
+				for (Component item : componentsToAdd) {
+					currentOrder.addComponent(item);
+					Entities[++i] = item;
+				}
+				new updateEntities(null, null, null).execute(Entities);
 			}
 		});
 		cancelButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				for (Component item : componentsToAdd)
-					item.setOrderId(-item.getOrderId());
+				// for (Component item : componentsToAdd)
+				// item.setOrderId(-currentOrder.getOrderNumber());
 				finish();
 			}
 		});
@@ -124,7 +136,7 @@ public class Addcomponent extends _Activity {
 				if (progressDialog.isShowing()) {
 					progressDialog.dismiss();
 				}
-				components = res;
+				components.addAll(res);
 				componentNames = getComponentsNames(components);
 				adapter = new ArrayAdapter<String>(Addcomponent.this,
 						layout.simple_list_item_checked, componentNames);
@@ -142,8 +154,9 @@ public class Addcomponent extends _Activity {
 
 	private ArrayList<String> getComponentsNames(ArrayList<Component> list) {
 		ArrayList<String> result = new ArrayList<String>();
-		for (Component item : list)
-			result.add(item.getName());
+		if (list != null)
+			for (Component item : list)
+				result.add(item.getName());
 		return result;
 	}
 

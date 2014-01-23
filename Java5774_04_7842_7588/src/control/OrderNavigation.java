@@ -1,27 +1,23 @@
 package control;
 
-import BE.Order;
-import BE.Order.statuses;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import androidBE.Order.statuses;
 
 import com.example.java5774_04_7842_7588.R;
 
 public class OrderNavigation extends _Activity {
 
-	Order currentOrder;
-	Long orderNumber;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_order_navigation);
-		currentOrder = (Order) (getIntent()
-				.getSerializableExtra("selectedOrder"));
+//		currentOrder = (Order) (getIntent()
+//				.getSerializableExtra("selectedOrder"));
 
 		OnClickListener buttonsClick = new OnClickListener() {
 			@Override
@@ -62,7 +58,7 @@ public class OrderNavigation extends _Activity {
 				else {
 					Intent intent = new Intent(OrderNavigation.this,
 							destinationActivity);
-					intent.putExtra("currentOrder", currentOrder);
+					//intent.putExtra("currentOrder", currentOrder);
 					startActivity(intent);
 				}
 			}

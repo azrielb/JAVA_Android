@@ -8,11 +8,11 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import BE.Bill;
-import BE.Component;
-import BE.Convertions;
-import BE.Order;
-import BE.Technician;
+import appEngineBE.Bill;
+import appEngineBE.Component;
+import appEngineBE.Convertions;
+import appEngineBE.Order;
+import appEngineBE.Technician;
 
 public class DBbackend implements Backend {
 
@@ -240,7 +240,8 @@ public class DBbackend implements Backend {
 			throws Exception {
 		List<Component> result = new ArrayList<Component>();
 		for (Component component : getAllComponents())
-			if (component != null && component.getOrderId() == orderNumber)
+			if (component != null && component.getOrderId() != null
+					&& component.getOrderId() == orderNumber)
 				result.add(component);
 		return result;
 	}

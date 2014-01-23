@@ -2,10 +2,10 @@ package model.backend;
 
 import java.util.List;
 
-import BE.Bill;
-import BE.Component;
-import BE.Order;
-import BE.Technician;
+import appEngineBE.Bill;
+import appEngineBE.Component;
+import appEngineBE.Order;
+import appEngineBE.Technician;
 
 public interface Backend {
 

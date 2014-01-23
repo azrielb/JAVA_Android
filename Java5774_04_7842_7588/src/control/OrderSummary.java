@@ -1,8 +1,6 @@
 package control;
 
 import model.backend.BackendFactory;
-import BE.Order;
-import BE.Order.statuses;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -14,6 +12,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import androidBE.Order.statuses;
 
 import com.example.java5774_04_7842_7588.R;
 
@@ -21,7 +20,6 @@ import conversions.Convertions;
 
 public class OrderSummary extends _Activity {
 
-	Order currentOrder;
 	TextView orderDescription;
 	TextView phoneNumber;
 	String techName;
@@ -30,8 +28,8 @@ public class OrderSummary extends _Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_order_summary);
-		currentOrder = (Order) (getIntent()
-				.getSerializableExtra("currentOrder"));
+		// currentOrder = (Order) (getIntent()
+		// .getSerializableExtra("currentOrder"));
 
 		new AsyncTask<Long, Void, String>() {
 			@Override
@@ -57,6 +55,8 @@ public class OrderSummary extends _Activity {
 					progressDialog.dismiss();
 				}
 				OrderSummary.this.techName = res;
+				OrderSummary.super.appendText(R.id.assignedToOrder, ": "
+						+ techName);
 
 			}
 		}.execute(currentOrder.getTechnicianId());
@@ -72,10 +72,10 @@ public class OrderSummary extends _Activity {
 		super.setText(R.id.phoneNumOrder, (currentOrder.getCustomerPhone()));
 		super.appendText(R.id.createOrder,
 				(": " + Convertions.toDateString(currentOrder.getCreateDate())));
-		if (currentOrder.getFinish() != null)
+		Long finish = currentOrder.getFinish();
+		if (finish != null && finish > 0)
 			super.appendText(R.id.finishOrder,
-					(": " + Convertions.toDateString(currentOrder.getFinish())));
-		super.appendText(R.id.assignedToOrder, ": " + techName);
+					(": " + Convertions.toDateString(finish)));
 		super.appendText(R.id.statusOrder, ": "
 				+ currentOrder.getStatus().toString());
 		super.appendText(R.id.idOrder, ": "
@@ -92,7 +92,7 @@ public class OrderSummary extends _Activity {
 							.getText().toString());
 					if (currentOrder.getStatus() == statuses.NEW)
 						currentOrder.setStatus(statuses.IN_PROGRESS);
-					finish();
+					new updateEntities(null, null, null).execute(currentOrder);
 				}
 			});
 		} else {

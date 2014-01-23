@@ -7,10 +7,6 @@ import java.util.List;
 import java.util.Set;
 
 import model.backend.BackendFactory;
-import BE.Bill;
-import BE.Component;
-import BE.Order;
-import BE.Order.statuses;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -24,6 +20,9 @@ import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import androidBE.Bill;
+import androidBE.Component;
+import androidBE.Order.statuses;
 
 import com.example.java5774_04_7842_7588.R;
 
@@ -31,7 +30,6 @@ public class BillActivity extends _Activity {
 
 	float hours;
 	Long orderNumber;
-	Order currentOrder;
 	Bill bill = null;
 	ListView componentList;
 	List<Component> components = new ArrayList<Component>();
@@ -42,8 +40,8 @@ public class BillActivity extends _Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_bill);
 
-		currentOrder = (Order) (getIntent()
-				.getSerializableExtra("currentOrder"));
+		// currentOrder = (Order) (getIntent()
+		// .getSerializableExtra("currentOrder"));
 		componentList = (ListView) findViewById(R.id.billList);
 		hours = currentOrder.getHours();
 		super.appendText(R.id.workHours, Float.toString(hours));
@@ -135,9 +133,6 @@ public class BillActivity extends _Activity {
 				componentList.setAdapter(adapter);
 			}
 		}.execute(currentOrder.getBillId(), currentOrder.getOrderNumber());
-
-		// from here we have to check
-
 		Button nextStepButton = (Button) findViewById(R.id.nextStepButton);
 		nextStepButton.setOnClickListener(new OnClickListener() {
 
@@ -148,30 +143,55 @@ public class BillActivity extends _Activity {
 				case IN_PROGRESS:
 					Alert.showToast(BillActivity.this,
 							"This order is still open!");
+					finish();
 					break;
 				case ACTION_DONE:
 					Intent intent = new Intent(BillActivity.this,
 							SignatureActivity.class);
-					intent.putExtra("currentOrder", currentOrder);
 					startActivity(intent);
-					return;
-					// "return" instead of "break" - for ignoring the "finish"
-					// line.
+					break;
 				case SIGNATURED:
 					bill.setCost(totalPrice());
-					try {
-						BackendFactory.getInstance().addBill(bill);
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-					}
-					currentOrder.setStatus(statuses.FINISHED);
+					new AsyncTask<Bill, Void, String>() {
+						@Override
+						protected void onPreExecute() {
+							progressDialog = ProgressDialog.show(
+									BillActivity.this, "Please wait",
+									"Synchronizing with the server...", true);
+						}
+
+						@Override
+						protected String doInBackground(Bill... params) {
+							try {
+								BackendFactory.getInstance().addBill(bill);
+								currentOrder.setStatus(statuses.FINISHED);
+								BackendFactory.getInstance().updateOrder(
+										currentOrder);
+							} catch (Exception e) {
+								currentOrder.setStatus(statuses.SIGNATURED);
+								return e.getMessage();
+							}
+							return null;
+						}
+
+						@Override
+						protected void onPostExecute(String exception) {
+							if (progressDialog.isShowing()) {
+								progressDialog.dismiss();
+							}
+							if (exception != null)
+								Alert.showToast(BillActivity.this, exception);
+							finish();
+						}
+					}.execute(bill);
+
 					break;
 				case FINISHED:
 					Alert.showToast(BillActivity.this,
 							"This order is closed!\nThank you for the excellent work!");
+					finish();
 					break;
 				}
-				finish();
 			}
 		});
 	}

@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.backend.BackendFactory;
-import BE.Component;
-import BE.Order;
-import BE.Order.statuses;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -20,42 +17,12 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import androidBE.Component;
+import androidBE.Order.statuses;
 
 import com.example.java5774_04_7842_7588.R;
 
 public class ComponentList extends _Activity {
-	protected class componentAdapter extends ArrayAdapter<Component> {
-
-		public componentAdapter(ComponentList componentList,
-				int componentListView, List<Component> components) {
-			super(componentList, componentListView, components);
-		}
-
-		@Override
-		public View getDropDownView(int position, View convertView,
-				ViewGroup parent) {
-			return getCustomView(position, convertView, parent);
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			return getCustomView(position, convertView, parent);
-		}
-
-		View getCustomView(int position, View convertView, ViewGroup parent) {
-			if (convertView == null) {
-				convertView = View.inflate(ComponentList.this,
-						R.layout.component_list_view, null);
-			}
-			_Activity.setText(convertView, R.id.componentName,
-					components.get(position).getName());
-			_Activity.setText(convertView, R.id.serialNumber,
-					components.get(position).getSerialNumber());
-			return convertView;
-		}
-	};
-
-	private Order currentOrder = null;
 	private ListView componentList = null;
 	private List<Component> components = null;
 
@@ -64,8 +31,8 @@ public class ComponentList extends _Activity {
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_component_list);
-		currentOrder = (Order) (getIntent()
-				.getSerializableExtra("currentOrder"));
+		// currentOrder = (Order) (getIntent()
+		// .getSerializableExtra("currentOrder"));
 		new AsyncTask<Long, Void, List<Component>>() {
 			@Override
 			protected void onPreExecute() {
@@ -119,12 +86,9 @@ public class ComponentList extends _Activity {
 					public void onClick(DialogInterface dialog, int which) {
 						switch (which) {
 						case DialogInterface.BUTTON_POSITIVE:
-							components.get(position).setOrderId(
-									-components.get(position).getOrderId());
-							components.remove(position);
-							setComponents(components);
-							Alert.showToast(ComponentList.this,
-									"The item has been removed successfuly");
+							Component component = components.get(position);
+							component.setOrderId(-currentOrder.getOrderNumber());
+							new removeComponent(position).execute(component);
 							break;
 						case DialogInterface.BUTTON_NEGATIVE:
 							Alert.showToast(ComponentList.this,
@@ -159,5 +123,53 @@ public class ComponentList extends _Activity {
 		ListAdapter adapter = new componentAdapter(this,
 				R.layout.component_list_view, components);
 		componentList.setAdapter(adapter);
+	}
+
+	protected class componentAdapter extends ArrayAdapter<Component> {
+		public componentAdapter(ComponentList componentList,
+				int componentListView, List<Component> components) {
+			super(componentList, componentListView, components);
+		}
+
+		@Override
+		public View getDropDownView(int position, View convertView,
+				ViewGroup parent) {
+			return getCustomView(position, convertView, parent);
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			return getCustomView(position, convertView, parent);
+		}
+
+		View getCustomView(int position, View convertView, ViewGroup parent) {
+			if (convertView == null) {
+				convertView = View.inflate(ComponentList.this,
+						R.layout.component_list_view, null);
+			}
+			_Activity.setText(convertView, R.id.componentName,
+					components.get(position).getName());
+			_Activity.setText(convertView, R.id.serialNumber,
+					components.get(position).getSerialNumber());
+			return convertView;
+		}
+	};
+
+	protected class removeComponent extends updateEntities {
+		private int position;
+
+		public removeComponent(int _position) {
+			super(Object.class, null, null);
+			position = _position;
+		}
+
+		@Override
+		public void onPostExecute(Exception e) {
+			super.onPostExecute(e);
+			components.remove(position);
+			setComponents(components);
+			Alert.showToast(ComponentList.this,
+					"The item has been removed successfuly");
+		}
 	}
 }

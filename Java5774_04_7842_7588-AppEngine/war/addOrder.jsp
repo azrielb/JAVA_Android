@@ -1,6 +1,6 @@
 <%@page import="java.util.Date"%>
-<%@page import="BE.Order"%>
-<%@page import="BE.Technician"%>
+<%@page import="appEngineBE.Order"%>
+<%@page import="appEngineBE.Technician"%>
 <%@page import="model.backend.Factory"%>
 <%@page import="model.backend.Backend"%>
 <%@ page language="java" contentType="text/html; charset=windows-1255"

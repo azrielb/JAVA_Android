@@ -1,7 +1,6 @@
 package control;
 
 import model.backend.BackendFactory;
-import BE.Technician;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -11,6 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import androidBE.Technician;
 
 import com.example.java5774_04_7842_7588.R;
 

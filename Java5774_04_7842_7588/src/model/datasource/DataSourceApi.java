@@ -34,101 +34,101 @@ public class DataSourceApi implements Backend {
 	}
 
 	@Override
-	public void addTechnician(BE.Technician AndroidTechnician) throws Exception {
+	public void addTechnician(androidBE.Technician AndroidTechnician) throws Exception {
 		// TODO check
 		Technician googleTechnician = Adapter.toGoogle(AndroidTechnician);
 		myApi.addTechnician(googleTechnician).execute();
 	}
 
 	@Override
-	public void addOrder(BE.Order AndroidOrder) throws Exception {
+	public void addOrder(androidBE.Order AndroidOrder) throws Exception {
 		// TODO check
 		Order googleOrder = Adapter.toGoogle(AndroidOrder);
 		myApi.addOrder(googleOrder).execute();
 	}
 
 	@Override
-	public void addComponent(BE.Component AndroidComponent) throws Exception {
+	public void addComponent(androidBE.Component AndroidComponent) throws Exception {
 		// TODO check
 		Component googleComponent = Adapter.toGoogle(AndroidComponent);
 		myApi.addComponent(googleComponent).execute();
 	}
 
 	@Override
-	public void addBill(BE.Bill AndroidBill) throws Exception {
+	public void addBill(androidBE.Bill AndroidBill) throws Exception {
 		// TODO check
 		Bill googleBill = Adapter.toGoogle(AndroidBill);
 		myApi.addBill(googleBill).execute();
 	}
 
 	@Override
-	public void deleteTechnician(BE.Technician book) throws Exception {
+	public void deleteTechnician(androidBE.Technician book) throws Exception {
 		throw new Exception("not implemented");
 	}
 
 	@Override
-	public BE.Technician getUserByIdAndPassword(Long id, String password)
+	public androidBE.Technician getUserByIdAndPassword(Long id, String password)
 			throws Exception {
 		// TODO check
-		BE.Technician technician = Adapter.fromGoogle(myApi
+		androidBE.Technician technician = Adapter.fromGoogle(myApi
 				.getUserByIdAndPassword(id, password).execute());
 		return technician;
 	}
 
 	@Override
-	public BE.Technician getTechnicianByName(String technicianName)
+	public androidBE.Technician getTechnicianByName(String technicianName)
 			throws Exception {
 		// TODO check
-		BE.Technician technician = Adapter.fromGoogle(myApi
+		androidBE.Technician technician = Adapter.fromGoogle(myApi
 				.getTechnicianByName(technicianName).execute());
 		return technician;
 	}
 
 	@Override
-	public ArrayList<BE.Order> getOrdersByTechnicianId(Long technicianID)
+	public ArrayList<androidBE.Order> getOrdersByTechnicianId(Long technicianID)
 			throws Exception {
 		// TODO check
-		ArrayList<BE.Order> orderList = Adapter.fromGoogle(myApi
+		ArrayList<androidBE.Order> orderList = Adapter.fromGoogle(myApi
 				.getOrdersByTechnicianId(technicianID).execute().getItems());
 		return orderList;
 	}
 
 	@Override
-	public ArrayList<BE.Order> getAllOrders() throws Exception {
+	public ArrayList<androidBE.Order> getAllOrders() throws Exception {
 		throw new Exception("not implemented");
 	}
 
 	@Override
-	public ArrayList<BE.Component> getAllComponents() throws Exception {
+	public ArrayList<androidBE.Component> getAllComponents() throws Exception {
 		throw new Exception("not implemented");
 	}
 
 	@Override
-	public ArrayList<BE.Component> getAvailableComponent() throws Exception {
+	public ArrayList<androidBE.Component> getAvailableComponent() throws Exception {
 		// TODO check
-		ArrayList<BE.Component> components = Adapter.fromGoogle(myApi
+		ArrayList<androidBE.Component> components = Adapter.fromGoogle(myApi
 				.getAvailableComponents().execute().getItems());
 		return components;
 	}
 
 	@Override
-	public ArrayList<BE.Order> getFilteredOrders(String city, Long id)
+	public ArrayList<androidBE.Order> getFilteredOrders(String city, Long id)
 			throws Exception {
 		// TODO check
-		ArrayList<BE.Order> orders = Adapter.fromGoogle(myApi
+		ArrayList<androidBE.Order> orders = Adapter.fromGoogle(myApi
 				.getFilteredOrders(city, id).execute().getItems());
 		return orders;
 	}
 
 	@Override
-	public BE.Order getOrderByNumber(Long orderNumber) throws Exception {
+	public androidBE.Order getOrderByNumber(Long orderNumber) throws Exception {
 		// TODO check
 		return Adapter
 				.fromGoogle(myApi.getOrderByNumber(orderNumber).execute());
 	}
 
 	@Override
-	public BE.Bill getBillById(Long billId) throws Exception {
+	public androidBE.Bill getBillById(Long billId) throws Exception {
 		// TODO check
 		List<Bill> bills = myApi.getAllBills().execute().getItems();
 		if (bills != null)
@@ -139,17 +139,36 @@ public class DataSourceApi implements Backend {
 	}
 
 	@Override
-	public BE.Technician getUserById(Long technicianId) throws Exception {
+	public androidBE.Technician getUserById(Long technicianId) throws Exception {
 		// TODO check
 		return Adapter.fromGoogle(myApi.getUserById(technicianId).execute());
 	}
 
 	@Override
-	public List<BE.Component> getComponentsByOrderNumber(long orderNumber)
+	public List<androidBE.Component> getComponentsByOrderNumber(long orderNumber)
 			throws Exception {
 		// TODO check
 		return Adapter.fromGoogle(myApi.getComponentsByOrderNumber(orderNumber)
 				.execute().getItems());
 	}
 
+	@Override
+	public void updateTechnician(androidBE.Technician technician) throws Exception {
+		myApi.updateTechnician(Adapter.toGoogle(technician)).execute();
+	}
+
+	@Override
+	public void updateOrder(androidBE.Order order) throws Exception {
+		myApi.updateOrder(Adapter.toGoogle(order)).execute();
+	}
+
+	@Override
+	public void updateComponent(androidBE.Component component) throws Exception {
+		myApi.updateComponent(Adapter.toGoogle(component)).execute();
+	}
+
+	@Override
+	public void updateBill(androidBE.Bill bill) throws Exception {
+		myApi.updateBill(Adapter.toGoogle(bill)).execute();
+	}
 }

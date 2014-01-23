@@ -3,8 +3,6 @@ package control;
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
-import BE.Order;
-import BE.Order.statuses;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -13,13 +11,12 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import androidBE.Order.statuses;
 
 import com.example.java5774_04_7842_7588.R;
 
 public class WorkingTime extends _Activity {
-	private Order currentOrder;
 	private Calendar startDate;
-	private Calendar finishDate;
 	private DatePicker startDatePicker;
 	private TimePicker startTimePicker;
 
@@ -27,22 +24,23 @@ public class WorkingTime extends _Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_working_time);
-		currentOrder = (Order) (getIntent().getSerializableExtra("currentOrder"));
+		// currentOrder = (Order)
+		// (getIntent().getSerializableExtra("currentOrder"));
 
 		startDatePicker = (DatePicker) findViewById(R.id.date_picker);
 		startTimePicker = (TimePicker) findViewById(R.id.time_picker);
-		startDate = Calendar.getInstance();
-		startDate.setTimeInMillis(currentOrder.getStart());
-		if (startDate != null) {
+
+		if (currentOrder.getStart() != null && currentOrder.getStart() > 0) {
+			startDate = Calendar.getInstance();
+			startDate.setTimeInMillis(currentOrder.getStart());
 			startDatePicker.init(startDate.get(Calendar.YEAR),
 					startDate.get(Calendar.MONTH),
 					startDate.get(Calendar.DAY_OF_MONTH), null);
 			startTimePicker.setCurrentHour(startDate.get(Calendar.HOUR_OF_DAY));
 			startTimePicker.setCurrentMinute(startDate.get(Calendar.MINUTE));
-			finishDate = Calendar.getInstance();
-			finishDate.setTimeInMillis(currentOrder.getFinish());
-			if (finishDate != null) {
-				Long miliSecDiff = finishDate.getTimeInMillis()
+			if (currentOrder.getFinish() != null
+					&& currentOrder.getFinish() > 0) {
+				Long miliSecDiff = currentOrder.getFinish()
 						- startDate.getTimeInMillis();
 				Float hours = (float) (TimeUnit.MILLISECONDS
 						.toMinutes(miliSecDiff)) / 60;
@@ -66,18 +64,15 @@ public class WorkingTime extends _Activity {
 						startTimePicker.getCurrentMinute());
 				currentOrder.setStart(startDate.getTimeInMillis());
 				if (s_hours.length() > 0) {
-					finishDate = Calendar.getInstance();
-					finishDate.setTimeInMillis(startDate.getTimeInMillis()
+					currentOrder.setFinish(startDate.getTimeInMillis()
 							+ TimeUnit.MINUTES.toMillis((long) (Float
 									.parseFloat(s_hours) * 60)));
-					currentOrder.setFinish(finishDate.getTimeInMillis());
 					currentOrder.setStatus(statuses.ACTION_DONE);
 				} else {
-					finishDate = null;
 					currentOrder.setFinish(-1L);
 					currentOrder.setStatus(statuses.IN_PROGRESS);
 				}
-				finish();
+				new updateEntities(null, null, null).execute(currentOrder);
 			}
 		});
 		Cancel.setOnClickListener(new OnClickListener() {

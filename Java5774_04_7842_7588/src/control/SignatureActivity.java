@@ -3,8 +3,6 @@ package control;
 import java.io.File;
 import java.io.FileOutputStream;
 
-import BE.Order;
-import BE.Order.statuses;
 import android.gesture.GestureOverlayView;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -14,13 +12,12 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import androidBE.Order.statuses;
 
 import com.example.java5774_04_7842_7588.R;
 
 public class SignatureActivity extends _Activity {
 
-	Long orderNumber = 0L;
-	Order currentOrder = null;
 	GestureOverlayView gestureView;
 
 	@Override
@@ -28,7 +25,7 @@ public class SignatureActivity extends _Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_signature);
 
-		currentOrder = (Order) (getIntent().getSerializableExtra("currentOrder"));
+		//currentOrder = (Order) (getIntent().getSerializableExtra("currentOrder"));
 		Button save = (Button) findViewById(R.id.DoneButton);
 		Button clear = (Button) findViewById(R.id.clearButton);
 
@@ -41,7 +38,7 @@ public class SignatureActivity extends _Activity {
 				try {
 					saveSig(gestureView);
 					currentOrder.setStatus(statuses.SIGNATURED);
-					finish();
+					new updateEntities(null,null, null).execute(currentOrder);
 				} catch (Exception e) {
 					Alert.showToast(SignatureActivity.this, e.getMessage());
 				}
@@ -70,7 +67,7 @@ public class SignatureActivity extends _Activity {
 
 	public void saveSig(View view) {
 		try {
-			String sigName = orderNumber.toString() + ".png";
+			String sigName =currentOrder.getOrderNumber().toString() + ".png";
 			GestureOverlayView gestureView1 = (GestureOverlayView) findViewById(R.id.signaturePad);
 			gestureView1.setDrawingCacheEnabled(true);
 

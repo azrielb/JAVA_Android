@@ -3,10 +3,10 @@ package model.backend;
 import java.util.ArrayList;
 import java.util.List;
 
-import BE.Bill;
-import BE.Component;
-import BE.Order;
-import BE.Technician;
+import androidBE.Bill;
+import androidBE.Component;
+import androidBE.Order;
+import androidBE.Technician;
 
 public interface Backend {
 
@@ -42,13 +42,23 @@ public interface Backend {
 
 	public ArrayList<Component> getAvailableComponent() throws Exception;
 
-	public ArrayList<Order> getFilteredOrders(String city, Long id)throws Exception;
+	public ArrayList<Order> getFilteredOrders(String city, Long id)
+			throws Exception;
 
 	public Order getOrderByNumber(Long orderNumber) throws Exception;
 
-	public Bill getBillById(Long billId)throws Exception;
+	public Bill getBillById(Long billId) throws Exception;
 
-	public Technician getUserById(Long technicianId)throws Exception;
+	public Technician getUserById(Long technicianId) throws Exception;
 
-	public List<Component> getComponentsByOrderNumber(long orderNumber) throws Exception;
+	public List<Component> getComponentsByOrderNumber(long orderNumber)
+			throws Exception;
+
+	public void updateTechnician(Technician technician) throws Exception;
+
+	public void updateOrder(Order order) throws Exception;
+
+	public void updateComponent(Component component) throws Exception;
+
+	public void updateBill(Bill bill) throws Exception;
 }

@@ -1,4 +1,4 @@
-<%@page import="BE.Bill"%>
+<%@page import="appEngineBE.Bill"%>
 <%@page import="model.backend.Factory"%>
 <%@page import="model.backend.Backend"%>
 <%@ page language="java" contentType="text/html; charset=windows-1255"
@@ -35,9 +35,13 @@
 			String cost = request.getParameter("cost");
 
 			if (orderId != null && cost != null) {
-				Bill bill = new Bill(Long.parseLong(orderId),
-						Float.parseFloat(cost));
-				Factory.getInstance().addBill(bill);
+				try {
+					Bill bill = new Bill(Long.parseLong(orderId),
+							Float.parseFloat(cost));
+					Factory.getInstance().addBill(bill);
+				} catch (Exception e) {
+					out.println("<p>" + e.getMessage() + "</p>");
+				}
 			}
 		%>
 	</form>

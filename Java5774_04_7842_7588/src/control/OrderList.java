@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.backend.BackendFactory;
-import BE.Order;
-import BE.Technician;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -21,6 +19,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import androidBE.Order;
+import androidBE.Technician;
 
 import com.example.java5774_04_7842_7588.R;
 
@@ -29,10 +29,10 @@ import conversions.Convertions;
 public class OrderList extends _Activity {
 
 	private Technician technic;
-	private List<BE.Order> orders = new ArrayList<BE.Order>();
+	private List<androidBE.Order> orders = new ArrayList<androidBE.Order>();
 	private ListView list;
 
-	protected class ordersAdapter extends ArrayAdapter<BE.Order> {
+	protected class ordersAdapter extends ArrayAdapter<androidBE.Order> {
 		public ordersAdapter(OrderList orderList, int orderListView,
 				List<Order> orders) {
 			super(orderList, orderListView, orders);
@@ -111,11 +111,11 @@ public class OrderList extends _Activity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				try {
-					//long orderNumber = orders.get(position).getOrderNumber();
+					// long orderNumber = orders.get(position).getOrderNumber();
 					Intent intent = new Intent(OrderList.this,
 							OrderNavigation.class);
-					//intent.putExtra("selectedOrder", orderNumber);
-					intent.putExtra("selectedOrder", orders.get(position));
+					// intent.putExtra("selectedOrder", orders.get(position));
+					currentOrder = orders.get(position);
 					startActivity(intent);
 				} catch (Exception ex) {
 				}

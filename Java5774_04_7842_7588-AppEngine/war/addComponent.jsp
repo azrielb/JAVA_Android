@@ -1,4 +1,4 @@
-<%@page import="BE.Component"%>
+<%@page import="appEngineBE.Component"%>
 <%@page import="model.backend.Factory"%>
 <%@page import="model.backend.Backend"%>
 <%@ page language="java" contentType="text/html; charset=windows-1255"

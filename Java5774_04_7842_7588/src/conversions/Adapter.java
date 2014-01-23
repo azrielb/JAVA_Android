@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import BE.Order.statuses;
+import androidBE.Order.statuses;
 
 import com.appspot.android_technician.serverApi.model.Bill;
 import com.appspot.android_technician.serverApi.model.Component;
@@ -31,7 +31,7 @@ public class Adapter {
 	}
 
 	public static <S extends toGoogleConvertions> ArrayList<S> fromGoogle(
-			List<? extends GenericJson> src) {
+			List<? extends GenericJson> src) throws NullPointerException {
 		if (src == null)
 			return null;
 		ArrayList<S> dst = new ArrayList<S>();
@@ -42,15 +42,15 @@ public class Adapter {
 		return dst;
 	}
 
-	public static BE.Bill fromGoogle(Bill GoogleBill) {
-		BE.Bill AndroidBill = new BE.Bill(GoogleBill.getOrderID(),
+	public static androidBE.Bill fromGoogle(Bill GoogleBill) {
+		androidBE.Bill AndroidBill = new androidBE.Bill(GoogleBill.getOrderID(),
 				GoogleBill.getCost());
 		AndroidBill.setSignatureFilePath(GoogleBill.getSignatureFilePath());
 		return AndroidBill;
 	}
 
-	public static BE.Component fromGoogle(Component GoogleComponent) {
-		BE.Component AndroidComponent = new BE.Component(
+	public static androidBE.Component fromGoogle(Component GoogleComponent) {
+		androidBE.Component AndroidComponent = new androidBE.Component(
 				GoogleComponent.getName(), GoogleComponent.getCost(),
 				GoogleComponent.getSerialNumber());
 		AndroidComponent.setDescription(GoogleComponent.getDescription());
@@ -58,16 +58,18 @@ public class Adapter {
 		return AndroidComponent;
 	}
 
-	public static BE.Order fromGoogle(Order GoogleOrder) {
-		BE.Order AndroidOrder = new BE.Order(GoogleOrder.getOrderNumber(),
+	public static androidBE.Order fromGoogle(Order GoogleOrder) {
+		androidBE.Order AndroidOrder = new androidBE.Order(GoogleOrder.getOrderNumber(),
 				GoogleOrder.getCity(), GoogleOrder.getCustomer(), new Date(
 						GoogleOrder.getCreateDate().getValue()),
 				GoogleOrder.getCustomerPhone());
 		AndroidOrder.setAddres(GoogleOrder.getAddres());
 		AndroidOrder.setBillId(GoogleOrder.getBillId());
 		AndroidOrder.setDetailes(GoogleOrder.getDetailes());
-		AndroidOrder.setFinish(GoogleOrder.getFinish());
-		AndroidOrder.setStart(GoogleOrder.getStart());
+		Long temp = GoogleOrder.getFinish();
+		AndroidOrder.setFinish(temp == null ? -1 : temp);
+		temp = GoogleOrder.getStart();
+		AndroidOrder.setStart(temp == null ? -1 : temp);
 		AndroidOrder.setStatus(statuses.valueOf(GoogleOrder.getStatus()));
 		AndroidOrder.setTechnicianId(GoogleOrder.getTechnicianId());
 		AndroidOrder.setTechnicianComments(GoogleOrder.getTechnicianComments());
@@ -75,8 +77,8 @@ public class Adapter {
 		return AndroidOrder;
 	}
 
-	public static BE.Technician fromGoogle(Technician GoogleTechnician) {
-		BE.Technician technician = new BE.Technician(
+	public static androidBE.Technician fromGoogle(Technician GoogleTechnician) {
+		androidBE.Technician technician = new androidBE.Technician(
 				GoogleTechnician.getFirstName(),
 				GoogleTechnician.getLastName(), GoogleTechnician.getPassword(),
 				GoogleTechnician.getEMail(), GoogleTechnician.getId());
@@ -86,23 +88,24 @@ public class Adapter {
 
 	@SuppressWarnings("unchecked")
 	public static <T extends GenericJson> T toGoogle(toGoogleConvertions item) {
-		if (item instanceof BE.Bill) {
-			return (T) toGoogle((BE.Bill) item);
+		if (item instanceof androidBE.Bill) {
+			return (T) toGoogle((androidBE.Bill) item);
 		}
-		if (item instanceof BE.Component) {
-			return (T) toGoogle((BE.Component) item);
+		if (item instanceof androidBE.Component) {
+			return (T) toGoogle((androidBE.Component) item);
 		}
-		if (item instanceof BE.Order) {
-			return (T) toGoogle((BE.Order) item);
+		if (item instanceof androidBE.Order) {
+			return (T) toGoogle((androidBE.Order) item);
 		}
-		if (item instanceof BE.Technician) {
-			return (T) toGoogle((BE.Technician) item);
+		if (item instanceof androidBE.Technician) {
+			return (T) toGoogle((androidBE.Technician) item);
 		}
 		return null;
 	}
 
 	public static <T extends GenericJson> List<T> toGoogle(
-			List<? extends toGoogleConvertions> src) {
+			List<? extends toGoogleConvertions> src)
+			throws NullPointerException {
 		if (src == null)
 			return null;
 		List<T> dst = new ArrayList<T>();
@@ -113,7 +116,7 @@ public class Adapter {
 		return dst;
 	}
 
-	public static Bill toGoogle(BE.Bill AndroidBill) {
+	public static Bill toGoogle(androidBE.Bill AndroidBill) {
 		Bill GoogleBill = new Bill();
 		GoogleBill.setOrderID(AndroidBill.getOrderID());
 		GoogleBill.setCost(AndroidBill.getCost());
@@ -121,7 +124,7 @@ public class Adapter {
 		return GoogleBill;
 	}
 
-	public static Component toGoogle(BE.Component AndroidComponent) {
+	public static Component toGoogle(androidBE.Component AndroidComponent) {
 		Component GoogleComponent = new Component();
 		GoogleComponent.setCost(AndroidComponent.getCost());
 		GoogleComponent.setDescription(AndroidComponent.getDescription());
@@ -131,7 +134,7 @@ public class Adapter {
 		return GoogleComponent;
 	}
 
-	public static Order toGoogle(BE.Order AndroidOrder) {
+	public static Order toGoogle(androidBE.Order AndroidOrder) {
 		Order Google_Order = new Order();
 		Google_Order.setOrderNumber(AndroidOrder.getOrderNumber());
 		Google_Order.setCity(AndroidOrder.getCity());
@@ -152,7 +155,7 @@ public class Adapter {
 		return Google_Order;
 	}
 
-	public static Technician toGoogle(BE.Technician AndroidTechnician) {
+	public static Technician toGoogle(androidBE.Technician AndroidTechnician) {
 		Technician GoogleTechnician = new Technician();
 		GoogleTechnician.setCellphone(AndroidTechnician.getCellphone());
 		GoogleTechnician.setEMail(AndroidTechnician.geteMail());

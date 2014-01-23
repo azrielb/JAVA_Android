@@ -31,7 +31,7 @@ public class Adapter {
 	}
 
 	public static <S extends toGoogleConvertions> ArrayList<S> fromGoogle(
-			List<? extends GenericJson> src) throws NullPointerException {
+			List<? extends GenericJson> src) {
 		if (src == null)
 			return null;
 		ArrayList<S> dst = new ArrayList<S>();
@@ -102,7 +102,7 @@ public class Adapter {
 	}
 
 	public static <T extends GenericJson> List<T> toGoogle(
-			List<? extends toGoogleConvertions> src) throws NullPointerException {
+			List<? extends toGoogleConvertions> src) {
 		if (src == null)
 			return null;
 		List<T> dst = new ArrayList<T>();
